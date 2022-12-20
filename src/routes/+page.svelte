@@ -2,8 +2,8 @@
 	import type { PageData } from './$types';
 
 	export let data: PageData;
-	const info = data.currentEvent.info;
-    console.log(data.currentEvent);
+	const info = data.currentEvent?.info || {};
+  console.log(data.currentEvent);
 </script>
 
 <div class="prose">
