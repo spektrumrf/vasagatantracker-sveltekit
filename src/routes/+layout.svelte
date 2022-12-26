@@ -1,5 +1,9 @@
 <script lang="ts">
 	import '../app.css';
+	import type { PageData } from './$types';
+	
+	export let data: PageData;
+	console.log(data.feats);
 </script>
 
 <div class="my-10">
