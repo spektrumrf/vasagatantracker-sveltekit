@@ -1,7 +1,8 @@
 <script lang="ts">
-	import type { PageData } from "./$types";
+	import Info from "$lib/components/Info.svelte";
+import type { PageData } from "./$types";
 
     export let data: PageData;
 </script>
 
-<div>{data.year}</div>
+<Info info={data.event.info}/>
