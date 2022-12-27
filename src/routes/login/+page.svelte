@@ -5,14 +5,14 @@
 	<div>
 		<label>
 			Användarnamn
-			<input name="username" type="text" />
+			<input class="input input-bordered" name="username" type="text" />
 		</label>
 	</div>
 	<div>
-		<label>
+		<label for="password">
 			Lösenord
-			<input name="password" type="password" />
+			<input class="input input-bordered" name="password" type="password" />
 		</label>
 	</div>
-	<button class="btn-primary">Logga in</button>
+	<button class="btn btn-primary">Logga in</button>
 </form>

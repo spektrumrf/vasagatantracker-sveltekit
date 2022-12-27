@@ -1,12 +1,24 @@
-import type { PageServerLoad } from './$types';
 import { error } from '@sveltejs/kit';
+import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async function({ locals }) {
+  const account = locals
+    .client
+    .authStore
+    .model;
   const feats = await locals
     .client
     .collection("feat")
-    .getOne("gcclj7ouhyv4347")
-    .catch(e => { throw error(e.status, e.data.message) });
-  return { feats: feats.export() };
-
+    .getFullList()
+    .catch(e => {throw error(e.status, e.data.message)});
+  const locations = await locals
+    .client
+    .collection("location")
+    .getFullList()
+    .catch(e => {throw error(e.status, e.data.message)});
+  return { 
+    account: account?.export(), 
+    feats: feats.map(f => f.export()),
+    locations: locations.map(l => l.export())
+  };
 }
