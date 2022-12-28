@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { account, feats, locations, event } from '$lib/stores';
-	import '../../app.css';
+	import { page } from '$app/stores';
 	import type { PageData } from './$types';
+	import '../../app.css';
 
 	export let data: PageData;
 	$account = data.account;
@@ -38,7 +39,7 @@
 					<button class="btn">Logga ut</button>
 				</form>
 			{:else}
-				<button class="btn btn-primary">Logga in</button>
+				<a class="btn btn-primary" href={`/${$page.params.year}/login`}>Logga in</a>
 			{/if}
 		</div>
 	</div>

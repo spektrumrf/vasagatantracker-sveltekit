@@ -1,5 +1,11 @@
-import { error, invalid, redirect } from "@sveltejs/kit";
-import type { Actions } from "./$types";
+import { invalid, redirect } from "@sveltejs/kit";
+import type { Actions, PageServerLoad } from "./$types";
+
+export const load: PageServerLoad = async function({ locals, params }) {
+  if(locals.client.authStore.isValid) {
+    throw redirect(303, `/${params.year}`);
+  }
+}
 
 export const actions: Actions = {
   default: async ({ locals, cookies, request, url }) => {
