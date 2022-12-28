@@ -1,12 +1,13 @@
 <script lang="ts">
-	import { account, feats, locations } from '$lib/stores';
-	import '../app.css';
+	import { account, feats, locations, event } from '$lib/stores';
+	import '../../app.css';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
 	$account = data.account;
 	$feats = data.feats;
 	$locations = data.locations;
+	$event = data.event;
 </script>
 
 <div class="my-10">
@@ -31,7 +32,14 @@
 			<a href="/" class="btn btn-ghost normal-case text-xl">Vasagatantracker</a>
 		</div>
 		<div class="flex-1">
-			<span>{$account.name}</span>
+			{#if $account}
+				<span>{$account.name}</span>
+				<form method="POST" action="/logout">
+					<button class="btn">Logga ut</button>
+				</form>
+			{:else}
+				<button class="btn btn-primary">Logga in</button>
+			{/if}
 		</div>
 	</div>
 	<slot />
