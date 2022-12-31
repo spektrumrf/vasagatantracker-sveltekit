@@ -12,30 +12,41 @@
 </script>
 
 <div class="my-10">
-	<div class="navbar bg-base-100">
+	<div class="navbar bg-base-100 px-10">
 		<div class="flex-none">
-			<button class="btn btn-square btn-ghost">
-				<svg
-					xmlns="http://www.w3.org/2000/svg"
-					fill="none"
-					viewBox="0 0 24 24"
-					class="inline-block w-5 h-5 stroke-current"
-					><path
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						stroke-width="2"
-						d="M4 6h16M4 12h16M4 18h16"
-					/></svg
+			<div class="dropdown">
+				<label for="menu" tabindex="0" class="btn btn-ghost btn-circle">
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						class="h-5 w-5"
+						fill="none"
+						viewBox="0 0 24 24"
+						stroke="currentColor"
+						><path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="2"
+							d="M4 6h16M4 12h16M4 18h7"
+						/></svg
+					>
+				</label>
+				<ul
+					name="menu"
+					tabindex="0"
+					class="menu dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
 				>
-			</button>
+					<li><a href={`${$page.url}/feats`}>Prestationer</a></li>
+				</ul>
+			</div>
 		</div>
-		<div class="flex-1">
+		<div class="grow">
 			<a href="/" class="btn btn-ghost normal-case text-xl">Vasagatantracker</a>
 		</div>
-		<div class="flex-1">
+		<div class="flex-none">
 			{#if $account}
 				<span>{$account.name}</span>
 				<form method="POST" action="/logout">
+					<input hidden name="year" value={$page.params.year} />
 					<button class="btn">Logga ut</button>
 				</form>
 			{:else}

@@ -8,11 +8,10 @@ export const load: PageServerLoad = async function({ locals, params }) {
 }
 
 export const actions: Actions = {
-  default: async ({ locals, cookies, request, url }) => {
+  default: async ({ locals, cookies, request, params }) => {
     const form = await request.formData();
     const username = form.get("username") as string;
     const password = form.get("password") as string;
-    const eventId = form.get("eventId") as string;
     const result = await locals
       .client
       .collection("account")
@@ -24,13 +23,13 @@ export const actions: Actions = {
     const user = await locals
       .client
       .collection("account")
-      .getOne(locals.client.authStore.model?.id || "");
-    if (user.event !== eventId) {
+      .getOne(locals.client.authStore.model?.id || "", { expand: "event" });
+    if (user.export().expand.event.year.toString() !== params.year) {
       locals.client.authStore.clear();
       cookies.delete("pb_auth")
       return invalid(400, { incorrectYear: "Användaren du loggat in deltog i evenemanget i ett annat år." })
     }
     cookies.set("pb_auth", locals.client.authStore.exportToCookie(), { path: "/" });
-    throw redirect(303, "/");
+    throw redirect(303, `/${params.year}`);
   }
 };

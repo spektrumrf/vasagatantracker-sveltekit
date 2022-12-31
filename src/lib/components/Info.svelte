@@ -1,8 +1,8 @@
 <script lang="ts">
-  export let info = {};
+  export let info: any;
 </script>
 
-<div class="prose">
+<div class="card shadow-xl w-auto m-auto p-5 text-center bg-pink-100 prose">
 	<h3>Vad?</h3>
 	<p>{info.what}</p>
 
