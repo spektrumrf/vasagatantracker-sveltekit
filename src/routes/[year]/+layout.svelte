@@ -11,8 +11,8 @@
 	$event = data.event;
 </script>
 
-<div class="my-10">
-	<div class="navbar bg-base-100 px-10">
+<div class="m-5">
+	<div class="navbar bg-base-100">
 		<div class="flex-none">
 			<div class="dropdown">
 				<label for="menu" tabindex="0" class="btn btn-ghost btn-circle">
