@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { feats } from '$lib/stores';
+	import Feat from '$lib/components/Feat.svelte';
 	import SvelteTable from 'svelte-table';
 
 	const columns = [
@@ -36,6 +37,7 @@
 			filterOptions: [true, false]
 		}
 	];
+	let selectedFeat;
 </script>
 
 <div class="overfull-x-auto">
@@ -44,5 +46,10 @@
 		{columns}
 		classNameTable="table table-compact"
 		classNameSelect="select select-sm"
+		on:clickRow={e => {
+			const row = e.detail.row;
+			selectedFeat = selectedFeat?.id === row.id ? null : row;
+		}}
 	/>
 </div>
+<Feat feat={selectedFeat} />

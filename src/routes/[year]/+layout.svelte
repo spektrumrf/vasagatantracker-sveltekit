@@ -9,6 +9,7 @@
 	$feats = data.feats;
 	$locations = data.locations;
 	$event = data.event;
+	console.log($feats);
 </script>
 
 <div class="m-5">

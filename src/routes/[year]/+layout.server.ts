@@ -9,7 +9,7 @@ export const load: PageServerLoad = async function({ locals, params }) {
   const feats = await locals
     .client
     .collection("feat")
-    .getFullList(undefined, { expand: "team,location", sort: "-created" })
+    .getFullList(undefined, { expand: "team,location,proofs", sort: "-created" })
     .catch(e => { throw error(e.status, e.data.message) });
   const locations = await locals
     .client
