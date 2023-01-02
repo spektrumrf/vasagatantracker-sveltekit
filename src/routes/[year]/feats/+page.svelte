@@ -1,12 +1,10 @@
 <script lang="ts">
+	import FeatTable from '$lib/components/FeatTable.svelte';
 	import Input from '$lib/components/Input.svelte';
-	import { event, feats, locations } from '$lib/stores';
+	import { event, locations } from '$lib/stores';
 </script>
 
-{#each $feats as feat}
-	<div>{feat.points}</div>
-{/each}
-
+<FeatTable />
 <label for="addFeat" class="btn">Ny prestation</label>
 
 <input type="checkbox" id="addFeat" class="modal-toggle" />
@@ -36,7 +34,7 @@
 				<input type="file" name="proofs" class="file-input file-input-bordered w-full max-w-xs" />
 			</div>
 
-			<Input name="teamComment" type="text" label="Kommentar" />
+			<Input name="teamComment" type="text" label="Kommentar" altLabel="" />
 			<input hidden value={$event?.id} name="event" />
 			<div>
 				<button for="addFeat" class="btn">Spara</button>

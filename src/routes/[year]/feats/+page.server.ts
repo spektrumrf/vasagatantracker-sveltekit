@@ -1,6 +1,8 @@
 import { error } from "@sveltejs/kit";
 import type { Actions } from "./$types";
 
+export const ssr = false;
+
 export const actions: Actions = {
   add: async ({ request, locals }) => {
     const formData = await request.formData();

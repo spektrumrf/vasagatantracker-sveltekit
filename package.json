@@ -36,6 +36,7 @@
 		"@sveltejs/adapter-node": "*",
 		"@tailwindcss/typography": "^0.5.8",
 		"daisyui": "^2.28.0",
-		"pocketbase": "^0.8.2"
+		"pocketbase": "^0.8.2",
+		"svelte-table": "^0.5.2"
 	}
 }
