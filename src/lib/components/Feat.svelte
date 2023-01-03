@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { pocketbaseUrl } from '$lib/stores';
 	export let feat;
 </script>
 
@@ -20,7 +21,7 @@
 		<div class="form-control w-full max-w-xs">
 			<label for="proofs" class="label"> Bevis </label>
 			<img
-				src={`https://pocketbase-docker-dev.up.railway.app/api/files/feat/${feat?.id}/${feat?.proofs[0]}`}
+				src={`${$pocketbaseUrl}/api/files/feat/${feat?.id}/${feat?.proofs[0]}`}
 			/>
 		</div>
 		<div>
