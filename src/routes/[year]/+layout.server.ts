@@ -9,8 +9,15 @@ export const load: PageServerLoad = async function({ locals, params }) {
   const feats = await locals
     .client
     .collection("feat")
-    .getFullList(undefined, { expand: "team,location,proofs", sort: "-created" })
+    .getFullList(undefined, { expand: "team,location", sort: "-created" })
     .catch(e => { throw error(e.status, e.data.message) });
+  const featsWithProofUrls = feats.map(
+    f =>
+    ({
+      ...f.export(),
+      proofUrls: f.proofs.map(p => locals.client.getFileUrl(f, p))
+    })
+  );
   const locations = await locals
     .client
     .collection("location")
@@ -23,7 +30,7 @@ export const load: PageServerLoad = async function({ locals, params }) {
     .catch(e => { throw error(e.status, e.data.message) });
   return {
     account: account?.export(),
-    feats: feats.map(f => f.export()),
+    feats: featsWithProofUrls,
     locations: locations.map(l => l.export()),
     event: event.export()
   };

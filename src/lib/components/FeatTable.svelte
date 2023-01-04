@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { feats } from '$lib/stores';
-	import Feat from '$lib/components/Feat.svelte';
+	import { feats, type Feat } from '$lib/stores';
+	import FeatView from '$lib/components/FeatView.svelte';
 	import SvelteTable from 'svelte-table';
 
 	const columns = [
@@ -37,7 +37,7 @@
 			filterOptions: [true, false]
 		}
 	];
-	let selectedFeat;
+	let selectedFeat: Feat;
 </script>
 
 <div class="overfull-x-auto">
@@ -52,4 +52,4 @@
 		}}
 	/>
 </div>
-<Feat feat={selectedFeat} />
+<FeatView feat={selectedFeat} isOpen={!!selectedFeat} />

@@ -1,8 +1,12 @@
 import type { Handle } from '@sveltejs/kit';
 import PocketBase from 'pocketbase';
+import { dev } from '$app/environment';
 
 export const handle: Handle = async function({ event, resolve }) {
-	const client = new PocketBase("https://pocketbase-docker-dev.up.railway.app");
+	const pocketbaseUrl = dev ?
+		"https://pocketbase-docker-dev.up.railway.app" :
+		"https://pocketbase-docker-prod.up.railway.app"
+	const client = new PocketBase(pocketbaseUrl);
 	event.locals.client = client;
 
 	const authStore = client.authStore;
