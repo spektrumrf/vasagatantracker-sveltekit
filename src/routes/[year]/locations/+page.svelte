@@ -1,7 +1,5 @@
 <script lang="ts">
-	import { locations } from '$lib/stores';
+	import LocationTable from '$lib/components/LocationTable.svelte';
 </script>
 
-{#each $locations as location}
-	<div>{location.name}</div>
-{/each}
+<LocationTable/>

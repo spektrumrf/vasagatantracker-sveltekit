@@ -36,7 +36,8 @@
 					tabindex="0"
 					class="menu dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
 				>
-					<li><a href={`${$page.url}/feats`}>Prestationer</a></li>
+					<li><a href={`${$page.url.origin}/${$page.params.year}/feats`}>Prestationer</a></li>
+					<li><a href={`${$page.url.origin}/${$page.params.year}/locations`}>Platser</a></li>
 				</ul>
 			</div>
 		</div>
