@@ -1,3 +1,4 @@
+import type { Account, Event, Feat, Location } from '$lib/stores';
 import { error } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 
@@ -32,7 +33,14 @@ export const load: PageServerLoad = async function({ locals, params }) {
     account: account?.export(),
     feats: featsWithProofUrls,
     locations: locations.map(l => l.export()),
-    event: event.export()
-  };
+    event: event.export() 
+  } as Data;
+}
+
+type Data = {
+  account: Account,
+  feats: Feat[],
+  locations: Location[],
+  event: Event
 }
 
