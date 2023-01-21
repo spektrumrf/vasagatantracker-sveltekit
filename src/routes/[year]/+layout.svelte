@@ -3,12 +3,21 @@
 	import { page } from '$app/stores';
 	import '../../app.css';
 	import type { LayoutData } from './$types';
+	import { onMount } from 'svelte';
+	import { invalidateAll } from '$app/navigation';
+	import { getClient } from '$lib/pocketbase';
 
 	export let data: LayoutData;
-	$account = data.account;
-	$feats = data.feats;
-	$locations = data.locations;
-	$event = data.event;
+	$: {
+		$account = data.account;
+		$feats = data.feats;
+		$locations = data.locations;
+		$event = data.event;
+	}
+	onMount(async () => {
+		const client = await getClient(data.cookie);
+		client.collection('feat').subscribe('*', () => invalidateAll());
+	});
 </script>
 
 <div class="m-5">
