@@ -1,8 +1,8 @@
 import type { Account, Event, Feat, Location } from '$lib/stores';
 import { error } from '@sveltejs/kit';
-import type { PageServerLoad } from './$types';
+import type { LayoutServerLoad } from './$types';
 
-export const load: PageServerLoad = async function({ locals, params }) {
+export const load: LayoutServerLoad = async function({ locals, params }) {
   const account = locals
     .client
     .authStore
@@ -16,7 +16,7 @@ export const load: PageServerLoad = async function({ locals, params }) {
     f =>
     ({
       ...f.export(),
-      proofUrls: f.proofs.map(p => locals.client.getFileUrl(f, p))
+      proofUrls: f.proofs.map((p: string) => locals.client.getFileUrl(f, p))
     })
   );
   const locations = await locals

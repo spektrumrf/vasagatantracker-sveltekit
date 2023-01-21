@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { account, feats, locations, event } from '$lib/stores';
 	import { page } from '$app/stores';
-	import type { PageData } from './$types';
 	import '../../app.css';
+	import type { LayoutData } from './$types';
 
-	export let data: PageData;
+	export let data: LayoutData;
 	$account = data.account;
 	$feats = data.feats;
 	$locations = data.locations;
