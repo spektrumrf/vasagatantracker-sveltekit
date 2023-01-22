@@ -46,6 +46,7 @@
 				>
 					<li><a href={`${$page.url.origin}/${$page.params.year}/feats`}>Prestationer</a></li>
 					<li><a href={`${$page.url.origin}/${$page.params.year}/locations`}>Platser</a></li>
+					<li><a href={`${$page.url.origin}/${$page.params.year}/admin`}>Admin</a></li>
 				</ul>
 			</div>
 		</div>

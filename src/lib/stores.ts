@@ -4,6 +4,7 @@ export const account = writable<Account | null>(null);
 export const feats = writable<Feat[]>([]);
 export const locations = writable<Location[]>([]);
 export const event = writable<Event | null>(null);
+export const teams = writable<Account[]>([]);
 
 export type Account = {
   id: string,
