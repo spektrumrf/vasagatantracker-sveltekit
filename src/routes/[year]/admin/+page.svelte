@@ -1,5 +1,6 @@
 <script lang="ts">
 	import EditEvent from '$lib/components/EditEvent.svelte';
+	import EditLocation from '$lib/components/EditLocation.svelte';
 </script>
 
 <div class="prose">

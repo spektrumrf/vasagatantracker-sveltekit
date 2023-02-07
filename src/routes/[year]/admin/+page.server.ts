@@ -13,5 +13,14 @@ export const actions: Actions = {
       .update(formData.get("id") as string, { info, finished })
       .catch(e => { throw error(e.status, e.data.message) })
     return { event };
+  },
+  editLocation: async ({ request, locals }) => {
+    const formData = await request.formData();
+    const event = await locals
+      .client
+      .collection("location")
+      .update(formData.get("id") as string, { name: formData.get("name") })
+      .catch(e => { throw error(e.status, e.data.message) })
+    return { location };
   }
 }

@@ -46,7 +46,7 @@
 			</div>
 			<Input name="id" value={$event?.id} type="hidden" />
 			<div>
-				<button for="editEvent" class="btn">Spara</button>
+				<button class="btn">Spara</button>
 				<label for="editEvent" class="btn">Stäng</label>
 			</div>
 		</form>
