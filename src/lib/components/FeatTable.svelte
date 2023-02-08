@@ -1,6 +1,7 @@
 <script lang="ts">
-	import { feats, type Feat } from '$lib/stores';
+	import { feats, account, type Feat, type Account, Role } from '$lib/stores';
 	import FeatView from '$lib/components/FeatView.svelte';
+	import EditFeat from '$lib/components/EditFeat.svelte';
 	import SvelteTable from 'svelte-table';
 
 	const columns = [
@@ -38,6 +39,7 @@
 		}
 	];
 	let selectedFeat: Feat;
+	let editOpen = false;
 </script>
 
 <div class="overfull-x-auto">
@@ -46,10 +48,14 @@
 		{columns}
 		classNameTable="table table-compact"
 		classNameSelect="select select-sm"
-		on:clickRow={e => {
+		on:clickRow={(e) => {
 			const row = e.detail.row;
 			selectedFeat = selectedFeat?.id === row.id ? null : row;
 		}}
 	/>
 </div>
-<FeatView feat={selectedFeat} isOpen={!!selectedFeat} />
+{#if $account.role === Role.TEAM}
+	<FeatView feat={selectedFeat} isOpen={!!selectedFeat} />
+{:else if selectedFeat}
+	<EditFeat feat={selectedFeat} modalOpen={!!selectedFeat} />
+{/if}

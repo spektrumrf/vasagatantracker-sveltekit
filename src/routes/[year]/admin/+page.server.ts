@@ -10,13 +10,13 @@ export const actions: Actions = {
     const event = await locals
       .client
       .collection("event")
-      .update(formData.get("id") as string, { info, finished })
+      .update(formData.get("id") as string, { info, finished: !!finished })
       .catch(e => { throw error(e.status, e.data.message) })
     return { event };
   },
   editLocation: async ({ request, locals }) => {
     const formData = await request.formData();
-    const event = await locals
+    const location = await locals
       .client
       .collection("location")
       .update(formData.get("id") as string, { name: formData.get("name") })

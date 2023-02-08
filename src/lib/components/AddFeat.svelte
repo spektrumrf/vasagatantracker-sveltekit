@@ -35,7 +35,7 @@
 			<Input name="teamComment" type="text" label="Kommentar" altLabel="" />
 			<input hidden value={$event?.id} name="event" />
 			<div>
-				<button for="addFeat" class="btn">Spara</button>
+				<button class="btn">Spara</button>
 				<label for="addFeat" class="btn">Stäng</label>
 			</div>
 		</form>

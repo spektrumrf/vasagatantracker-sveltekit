@@ -39,9 +39,9 @@
 					type="checkbox"
 					name="finished"
 					class="toggle"
-					bind:value={finished}
-					on:click={() => (finished = !finished)}
+					value={finished}
 					checked={$event?.finished}
+					on:change={() => finished = !finished}
 				/>
 			</div>
 			<Input name="id" value={$event?.id} type="hidden" />

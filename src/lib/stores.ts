@@ -43,7 +43,7 @@ export type Feat = {
   location: string,
   event: string,
   team: string,
-  content: { [key: string]: any },
+  content: { [key: string]: number },
   points: number,
   approved: boolean,
   teamComment: string,
@@ -55,7 +55,18 @@ export type Feat = {
   updated: string
 }
 
-enum Role {
+export enum Role {
   TEAM = "team",
   ADMIN = "admin"
+}
+
+export enum FeatContent {
+  ÖL = "öl",
+  CIDER = "cider",
+  LONKERO = "lonkero",
+  VIN = "vin",
+  DRINK = "drink",
+  MAT = "mat",
+  SHOT = "shot",
+  ANNAT = "annat"
 }
