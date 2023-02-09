@@ -54,7 +54,7 @@
 		}}
 	/>
 </div>
-{#if $account.role === Role.TEAM}
+{#if !$account || $account.role === Role.TEAM}
 	<FeatView feat={selectedFeat} isOpen={!!selectedFeat} />
 {:else if selectedFeat}
 	<EditFeat feat={selectedFeat} modalOpen={!!selectedFeat} />

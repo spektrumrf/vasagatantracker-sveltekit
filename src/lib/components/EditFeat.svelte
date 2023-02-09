@@ -3,7 +3,8 @@
 	import { locations, FeatContent } from '$lib/stores';
 	export let modalOpen = false;
 	export let feat: any = {};
-	$: content = feat.content;
+	$: content = feat.content || {};
+	$: console.log(content);
 	let approved: boolean;
 </script>
 
@@ -29,12 +30,11 @@
 							<label class="label" for={type}>
 								<span class="label-text">{type}</span>
 							</label>
-							<select name={type} bind:value={content[type]} class="select select-bordered">
+							<select name={type} on:change={(e) => content[type] = e.target?.value} class="select select-bordered">
 								{#each [...Array(10).keys()] as i}
-									<option value={i}>{i}</option>
+									<option value={i} selected={content[type] === i}>{i}</option>
 								{/each}
 							</select>
-							<input hidden value={content[type]} name={type} />
 						</div>
 					{/each}
 				</div>
