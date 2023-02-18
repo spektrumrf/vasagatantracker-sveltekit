@@ -18,10 +18,11 @@ export const actions: Actions = {
   edit: async ({ request, locals }) => {
     const formData = await request.formData();
     const formObject = Object.fromEntries(formData.entries());
-    
     let content: any = {};
     Object.values(FeatContent).forEach((c: string) => content[c] = Number(formData.get(c)));
-    
+    // Super hack, sorry
+    content["öl"] = Number(formData.get("Ã¶l"));
+    console.log(content)
     const feat = await locals
       .client
       .collection("feat")

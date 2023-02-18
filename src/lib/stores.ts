@@ -61,7 +61,7 @@ export enum Role {
 }
 
 export enum FeatContent {
-  BEER = "beer",
+  ÖL = "öl",
   CIDER = "cider",
   LONKERO = "lonkero",
   VIN = "vin",

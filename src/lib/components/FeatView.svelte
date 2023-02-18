@@ -15,9 +15,13 @@
 			</div>
 			<div class="form-control w-full max-w-xs">
 				<label for="content" class="label"> Innehåll </label>
-				{#each Object.entries(feat.content) as content}
-					{content[0]}: {content[1]}
-				{/each}
+				<div class="grid grid-cols-3">
+					{#each Object.entries(feat.content || {}) as content}
+							<div>
+								{content[0]}: {content[1]}
+							</div>
+					{/each}
+				</div>
 			</div>
 			<div class="form-control w-full max-w-xs">
 				<label for="location" class="label"> Plats </label>
@@ -38,7 +42,7 @@
 				{/each}
 			</div>
 			<div>
-				<button on:click={() => (isOpen = false)}  class="btn">Stäng</button>
+				<button on:click={() => (isOpen = false)} class="btn">Stäng</button>
 			</div>
 		</div>
 	</div>

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { feats, account, type Feat, type Account, Role } from '$lib/stores';
+	import { feats, account, type Feat, Role } from '$lib/stores';
 	import FeatView from '$lib/components/FeatView.svelte';
 	import EditFeat from '$lib/components/EditFeat.svelte';
 	import SvelteTable from 'svelte-table';
@@ -8,8 +8,8 @@
 		{
 			key: 'team',
 			title: 'Lagnamn',
-			value: (v) => v.expand.team.name,
-			filterOptions: [...new Set($feats.map((f) => f.expand.team.name))]
+			value: (v: Feat) => v.expand?.team.name,
+			filterOptions: [...new Set($feats.map((f) => f.expand?.team.name))]
 		},
 		{
 			key: 'location',
@@ -39,7 +39,6 @@
 		}
 	];
 	let selectedFeat: Feat;
-	let editOpen = false;
 </script>
 
 <div class="overfull-x-auto">

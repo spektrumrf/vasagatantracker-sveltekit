@@ -4,7 +4,6 @@
 	export let modalOpen = false;
 	export let feat: any = {};
 	$: content = feat.content || {};
-	$: console.log(content);
 	let approved: boolean;
 </script>
 
