@@ -1,22 +1,36 @@
 <script lang="ts">
-	import { account, feats, locations, event } from '$lib/stores';
+	import { account, feats, locations, event, teams, type Event as CurrentEvent } from '$lib/stores';
 	import { page } from '$app/stores';
 	import '../../app.css';
 	import type { LayoutData } from './$types';
 	import { onMount } from 'svelte';
-	import { invalidateAll } from '$app/navigation';
 	import { getClient } from '$lib/pocketbase';
 
 	export let data: LayoutData;
-	$: {
-		$account = data.account;
-		$feats = data.feats;
-		$locations = data.locations;
-		$event = data.event;
-	}
+	$account = data.account;
+	$feats = data.feats;
+	$locations = data.locations;
+	$event = data.event;
+	$teams = data.teams;
 	onMount(async () => {
 		const client = await getClient(data.cookie);
-		client.collection('feat').subscribe('*', () => invalidateAll());
+		client
+			.collection('feat')
+			.subscribe('*', async () => ($feats = await fetch('/api/feats').then((res) => res.json())));
+		client
+			.collection('location')
+			.subscribe(
+				'*',
+				async () => ($locations = await fetch('/api/locations').then((res) => res.json()))
+			);
+		client
+			.collection('account')
+			.subscribe('*', async () => ($teams = await fetch('/api/teams').then((res) => res.json())));
+		if ($event) {
+			client
+				.collection('event')
+				.subscribe($event.id, async (data) => ($event = data.record as any));
+		}
 	});
 </script>
 

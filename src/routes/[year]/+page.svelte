@@ -1,8 +1,6 @@
 <script lang="ts">
 	import Info from "$lib/components/Info.svelte";
-import type { PageData } from "./$types";
-
-    export let data: PageData;
+	import { event } from "$lib/stores";
 </script>
 
-<Info info={data.event.info}/>
+<Info info={$event?.info}/>
