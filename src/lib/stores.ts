@@ -28,7 +28,7 @@ export type Event = {
   endTime: string,
   finished: boolean,
   created: string,
-  updated: string  
+  updated: string
 }
 
 export type Location = {

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { ActionData } from './$types';
 	import { event } from '$lib/stores';
-
+	import { page } from '$app/stores';
 	export let form: ActionData;
 </script>
 
@@ -28,6 +28,10 @@
 			<input class="input input-bordered" name="password" type="password" />
 		</label>
 	</div>
-	<input hidden name="eventId" value={$event?.id}/>
+	<input hidden name="eventId" value={$event?.id} />
 	<button class="btn btn-primary">Logga in</button>
 </form>
+<div>
+	Inget lag?
+	<a class="link" href={`${$page.url.origin}/${$page.params.year}/register`}>Registrera!</a>
+</div>
