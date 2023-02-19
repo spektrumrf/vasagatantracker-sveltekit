@@ -2,6 +2,7 @@
 	import type { ActionData } from './$types';
 	import { event } from '$lib/stores';
 	import { page } from '$app/stores';
+	import Input from '$lib/components/Input.svelte';
 	export let form: ActionData;
 </script>
 
@@ -16,18 +17,8 @@
 			{form?.incorrectYear}
 		</div>
 	{/if}
-	<div>
-		<label>
-			Användarnamn
-			<input class="input input-bordered" name="username" type="text" />
-		</label>
-	</div>
-	<div>
-		<label for="password">
-			Lösenord
-			<input class="input input-bordered" name="password" type="password" />
-		</label>
-	</div>
+	<Input name="username" type="text" />
+	<Input name="password" type="password" />
 	<input hidden name="eventId" value={$event?.id} />
 	<button class="btn btn-primary">Logga in</button>
 </form>

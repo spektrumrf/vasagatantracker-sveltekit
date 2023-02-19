@@ -19,8 +19,17 @@ export const actions: Actions = {
     const location = await locals
       .client
       .collection("location")
-      .update(formData.get("id") as string, { name: formData.get("name") })
+      .update(formData.get("id") as string, formData)
       .catch(e => { throw error(e.status, e.data.message) })
     return { location };
+  },
+  editTeam: async ({ request, locals }) => {
+    const formData = await request.formData();
+    const account = await locals
+      .client
+      .collection("account")
+      .update(formData.get("id") as string, formData )
+      .catch(e => { throw error(e.status, e.data.message) })
+    return { account };
   }
 }

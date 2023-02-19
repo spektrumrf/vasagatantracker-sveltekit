@@ -1,5 +1,13 @@
 <script lang="ts">
-	import { account, feats, locations, event, teams, type Event as CurrentEvent } from '$lib/stores';
+	import {
+		account,
+		feats,
+		locations,
+		event,
+		teams,
+		type Event as CurrentEvent,
+		Role
+	} from '$lib/stores';
 	import { page } from '$app/stores';
 	import '../../app.css';
 	import type { LayoutData } from './$types';
@@ -38,7 +46,7 @@
 	<div class="navbar bg-base-100">
 		<div class="flex-none">
 			<div class="dropdown">
-				<label for="menu" tabindex="0" class="btn btn-ghost btn-circle">
+				<button for="menu" class="btn btn-ghost btn-circle">
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						class="h-5 w-5"
@@ -52,15 +60,14 @@
 							d="M4 6h16M4 12h16M4 18h7"
 						/></svg
 					>
-				</label>
-				<ul
-					name="menu"
-					tabindex="0"
-					class="menu dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
-				>
+				</button>
+				<ul name="menu" class="menu dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
 					<li><a href={`${$page.url.origin}/${$page.params.year}/feats`}>Prestationer</a></li>
+					<li><a href={`${$page.url.origin}/${$page.params.year}/teams`}>Lag</a></li>
 					<li><a href={`${$page.url.origin}/${$page.params.year}/locations`}>Platser</a></li>
-					<li><a href={`${$page.url.origin}/${$page.params.year}/admin`}>Admin</a></li>
+					{#if $account?.role === Role.ADMIN}
+						<li><a href={`${$page.url.origin}/${$page.params.year}/admin`}>Admin</a></li>
+					{/if}
 				</ul>
 			</div>
 		</div>
