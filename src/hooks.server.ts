@@ -4,8 +4,8 @@ import { dev } from '$app/environment';
 
 export const handle: Handle = async function({ event, resolve }) {
 	const pocketbaseUrl = dev ?
-		"https://pocketbase-docker-dev.up.railway.app" :
-		"https://pocketbase-docker-prod.up.railway.app"
+		"https://vasagatantracker-pocketbase-dev.up.railway.app" :
+		"https://vasagatantracker-pocketbase-prod.up.railway.app"
 	const client = new PocketBase(pocketbaseUrl);
 	event.locals.client = client;
 
