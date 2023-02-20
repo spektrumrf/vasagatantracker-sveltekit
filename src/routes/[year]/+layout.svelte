@@ -43,40 +43,45 @@
 </script>
 
 <div class="m-5">
-	<div class="navbar bg-base-100">
-		<div class="flex-none">
-			<div class="dropdown">
-				<button for="menu" class="btn btn-ghost btn-circle">
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						class="h-5 w-5"
-						fill="none"
-						viewBox="0 0 24 24"
-						stroke="currentColor"
-						><path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-width="2"
-							d="M4 6h16M4 12h16M4 18h7"
-						/></svg
+	<div class="navbar max-w-3xl mx-auto bg-base-100">
+		{#if $account}
+			<div class="flex-none">
+				<div class="dropdown">
+					<button for="menu" class="btn btn-ghost btn-circle">
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							class="h-5 w-5"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="currentColor"
+							><path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M4 6h16M4 12h16M4 18h7"
+							/></svg
+						>
+					</button>
+					<ul
+						name="menu"
+						class="menu dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
 					>
-				</button>
-				<ul name="menu" class="menu dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
-					<li><a href={`${$page.url.origin}/${$page.params.year}/feats`}>Prestationer</a></li>
-					<li><a href={`${$page.url.origin}/${$page.params.year}/teams`}>Lag</a></li>
-					<li><a href={`${$page.url.origin}/${$page.params.year}/locations`}>Platser</a></li>
-					{#if $account?.role === Role.ADMIN}
-						<li><a href={`${$page.url.origin}/${$page.params.year}/admin`}>Admin</a></li>
-					{/if}
-				</ul>
+						<li><a href={`${$page.url.origin}/${$page.params.year}/feats`}>Prestationer</a></li>
+						<li><a href={`${$page.url.origin}/${$page.params.year}/teams`}>Lag</a></li>
+						<li><a href={`${$page.url.origin}/${$page.params.year}/locations`}>Platser</a></li>
+						{#if $account?.role === Role.ADMIN}
+							<li><a href={`${$page.url.origin}/${$page.params.year}/admin`}>Admin</a></li>
+						{/if}
+					</ul>
+				</div>
 			</div>
-		</div>
+		{/if}
 		<div class="grow">
 			<a href="/" class="btn btn-ghost normal-case text-xl">Vasagatantracker</a>
 		</div>
 		<div class="flex-none">
 			{#if $account}
-				<span>{$account.name}</span>
+				<span class="mx-5">{$account.name}</span>
 				<form method="POST" action="/logout">
 					<input hidden name="year" value={$page.params.year} />
 					<button class="btn">Logga ut</button>
@@ -86,5 +91,7 @@
 			{/if}
 		</div>
 	</div>
-	<slot />
+	<div class="max-w-2xl mx-auto flex flex-col justify-center">
+		<slot />
+	</div>
 </div>

@@ -1,32 +1,32 @@
 <script lang="ts">
-  export let info: any;
+	export let info: any;
 </script>
 
-<div class="card shadow-xl mx-auto p-5 text-center bg-pink-100 prose">
-	<h3>Vad?</h3>
+<div class="card shadow-xl w-2/3 pb-7 pt-4 mx-auto text-center bg-pink-100">
+	<h3 class="font-bold text-xl my-3">Vad?</h3>
 	<p>{info.what}</p>
 
-	<h3>Varför?</h3>
+	<h3 class="font-bold text-xl my-3">Varför?</h3>
 	<p>{info.why}</p>
 
-	<h3>När?</h3>
+	<h3 class="font-bold text-xl my-3">När?</h3>
 	<p>{info.when}</p>
 
-	<h3>Var?</h3>
+	<h3 class="font-bold text-xl my-3">Var?</h3>
 	<p>{info.where}</p>
 
-	<h3>Start?</h3>
+	<h3 class="font-bold text-xl my-3">Start?</h3>
 	<p>{info.start}</p>
 
-	<h3>Mål?</h3>
+	<h3 class="font-bold text-xl my-3">Mål?</h3>
 	<p>{info.finish}</p>
 
-	<h3>Anmälan?</h3>
+	<h3 class="font-bold text-xl my-3">Anmälan?</h3>
 	<p>{info.registration}</p>
 
-	<h3>Detaljerad info?</h3>
-	<p><a href={info.details}>Approbatur i Vasagatan</a></p>
+	<h3 class="font-bold text-xl my-3">Detaljerad info?</h3>
+	<p><a class="link" href={info.details}>Approbatur i Vasagatan</a></p>
 
-	<h3>Viktig info!</h3>
-	<p><a href={info.important}>Lyssna här</a></p>
+	<h3 class="font-bold text-xl my-3">Viktig info!</h3>
+	<p><a class="link" href={info.important}>Lyssna här</a></p>
 </div>

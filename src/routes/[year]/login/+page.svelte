@@ -6,23 +6,28 @@
 	export let form: ActionData;
 </script>
 
-<form method="POST">
-	{#if form?.credentialsError}
+<div class="flex">
+	<div class="mx-auto">
+		<h3 class="text-2xl font-bold my-5">Logga in</h3>
+		<form method="POST">
+			{#if form?.credentialsError}
+				<div>
+					{form?.credentialsError}
+				</div>
+			{/if}
+			{#if form?.incorrectYear}
+				<div>
+					{form?.incorrectYear}
+				</div>
+			{/if}
+			<Input name="username" type="text" label="Användarnamn/epost" />
+			<Input name="password" type="password" label="Lösenord" />
+			<input hidden name="eventId" value={$event?.id} />
+			<button class="btn btn-primary my-3">Logga in</button>
+		</form>
 		<div>
-			{form?.credentialsError}
+			Inget lag?
+			<a class="link" href={`${$page.url.origin}/${$page.params.year}/register`}>Registrera!</a>
 		</div>
-	{/if}
-	{#if form?.incorrectYear}
-		<div>
-			{form?.incorrectYear}
-		</div>
-	{/if}
-	<Input name="username" type="text" />
-	<Input name="password" type="password" />
-	<input hidden name="eventId" value={$event?.id} />
-	<button class="btn btn-primary">Logga in</button>
-</form>
-<div>
-	Inget lag?
-	<a class="link" href={`${$page.url.origin}/${$page.params.year}/register`}>Registrera!</a>
+	</div>
 </div>
