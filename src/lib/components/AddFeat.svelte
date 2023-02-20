@@ -3,7 +3,7 @@
 	import { event, locations } from '$lib/stores';
 </script>
 
-<label for="addFeat" class="btn my-6">Ny prestation</label>
+<label for="addFeat" class="btn btn-primary mb-8">Ny prestation</label>
 
 <input type="checkbox" id="addFeat" class="modal-toggle" />
 <div class="modal modal-bottom sm:modal-middle">
@@ -35,8 +35,8 @@
 
 				<Input name="teamComment" type="text" label="Kommentar" altLabel="" />
 				<input hidden value={$event?.id} name="event" />
-				<div>
-					<button class="btn">Spara</button>
+				<div class="flex gap-3">
+					<button class="btn btn-primary">Spara</button>
 					<label for="addFeat" class="btn">Stäng</label>
 				</div>
 			</form>

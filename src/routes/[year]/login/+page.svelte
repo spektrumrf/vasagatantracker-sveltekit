@@ -8,7 +8,7 @@
 
 <div class="flex">
 	<div class="mx-auto">
-		<h3 class="text-2xl font-bold my-5">Logga in</h3>
+		<h3 class="text-2xl font-bold my-3">Logga in</h3>
 		<form method="POST">
 			{#if form?.credentialsError}
 				<div>
@@ -23,7 +23,7 @@
 			<Input name="username" type="text" label="Användarnamn/epost" />
 			<Input name="password" type="password" label="Lösenord" />
 			<input hidden name="eventId" value={$event?.id} />
-			<button class="btn btn-primary my-3">Logga in</button>
+			<button class="btn btn-primary my-5">Logga in</button>
 		</form>
 		<div>
 			Inget lag?

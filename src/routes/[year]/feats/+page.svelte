@@ -7,4 +7,6 @@
 {#if $account?.role === Role.TEAM}
 	<AddFeat />
 {/if}
+
+<h3 class="font-bold text-2xl mb-5">Prestationer</h3>
 <FeatTable />

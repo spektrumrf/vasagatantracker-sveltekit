@@ -43,7 +43,7 @@
 </script>
 
 <div class="m-5">
-	<div class="navbar max-w-3xl mx-auto bg-base-100">
+	<div class="navbar max-w-3xl mx-auto">
 		{#if $account}
 			<div class="flex-none">
 				<div class="dropdown">
@@ -77,7 +77,7 @@
 			</div>
 		{/if}
 		<div class="grow">
-			<a href="/" class="btn btn-ghost normal-case text-xl">Vasagatantracker</a>
+			<a href="/" class="btn btn-ghost normal-case text-2xl">Vasagatantracker</a>
 		</div>
 		<div class="flex-none">
 			{#if $account}
@@ -86,12 +86,12 @@
 					<input hidden name="year" value={$page.params.year} />
 					<button class="btn">Logga ut</button>
 				</form>
-			{:else}
+			{:else if !$page.url.toString().includes('login')}
 				<a class="btn btn-primary" href={`/${$page.params.year}/login`}>Logga in</a>
 			{/if}
 		</div>
 	</div>
-	<div class="max-w-2xl mx-auto flex flex-col justify-center">
+	<div class="max-w-2xl mx-auto mt-5 flex flex-col justify-center">
 		<slot />
 	</div>
 </div>

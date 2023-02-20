@@ -29,7 +29,11 @@
 							<label class="label" for={type}>
 								<span class="label-text">{type}</span>
 							</label>
-							<select name={type} on:change={(e) => content[type] = e.target?.value} class="select select-bordered">
+							<select
+								name={type}
+								on:change={(e) => (content[type] = e.target?.value)}
+								class="select select-bordered"
+							>
 								{#each [...Array(10).keys()] as i}
 									<option value={i} selected={content[type] === i}>{i}</option>
 								{/each}
@@ -89,7 +93,7 @@
 			</div>
 			<input hidden value={feat?.id} type="text" name="id" />
 			<div>
-				<button class="btn">Spara</button>
+				<button class="btn btn-primary">Spara</button>
 				<label
 					for="editFeat"
 					class="btn"
