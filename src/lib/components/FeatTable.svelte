@@ -35,7 +35,8 @@
 			title: 'Godkänd',
 			value: (v) => v.approved,
 			renderValue: (v) => (v.approved ? 'Ja' : 'Nej'),
-			filterOptions: [true, false]
+			filterOptions: ['Ja', 'Nej'],
+			filterValue: (v) => (v.approved ? 'Ja' : 'Nej')
 		}
 	];
 	let selectedFeat: Feat;
