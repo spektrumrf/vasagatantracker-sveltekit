@@ -46,7 +46,7 @@
 					/>
 				</div>
 				<Input name="id" value={$event?.id} type="hidden" />
-				<div class="flex gap-3">
+				<div class="flex gap-3 pb-10">
 					<button class="btn btn-primary">Spara</button>
 					<label for="editEvent" class="btn">Stäng</label>
 				</div>

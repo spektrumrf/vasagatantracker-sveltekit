@@ -4,6 +4,8 @@
 	import EditFeat from '$lib/components/EditFeat.svelte';
 	import SvelteTable from 'svelte-table';
 
+	export let filterSelections = {};
+
 	const columns = [
 		{
 			key: 'team',
@@ -52,6 +54,7 @@
 			const row = e.detail.row;
 			selectedFeat = selectedFeat?.id === row.id ? null : row;
 		}}
+		bind:filterSelections
 	/>
 </div>
 {#if !$account || $account.role === Role.TEAM}

@@ -25,7 +25,7 @@
 <div class="modal modal-bottom sm:modal-middle">
 	<div class="modal-box flex">
 		<div class="mx-auto">
-			<h3 class="font-bold text-lg">Editera plats</h3>
+			<h3 class="font-bold text-2xl">Editera plats</h3>
 			<form method="POST" enctype="multipart/form-data" action="?/editLocation">
 				<Input name="name" value={selectedLocation?.name || ''} type="text" label="Platsens namn" />
 				<Input name="id" value={selectedLocation?.id} type="hidden" />

@@ -22,7 +22,7 @@
 <div class="modal modal-bottom sm:modal-middle">
 	<div class="modal-box flex">
 		<div class="mx-auto">
-			<h3 class="font-bold text-lg">Editera lag</h3>
+			<h3 class="font-bold text-2xl">Editera lag</h3>
 			<form method="POST" enctype="multipart/form-data" action="?/editTeam">
 				<Input name="name" value={selectedTeam?.name || ''} type="text" label="Lagets namn" />
 				<Input

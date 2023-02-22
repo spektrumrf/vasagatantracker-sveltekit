@@ -30,7 +30,7 @@
 					<label class="label" for="proofs">
 						<span class="label-text">Välj bildbevis</span>
 					</label>
-					<input type="file" name="proofs" class="file-input file-input-primary file-input-sm file-input-bordered w-full max-w-xs" />
+					<input type="file" name="proofs" class="file-input file-input-secondary file-input-sm file-input-bordered w-full max-w-xs" />
 				</div>
 
 				<Input name="teamComment" type="text" label="Kommentar" altLabel="" />

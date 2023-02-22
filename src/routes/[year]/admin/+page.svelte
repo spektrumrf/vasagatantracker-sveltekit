@@ -4,7 +4,10 @@
 	import EditTeam from '$lib/components/EditTeam.svelte';
 </script>
 
-<h2 class="font-bold text-3xl mb-10">Admin</h2>
+<h2 class="font-bold text-3xl">Admin</h2>
+
+<span class="divider mb-5"/>
+
 <h3 class="font-bold text-2xl mb-5">Evenemang</h3>
 <EditEvent />
 
