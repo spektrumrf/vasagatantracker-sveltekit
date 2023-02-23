@@ -21,7 +21,6 @@
 	$event = data.event;
 	$teams = data.teams;
 	onMount(async () => {
-	console.log(data.cookie)
 		const client = await getClient(data.cookie);
 		client
 			.collection('feat')
@@ -67,11 +66,21 @@
 						name="menu"
 						class="menu dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
 					>
+						<li class="w-full overflow-hidden"><span>{$account?.name || ''}</span></li>
+						<span class="divider -my-1" />
 						<li><a href={`${$page.url.origin}/${$page.params.year}/feats`}>Prestationer</a></li>
 						<li><a href={`${$page.url.origin}/${$page.params.year}/teams`}>Lag</a></li>
 						<li><a href={`${$page.url.origin}/${$page.params.year}/locations`}>Platser</a></li>
 						{#if $account?.role === Role.ADMIN}
 							<li><a href={`${$page.url.origin}/${$page.params.year}/admin`}>Admin</a></li>
+						{/if}
+						{#if $account}
+							<div class="mx-auto">
+								<form method="POST" action="/logout">
+									<input hidden name="year" value={$page.params.year} />
+									<button class="btn"> Logga ut </button>
+								</form>
+							</div>
 						{/if}
 					</ul>
 				</div>
@@ -81,12 +90,7 @@
 			<a href="/" class="btn btn-ghost normal-case text-xl">Vasagatantracker</a>
 		</div>
 		<div class="flex-none">
-			{#if $account}
-				<form method="POST" action="/logout">
-					<input hidden name="year" value={$page.params.year} />
-					<button class="btn w-28">Logga ut {$account.name}</button>
-				</form>
-			{:else if !$page.url.toString().includes('login')}
+			{#if $account}{:else if !$page.url.toString().includes('login')}
 				<a class="btn btn-primary" href={`/${$page.params.year}/login`}>Logga in</a>
 			{/if}
 		</div>

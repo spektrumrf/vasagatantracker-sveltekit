@@ -18,7 +18,6 @@
 {#if selectedLocation}
 	<div class="flex gap-3">
 		<label for="editLocation" class="btn btn-primary my-5 max-w-xs ">Editera</label>
-		<button class="btn btn-error">Radera</button>
 	</div>
 {/if}
 <input type="checkbox" id="editLocation" class="modal-toggle" />

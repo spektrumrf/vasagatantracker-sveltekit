@@ -13,9 +13,12 @@
 	</select>
 </div>
 {#if selectedTeam}
-	<div class="flex gap-3 my-5">
+	<div class="flex gap-3 my-5 align-items">
 		<label for="editTeam" class="btn btn-primary">Editera</label>
-		<button class="btn btn-error">Radera</button>
+		<form method="POST" onsubmit="return confirm('Är du säker att du vill radera laget?')" action="?/deleteTeam">
+			<Input type="hidden" name="id" value={selectedTeam?.id}/>
+			<button class="btn btn-error">Radera</button>
+		</form>
 	</div>
 {/if}
 <input type="checkbox" id="editTeam" class="modal-toggle" />

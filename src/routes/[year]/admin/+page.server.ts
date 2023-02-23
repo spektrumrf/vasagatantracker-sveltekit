@@ -28,7 +28,16 @@ export const actions: Actions = {
     const account = await locals
       .client
       .collection("account")
-      .update(formData.get("id") as string, formData )
+      .update(formData.get("id") as string, formData)
+      .catch(e => { throw error(e.status, e.data.message) })
+    return { account };
+  },
+  deleteTeam: async ({ request, locals }) => {
+    const formData = await request.formData()   
+    const account = await locals
+      .client
+      .collection("account")
+      .delete(formData.get("id") as string)
       .catch(e => { throw error(e.status, e.data.message) })
     return { account };
   }
