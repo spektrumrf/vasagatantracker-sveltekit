@@ -7,7 +7,7 @@ import type { Actions } from "./$types";
 export const actions: Actions = {
   default: async ({ request, params }) => {
     const form = await request.formData();
-    form.append("role", Role.TEAM);
+    form.set("role", Role.TEAM);
     const client = await getClient("");
     await client.admins.authWithPassword(env.ADMIN_EMAIL as string, env.ADMIN_PASSWORD as string)
     await client

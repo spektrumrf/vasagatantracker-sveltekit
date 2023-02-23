@@ -22,7 +22,6 @@ export const actions: Actions = {
     Object.values(FeatContent).forEach((c: string) => content[c] = Number(formData.get(c)));
     // Super hack, sorry
     content["öl"] = Number(formData.get("Ã¶l"));
-    console.log(content)
     const feat = await locals
       .client
       .collection("feat")

@@ -1,10 +1,8 @@
 <script lang="ts">
-	import { feats, account, type Feat, Role } from '$lib/stores';
+	import { feats, account, type Feat, Role, featFilterSelections } from '$lib/stores';
 	import FeatView from '$lib/components/FeatView.svelte';
 	import EditFeat from '$lib/components/EditFeat.svelte';
 	import SvelteTable from 'svelte-table';
-
-	export let filterSelections = {};
 
 	const columns = [
 		{
@@ -17,24 +15,24 @@
 			key: 'location',
 			title: 'Plats',
 			value: (v) => v.expand.location.name,
-			filterOptions: [...new Set($feats.map((f) => f.expand.location.name))]
+			filterOptions: [...new Set($feats.map((f) => f.expand?.location.name))]
 		},
-		{
-			key: 'points',
-			title: 'Poäng',
-			value: (v) => v.points,
-			sortable: true
-		},
+		// {
+		// 	key: 'points',
+		// 	title: 'Poäng',
+		// 	value: (v) => v.points,
+		// 	sortable: true
+		// },
 		{
 			key: 'created',
 			title: 'Tid',
 			value: (v) => v.created,
-			renderValue: (v) => `kl. ${new Date(v.created).toLocaleTimeString('fi-FI')}`,
+			renderValue: (v) => `${new Date(v.created).toLocaleTimeString('fi-FI').slice(0,5)}`,
 			sortable: true
 		},
 		{
 			key: 'approved',
-			title: 'Godkänd',
+			title: 'OK',
 			value: (v) => v.approved,
 			renderValue: (v) => (v.approved ? 'Ja' : 'Nej'),
 			filterOptions: ['Ja', 'Nej'],
@@ -44,17 +42,17 @@
 	let selectedFeat: Feat;
 </script>
 
-<div class="overfull-x-auto">
+<div class="overflow-x-auto">
 	<SvelteTable
 		rows={$feats}
 		{columns}
-		classNameTable="table table-compact"
+		classNameTable="table table-compact w-full"
 		classNameSelect="select select-sm"
 		on:clickRow={(e) => {
 			const row = e.detail.row;
 			selectedFeat = selectedFeat?.id === row.id ? null : row;
 		}}
-		bind:filterSelections
+		bind:filterSelections= {$featFilterSelections}
 	/>
 </div>
 {#if !$account || $account.role === Role.TEAM}

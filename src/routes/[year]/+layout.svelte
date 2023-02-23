@@ -21,6 +21,7 @@
 	$event = data.event;
 	$teams = data.teams;
 	onMount(async () => {
+	console.log(data.cookie)
 		const client = await getClient(data.cookie);
 		client
 			.collection('feat')
@@ -42,12 +43,12 @@
 	});
 </script>
 
-<div class="m-5">
+<div class="m-2">
 	<div class="navbar max-w-3xl mx-auto">
 		{#if $account}
 			<div class="flex-none">
 				<div class="dropdown">
-					<button for="menu" class="btn btn-ghost btn-circle">
+					<button class="btn btn-ghost btn-circle">
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							class="h-5 w-5"
@@ -77,21 +78,22 @@
 			</div>
 		{/if}
 		<div class="grow">
-			<a href="/" class="btn btn-ghost normal-case text-2xl">Vasagatantracker</a>
+			<a href="/" class="btn btn-ghost normal-case text-xl">Vasagatantracker</a>
 		</div>
 		<div class="flex-none">
 			{#if $account}
-				<span class="mx-5">{$account.name}</span>
 				<form method="POST" action="/logout">
 					<input hidden name="year" value={$page.params.year} />
-					<button class="btn">Logga ut</button>
+					<button class="btn w-28">Logga ut {$account.name}</button>
 				</form>
 			{:else if !$page.url.toString().includes('login')}
 				<a class="btn btn-primary" href={`/${$page.params.year}/login`}>Logga in</a>
 			{/if}
 		</div>
 	</div>
-	<div class="max-w-2xl mx-auto mt-5 flex flex-col justify-center">
-		<slot />
+	<div class="max-w-2xl mx-auto">
+		<div class="">
+			<slot />
+		</div>
 	</div>
 </div>

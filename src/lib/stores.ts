@@ -6,6 +6,25 @@ export const locations = writable<Location[]>([]);
 export const event = writable<Event | null>(null);
 export const teams = writable<Account[]>([]);
 
+function createFeatFilterSelections() {
+  const selections = 
+    typeof window !== "undefined" ?
+    JSON.parse(window.localStorage.getItem("featFilterSelections") as string) || {}: 
+    {}
+  const { subscribe, set, update } = writable(selections);
+  return {
+    subscribe,
+    set: (selections: any) => {
+      if (typeof window !== "undefined") {
+        window.localStorage.setItem("featFilterSelections", JSON.stringify(selections))
+      }
+      set(selections)
+    },
+    update
+  }
+}
+export const featFilterSelections = createFeatFilterSelections();
+
 export type Account = {
   id: string,
   username: string,

@@ -24,7 +24,7 @@ export const actions: Actions = {
     return { location };
   },
   editTeam: async ({ request, locals }) => {
-    const formData = await request.formData();
+    const formData = await request.formData()   
     const account = await locals
       .client
       .collection("account")
