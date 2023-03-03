@@ -46,3 +46,18 @@ export const handleError: HandleServerError = (({ error, event }) => {
     message: "Some error happened, sorry!",
   };
 });
+
+const transaction = SentryNode.startTransaction({
+  op: "test",
+  name: "My First Test Transaction",
+});
+
+setTimeout(() => {
+  try {
+    foo();
+  } catch (e) {
+    SentryNode.captureException(e);
+  } finally {
+    transaction.finish();
+  }
+}, 99);
