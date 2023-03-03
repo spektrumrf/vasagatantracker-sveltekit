@@ -1,5 +1,7 @@
-import type { Handle } from '@sveltejs/kit';
+import type { Handle, HandleServerError } from '@sveltejs/kit';
 import { getClient } from '$lib/pocketbase';
+import * as SentryNode from '@sentry/node';
+import '@sentry/tracing';
 
 export const handle: Handle = async function({ event, resolve }) {
 	const cookie = event.cookies.get("pocketbase_auth") || "";
@@ -27,3 +29,20 @@ export const handle: Handle = async function({ event, resolve }) {
 
 	return resolve(event);
 };
+
+SentryNode.init({
+  dsn: "https://e8042ea7a3c64f2ba27befa6631c532e@o4504774078693376.ingest.sentry.io/4504774081839104", 
+  tracesSampleRate: 1.0,
+  // Add the Http integration for tracing
+  integrations: [new SentryNode.Integrations.Http()]
+});
+
+SentryNode.setTag('svelteKit', 'server');
+
+// use handleError to report errors during server-side data loading
+export const handleError: HandleServerError = (({ error, event }) => {
+  SentryNode.captureException(error, { contexts: { sveltekit: { event } } });
+  return {
+    message: "Some error happened, sorry!",
+  };
+});
