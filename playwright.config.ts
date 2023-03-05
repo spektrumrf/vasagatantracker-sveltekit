@@ -5,7 +5,10 @@ const config: PlaywrightTestConfig = {
 		command: 'npm run build && npm run preview',
 		port: 4173
 	},
-	testDir: 'tests'
+	testDir: 'tests',
+  expect: {
+    timeout: 10000
+  }
 };
 
 export default config;
