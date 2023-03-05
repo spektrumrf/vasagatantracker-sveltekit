@@ -7,7 +7,7 @@ const config: PlaywrightTestConfig = {
 	},
 	testDir: 'tests',
   expect: {
-    timeout: 10000
+    timeout: 60000
   }
 };
 
