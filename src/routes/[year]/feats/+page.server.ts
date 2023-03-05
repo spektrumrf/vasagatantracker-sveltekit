@@ -7,12 +7,17 @@ export const ssr = false;
 export const actions: Actions = {
   add: async ({ request, locals }) => {
     const formData = await request.formData();
-    formData.append("team", locals.client.authStore.model?.id as string);
+    formData.set("team", locals.client.authStore.model?.id as string);
+    const proofsBlob = formData.get("proofs") as Blob;
+    if(proofsBlob.size === 0) {
+      formData.delete("proofs");
+    }
     const feat = await locals
       .client
       .collection("feat")
       .create(formData)
       .catch(e => { throw error(e.status, e.data.message) })
+    console.log(feat);
     return { feat };
   },
   edit: async ({ request, locals }) => {
