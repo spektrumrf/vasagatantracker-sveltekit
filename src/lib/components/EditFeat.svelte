@@ -4,7 +4,7 @@
 	export let modalOpen = false;
 	export let feat: any = {};
 	$: content = feat.content || {};
-	let approved: boolean;
+	let approved: boolean = !!feat.approved;
 </script>
 
 <div class={`modal modal-bottom sm:modal-middle ${modalOpen ? 'modal-open' : ''}`}>
@@ -63,7 +63,9 @@
 						<span class="label-text"> Bevis</span>
 					</label>
 					{#each feat.proofUrls as url, i}
-						<a target="_blank" class="btn btn-secondary btn-sm ml-2" rel="noreferrer" href={url}>Bild {i + 1}</a>
+						<a target="_blank" class="btn btn-secondary btn-sm ml-2" rel="noreferrer" href={url}
+							>Bild {i + 1}</a
+						>
 					{/each}
 				</div>
 
