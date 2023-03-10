@@ -1,22 +1,31 @@
 <script lang="ts">
 	import Input from '$lib/components/Input.svelte';
-	import { teams, type Account } from '$lib/stores';
-	let selectedTeam: Account | null;
+	import { teams, type Account } from "$lib/stores";
+	
+	let selectedTeamName: string | null;
+	let selectedTeam: Account | undefined;
+	$: {
+		selectedTeam = $teams.find(t => t.name === selectedTeamName);
+	}
 </script>
 
 <div class="form-control w-full max-w-xs">
-	<select name="team" class="select select-bordered" bind:value={selectedTeam}>
+	<select name="team" class="select select-bordered" bind:value={selectedTeamName}>
 		<option disabled selected value={null}>Välj lag</option>
 		{#each $teams as team}
-			<option value={team}>{team.name}</option>
+			<option value={team.name}>{team.name}</option>
 		{/each}
 	</select>
 </div>
 {#if selectedTeam}
 	<div class="flex gap-3 my-5 align-items">
 		<label for="editTeam" class="btn btn-primary">Editera</label>
-		<form method="POST" onsubmit="return confirm('Är du säker att du vill radera laget?')" action="?/deleteTeam">
-			<Input type="hidden" name="id" value={selectedTeam?.id}/>
+		<form
+			method="POST"
+			on:submit={() => confirm('Är du säker att du vill radera laget?')}
+			action="?/deleteTeam"
+		>
+			<Input type="hidden" name="id" value={selectedTeam?.id} />
 			<button class="btn btn-error">Radera</button>
 		</form>
 	</div>

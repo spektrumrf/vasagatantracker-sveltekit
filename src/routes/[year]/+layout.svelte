@@ -1,13 +1,5 @@
 <script lang="ts">
-	import {
-		account,
-		feats,
-		locations,
-		event,
-		teams,
-		type Event as CurrentEvent,
-		Role
-	} from '$lib/stores';
+	import { account, feats, locations, event, teams, Role } from '$lib/stores';
 	import { page } from '$app/stores';
 	import '../../app.css';
 	import type { LayoutData } from './$types';
@@ -62,10 +54,7 @@
 							/></svg
 						>
 					</button>
-					<ul
-						name="menu"
-						class="menu dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
-					>
+					<ul class="menu dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
 						<li class="w-full overflow-hidden"><span>{$account?.name || ''}</span></li>
 						<span class="divider -my-1" />
 						<li><a href={`${$page.url.origin}/${$page.params.year}/feats`}>Prestationer</a></li>
@@ -90,7 +79,7 @@
 			<a href="/" class="btn btn-ghost normal-case text-xl">Vasagatantracker</a>
 		</div>
 		<div class="flex-none">
-			{#if $account}{:else if !$page.url.toString().includes('login')}
+			{#if !$account && !$page.url.toString().includes('login')}
 				<a class="btn btn-primary" href={`/${$page.params.year}/login`}>Logga in</a>
 			{/if}
 		</div>
