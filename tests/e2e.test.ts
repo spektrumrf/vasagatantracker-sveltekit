@@ -35,6 +35,7 @@ test.afterAll(async ({ page }) => {
   await page.goto("/2023/admin");
   await page.locator('select[name="team"]').selectOption(team.name);
   await page.getByRole('button', { name: 'Radera' }).click();  
+  await page.getByRole('button', { name: 'OK' }).click();
 })
 
 async function login(page: Page, username: string, password: string) {
