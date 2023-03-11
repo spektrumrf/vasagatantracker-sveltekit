@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Input from '$lib/components/Input.svelte';
 	import { locations, type Location } from '$lib/stores';
-	let selectedLocation: Location | null;
+	let selectedLocation: Location | null = null;
 </script>
 
 <div class="form-control w-full max-w-xs">
@@ -9,7 +9,7 @@
 		<span class="label-text-alt">Specialkrogar märkta med *</span>
 	</label>
 	<select name="location" class="select select-bordered" bind:value={selectedLocation}>
-		<option disabled selected value={null}>Välj plats</option>
+		<option disabled value={null}>Välj plats</option>
 		{#each $locations as location}
 			<option value={location}>{location.name}</option>
 		{/each}

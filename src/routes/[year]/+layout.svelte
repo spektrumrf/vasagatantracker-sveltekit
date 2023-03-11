@@ -34,8 +34,8 @@
 	});
 </script>
 
-<div class="m-2">
-	<div class="navbar max-w-3xl mx-auto">
+<div class="">
+	<div class="navbar">
 		{#if $account}
 			<div class="flex-none">
 				<div class="dropdown">
@@ -64,7 +64,7 @@
 							<li><a href={`${$page.url.origin}/${$page.params.year}/admin`}>Admin</a></li>
 						{/if}
 						{#if $account}
-							<div class="mx-auto">
+							<div class="mx-auto my-2">
 								<form method="POST" action="/logout">
 									<input hidden name="year" value={$page.params.year} />
 									<button class="btn"> Logga ut </button>
@@ -85,7 +85,7 @@
 		</div>
 	</div>
 	<div class="max-w-2xl mx-auto">
-		<div class="">
+		<div class="m-5">
 			<slot />
 		</div>
 	</div>

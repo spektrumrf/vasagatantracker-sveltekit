@@ -3,8 +3,9 @@
 	import { event, locations } from '$lib/stores';
 </script>
 
-<label for="addFeat" class="btn btn-primary mb-8">Ny prestation</label>
-
+<div class="flex">
+	<label for="addFeat" class="btn btn-primary mb-8 w-full max-w-sm mx-auto">Ny prestation</label>
+</div>
 <input type="checkbox" id="addFeat" class="modal-toggle" />
 <div class="modal modal-bottom sm:modal-middle">
 	<div class="modal-box flex">
@@ -30,7 +31,11 @@
 					<label class="label" for="proofs">
 						<span class="label-text">Välj bildbevis</span>
 					</label>
-					<input type="file" name="proofs" class="file-input file-input-secondary file-input-sm file-input-bordered w-full max-w-xs" />
+					<input
+						type="file"
+						name="proofs"
+						class="file-input file-input-secondary file-input-sm file-input-bordered w-full max-w-xs"
+					/>
 				</div>
 
 				<Input name="teamComment" type="text" label="Kommentar" altLabel="" />
