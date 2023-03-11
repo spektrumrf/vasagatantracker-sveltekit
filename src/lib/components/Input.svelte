@@ -8,14 +8,16 @@
 	export let minlength: string = '';
 	export let min: string = '';
 	export let max: string = '';
+	export let disabled: boolean = false;
 </script>
 
 <div class="form-control w-full max-w-xs">
-	<label class="label" for={name.toLowerCase()}>
+	<label class="label" for={name}>
 		<span class="label-text">{label}</span>
 		<span class="label-text-alt">{altLabel}</span>
 	</label>
 	<input
+		id="text-input"
 		{type}
 		{name}
 		{value}
@@ -23,6 +25,7 @@
 		{minlength}
 		{min}
 		{max}
+		{disabled}
 		class="input input-bordered w-full max-w-xs"
 	/>
 </div>
