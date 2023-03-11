@@ -1,8 +1,14 @@
-import { error } from "@sveltejs/kit";
-import type { Actions } from "./$types";
+import { Role } from "$lib/stores";
+import { error, redirect } from "@sveltejs/kit";
+import type { Actions, PageServerLoad } from "./$types";
 
 export const ssr = false;
 
+export const load: PageServerLoad = async function({locals}) {
+  if(locals.client.authStore.model?.export().role !== Role.ADMIN) {
+    throw redirect(303, "/");
+  }
+}
 export const actions: Actions = {
   edit: async ({ request, locals }) => {
     const formData = await request.formData();
