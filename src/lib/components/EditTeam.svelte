@@ -1,11 +1,11 @@
 <script lang="ts">
 	import Input from '$lib/components/Input.svelte';
-	import { teams, type Account } from "$lib/stores";
-	
+	import { teams, type Account } from '$lib/stores';
+
 	let selectedTeamName: string | null;
 	let selectedTeam: Account | undefined;
 	$: {
-		selectedTeam = $teams.find(t => t.name === selectedTeamName);
+		selectedTeam = $teams.find((t) => t.name === selectedTeamName);
 	}
 </script>
 
@@ -18,15 +18,17 @@
 	</select>
 </div>
 {#if selectedTeam}
-	<div class="flex gap-3 my-5 align-items">
-		<label for="editTeam" class="btn btn-primary">Editera</label>
+	<div class="my-5">
 		<form
 			method="POST"
-			on:submit={() => confirm('Är du säker att du vill radera laget?')}
+			onsubmit="return confirm('Är du säker att du vill radera laget? Lagets prestationer raderas också.')"
 			action="?/deleteTeam"
 		>
-			<Input type="hidden" name="id" value={selectedTeam?.id} />
-			<button class="btn btn-error">Radera</button>
+			<div class="flex gap-3">
+				<label for="editTeam" class="btn btn-primary">Editera</label>
+				<input type="hidden" name="id" value={selectedTeam?.id} />
+				<button class="btn btn-error">Radera</button>
+			</div>
 		</form>
 	</div>
 {/if}
@@ -37,6 +39,7 @@
 			<h3 class="font-bold text-2xl">Editera lag</h3>
 			<form method="POST" enctype="multipart/form-data" action="?/editTeam">
 				<Input name="name" value={selectedTeam?.name || ''} type="text" label="Lagets namn" />
+				<Input name="members" value={selectedTeam?.members || ''} type="text" label="Lagets medlemmar" />
 				<Input
 					name="coefficient"
 					value={selectedTeam?.coefficient || 1}

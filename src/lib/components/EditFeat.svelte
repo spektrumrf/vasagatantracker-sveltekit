@@ -5,6 +5,7 @@
 	export let feat: any = {};
 	$: content = feat.content || {};
 	let approved: boolean = !!feat.approved;
+	$: console.log(approved);
 </script>
 
 <div class={`modal modal-bottom sm:modal-middle ${modalOpen ? 'modal-open' : ''}`}>
@@ -17,7 +18,6 @@
 					value={feat.points}
 					type="number"
 					label="Poäng"
-					altLabel="0-15, 0 om osäker"
 				/>
 
 				<div class="form-control w-full max-w-xs">
@@ -92,7 +92,7 @@
 						name="approved"
 						class="toggle"
 						value={approved}
-						checked={feat?.approved}
+						checked={approved}
 						on:change={() => (approved = !approved)}
 					/>
 				</div>

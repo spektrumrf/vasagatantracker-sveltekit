@@ -30,6 +30,7 @@ export type Account = {
   username: string,
   email: string,
   name: string,
+  members: string,
   role: Role,
   avatar: string,
   coefficient: number,
