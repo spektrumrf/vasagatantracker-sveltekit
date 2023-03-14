@@ -48,6 +48,7 @@
 		{columns}
 		classNameTable="table table-compact w-full"
 		classNameSelect="select select-sm"
+		classNameCell="text-xs"
 		on:clickRow={(e) => {
 			const row = e.detail.row;
 			selectedFeat = selectedFeat?.id === row.id ? null : row;

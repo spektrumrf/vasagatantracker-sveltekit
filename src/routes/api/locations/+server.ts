@@ -5,7 +5,7 @@ export const GET: RequestHandler = async function({ locals }) {
   const locations = await locals
     .client
     .collection("location")
-    .getFullList(undefined, { expand: "team,location", sort: "-created" })
+    .getFullList(undefined, { expand: "team,location", sort: "name" })
     .catch(e => { throw error(e.status, e.data.message) });
   return json(locations);
 }

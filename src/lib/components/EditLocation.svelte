@@ -1,22 +1,11 @@
 <script lang="ts">
 	import Input from '$lib/components/Input.svelte';
-	import { locations, type Location } from '$lib/stores';
-	let selectedLocation: Location | null = null;
+	import type { Location } from '$lib/stores';
+	export let selectedLocation: Location | null = null;
 </script>
 
-<div class="form-control w-full max-w-xs">
-	<label class="label" for="location">
-		<span class="label-text-alt">Specialkrogar märkta med *</span>
-	</label>
-	<select name="location" class="select select-bordered" bind:value={selectedLocation}>
-		<option disabled value={null}>Välj plats</option>
-		{#each $locations as location}
-			<option value={location}>{location.name}</option>
-		{/each}
-	</select>
-</div>
 {#if selectedLocation}
-	<div class="flex gap-3">
+	<div class="">
 		<label for="editLocation" class="btn btn-primary my-5 max-w-xs ">Editera</label>
 	</div>
 {/if}

@@ -29,6 +29,15 @@ export const actions: Actions = {
       .catch(e => { throw error(e.status, e.data.message) })
     return { location };
   },
+  addLocation: async ({ request, locals }) => {
+    const formData = await request.formData();
+    const location = await locals
+      .client
+      .collection("location")
+      .create(formData)
+      .catch(e => { throw error(e.status, e.data.message) })
+    return { location };
+  },
   editTeam: async ({ request, locals }) => {
     const formData = await request.formData()   
     const account = await locals

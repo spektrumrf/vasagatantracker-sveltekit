@@ -34,7 +34,7 @@
 	});
 </script>
 
-<div class="">
+<div>
 	<div class="navbar">
 		{#if $account}
 			<div class="flex-none">
