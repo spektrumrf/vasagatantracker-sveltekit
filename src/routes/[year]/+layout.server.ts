@@ -16,7 +16,7 @@ export const load: LayoutServerLoad = async function({ fetch, locals, params }):
     feats,
     locations,
     event,
-    teams,
+    teams, 
     cookie: locals.client.authStore.exportToCookie() 
   } as Data;
 }
