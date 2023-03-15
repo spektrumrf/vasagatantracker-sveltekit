@@ -5,10 +5,8 @@
 	export let type: string;
 	export let value: any = '';
 	export let step: string = '';
-	export let minlength: string = '';
-	export let min: string = '';
-	export let max: string = '';
 	export let disabled: boolean = false;
+ 	export let constraints: any;
 </script>
 
 <div class="form-control w-full max-w-xs">
@@ -22,10 +20,8 @@
 		{name}
 		{value}
 		{step}
-		{minlength}
-		{min}
-		{max}
 		{disabled}
+		{...constraints}
 		class="input input-bordered w-full max-w-xs"
 	/>
 </div>
