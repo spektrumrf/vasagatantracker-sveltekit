@@ -5,8 +5,20 @@
 </script>
 
 {#if selectedLocation}
-	<div class="">
+	<div>
 		<label for="editLocation" class="btn btn-primary my-5 max-w-xs ">Editera</label>
+	</div>
+	<div class="my-5">
+		<form
+			method="POST"
+			onsubmit="return confirm('Är du säker att du vill radera platsen? Prestationer i platsen raderas också.')"
+			action="?/deleteLocation"
+		>
+			<div class="flex gap-3">
+				<input type="hidden" name="id" value={selectedLocation?.id} />
+				<button class="btn btn-error">Radera</button>
+			</div>
+		</form>
 	</div>
 {/if}
 <input type="checkbox" id="editLocation" class="modal-toggle" />
