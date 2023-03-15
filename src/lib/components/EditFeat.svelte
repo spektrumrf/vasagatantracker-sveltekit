@@ -5,7 +5,6 @@
 	export let feat: any = {};
 	$: content = feat.content || {};
 	let approved: boolean = !!feat.approved;
-	$: console.log(approved);
 </script>
 
 <div class={`modal modal-bottom sm:modal-middle ${modalOpen ? 'modal-open' : ''}`}>

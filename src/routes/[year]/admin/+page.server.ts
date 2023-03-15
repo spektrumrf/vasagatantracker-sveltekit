@@ -38,6 +38,15 @@ export const actions: Actions = {
       .catch(e => { throw error(e.status, e.data.message) })
     return { location };
   },
+  deleteLocation: async ({ request, locals }) => {
+    const formData = await request.formData()   
+    const location = await locals
+      .client
+      .collection("location")
+      .delete(formData.get("id") as string)
+      .catch(e => { throw error(e.status, e.data.message) })
+    return { location };
+  },
   editTeam: async ({ request, locals }) => {
     const formData = await request.formData()   
     const account = await locals
