@@ -6,7 +6,7 @@
 	export let value: any = '';
 	export let step: string = '';
 	export let disabled: boolean = false;
- 	export let constraints: any;
+ 	export let constraints: any = [];
 </script>
 
 <div class="form-control w-full max-w-xs">
