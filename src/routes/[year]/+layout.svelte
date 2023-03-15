@@ -35,7 +35,7 @@
 </script>
 
 <div>
-	<div class="navbar">
+	<div class="navbar max-w-2xl mx-auto">
 		{#if $account}
 			<div class="flex-none">
 				<div class="dropdown">
