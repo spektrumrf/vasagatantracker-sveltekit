@@ -27,7 +27,7 @@
 			<div class="flex gap-3">
 				<label for="editTeam" class="btn btn-primary">Editera</label>
 				<input type="hidden" name="id" value={selectedTeam?.id} />
-				<button class="btn btn-error">Radera</button>
+				<button class="btn btn-error" data-testid="deleteTeam">Radera</button>
 			</div>
 		</form>
 	</div>

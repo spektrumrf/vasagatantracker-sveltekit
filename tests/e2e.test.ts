@@ -34,7 +34,7 @@ test.afterAll(async ({ page }) => {
   await login(page, process.env.RUBEN_USERNAME as string, process.env.RUBEN_PASSWORD as string);
   await page.goto("/2023/admin");
   await page.locator('select[name="team"]').selectOption(team.name);
-  await page.getByRole('button', { name: 'Radera' }).click();  
+  await page.getByTestId('deleteTeam').click();  
   await page.getByRole('button', { name: 'OK' }).click();
 })
 

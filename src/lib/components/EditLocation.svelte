@@ -16,7 +16,7 @@
 		>
 			<div class="flex gap-3">
 				<input type="hidden" name="id" value={selectedLocation?.id} />
-				<button class="btn btn-error">Radera</button>
+				<button class="btn btn-error" data-testid="deleteLocation">Radera</button>
 			</div>
 		</form>
 	</div>
