@@ -14,25 +14,28 @@ const addSchema = z.object({
 })
 
 export const load: PageServerLoad = async function(event) {
-  const form = await superValidate(event, addSchema);  
+  const form = await superValidate(event, addSchema, {id: 'add-form'});  
   return { form };
 }
 export const actions: Actions = {
   add: async (event) => {
-    const form = await superValidate(event, addSchema);
     const formData = await event.request.formData();
-    console.log(Object.fromEntries(formData.entries()))
-    if(!form.valid) {
+    const form = await superValidate(event, addSchema, {id: 'add-form'});
+    console.log(form);
+    if(!form.valid) {      
+      console.log("fail");
       return fail(400, { form });
     } else if(form.data.locationName === "Övrig" && !form.data.teamComment) {
+      console.log("fail again")
       form.errors.teamComment = ["Övriga platser kräver kommentar"];
       return fail(400, { form } )
     }
+    console.log({ ...form.data, proofs: formData.get("proofs"), team: event.locals.client.authStore.model?.id })
     try {
       await event.locals
         .client
         .collection("feat")
-        .create({ ...formData, team: event.locals.client.authStore.model?.id })
+        .create({ ...form.data, proofs: formData.get("proofs"), team: event.locals.client.authStore.model?.id })
     } catch (e: any) {
       return fail(400, { form, ...e })
     }

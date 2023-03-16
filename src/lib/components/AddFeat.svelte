@@ -5,15 +5,6 @@
 	export let constraints: any;
 	let locationId = "";
 	$: locationName = $locations.find(l => l.id === locationId)?.name
-	function handleSubmit(e: any) {
-		const formData = new FormData(e.target);
-		const proof = formData.get("proofs") as File;
-		if(proof.size === 0) {
-			return false;
-		} else {
-			this.submit();
-		}
-	}
 </script>
 
 <div class="flex">
@@ -24,7 +15,7 @@
 	<div class="modal-box flex">
 		<div class="mx-auto">
 			<h3 class="font-bold text-xl">Ny prestation</h3>
-			<form method="POST" id="form" enctype="multipart/form-data" on:submit|preventDefault={handleSubmit} action="?/add">
+			<form method="POST" id="add-form" enctype="multipart/form-data" action="?/add">
 				<Input name="points" type="number" label="Poäng" altLabel="0-15, 0 om osäker" constraints={$constraints.points} />
 
 				<div class="form-control w-full max-w-xs">
@@ -47,7 +38,7 @@
 					<input
 						type="file"
 						name="proofs"
-						{...$constraints.proofs}
+						required
 						class="file-input file-input-secondary file-input-sm file-input-bordered w-full max-w-xs"
 					/>
 				</div>
