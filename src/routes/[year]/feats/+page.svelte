@@ -5,7 +5,7 @@
 </script>
 
 {#if $account?.role === Role.TEAM}
-	<AddFeat />
+	<AddFeat/>
 {/if}
 
 <h3 class="font-bold text-2xl mb-5">Prestationer</h3>

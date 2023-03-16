@@ -1,6 +1,8 @@
 <script lang="ts">
 	import Input from '$lib/components/Input.svelte';
 	import { event, locations } from '$lib/stores';
+	let locationId = "";
+	$: locationName = $locations.find(l => l.id === locationId)?.name
 </script>
 
 <div class="flex">
@@ -11,16 +13,16 @@
 	<div class="modal-box flex">
 		<div class="mx-auto">
 			<h3 class="font-bold text-xl">Ny prestation</h3>
-			<form method="POST" enctype="multipart/form-data" action="?/add">
-				<Input name="points" type="number" label="Poäng" altLabel="0-15, 0 om osäker" />
+			<form method="POST" id="add-form" enctype="multipart/form-data" action="?/add">
+				<Input name="points" type="number" label="Poäng" required={true} min={0} max={15} altLabel="0-15, 0 om osäker" />
 
 				<div class="form-control w-full max-w-xs">
 					<label class="label" for="location">
 						<span class="label-text">Plats</span>
 						<span class="label-text-alt">Specialkrogar märkta med *</span>
 					</label>
-					<select name="location" class="select select-bordered">
-						<option disabled selected>Välj plats</option>
+					<select name="location" required on:change={(e) => locationId = e.target.value} class="select select-bordered">
+						<option disabled selected value="">Välj plats</option>
 						{#each $locations as location}
 							<option value={location.id}>{location.name}</option>
 						{/each}
@@ -34,12 +36,14 @@
 					<input
 						type="file"
 						name="proofs"
+						required
 						class="file-input file-input-secondary file-input-sm file-input-bordered w-full max-w-xs"
 					/>
 				</div>
 
-				<Input name="teamComment" type="text" label="Kommentar" altLabel="" />
+				<Input name="teamComment" type="text" label="Kommentar" altLabel=""/>
 				<input hidden value={$event?.id} name="event" />
+				<input hidden value={locationName} name="locationName" />
 				<div class="flex gap-3 mt-3">
 					<button class="btn btn-primary">Spara</button>
 					<label for="addFeat" class="btn">Stäng</label>
