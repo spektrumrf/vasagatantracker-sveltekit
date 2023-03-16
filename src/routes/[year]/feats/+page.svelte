@@ -1,10 +1,11 @@
 <script lang="ts">
 	import AddFeat from '$lib/components/AddFeat.svelte';
 	import FeatTable from '$lib/components/FeatTable.svelte';
-	import { account, Role } from '$lib/stores';
+	import { account, event, Role } from '$lib/stores';
+	const hasEventStarted = new Date($event.startTime).toISOString() < new Date().toISOString();
 </script>
 
-{#if $account?.role === Role.TEAM}
+{#if $account?.role === Role.TEAM && hasEventStarted } 
 	<AddFeat/>
 {/if}
 
