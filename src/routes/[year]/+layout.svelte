@@ -60,6 +60,7 @@
 						<li><a href={`${$page.url.origin}/${$page.params.year}/feats`}>Prestationer</a></li>
 						<li><a href={`${$page.url.origin}/${$page.params.year}/teams`}>Lag</a></li>
 						<li><a href={`${$page.url.origin}/${$page.params.year}/locations`}>Platser</a></li>
+						<li><a href={`${$page.url.origin}/${$page.params.year}/statistics`}>Statistik</a></li>
 						{#if $account?.role === Role.ADMIN}
 							<li><a href={`${$page.url.origin}/${$page.params.year}/admin`}>Admin</a></li>
 						{/if}
