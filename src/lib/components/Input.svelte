@@ -7,6 +7,9 @@
 	export let step: string = '';
 	export let disabled: boolean = false;
  	export let constraints: any = [];
+	export let min: number | null = null;
+	export let max: number | null = null;
+	export let required: boolean = false;
 </script>
 
 <div class="form-control w-full max-w-xs">
@@ -22,6 +25,9 @@
 		{step}
 		{disabled}
 		{...constraints}
+		{min}
+		{max}
+		{required}
 		class="input input-bordered w-full max-w-xs"
 	/>
 </div>

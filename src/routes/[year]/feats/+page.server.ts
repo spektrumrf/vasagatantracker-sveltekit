@@ -1,45 +1,30 @@
 import { FeatContent } from "$lib/stores";
 import { error, fail } from "@sveltejs/kit";
-import type { Actions, PageServerLoad } from "./$types";
-import { z } from "zod";
-import { superValidate } from "sveltekit-superforms/server";
+import type { Actions } from "./$types";
 
 export const ssr = false;
 
-const addSchema = z.object({
-  points: z.number().min(0).max(15),
-  location: z.string().min(0),
-  locationName: z.string().nonempty(),
-  teamComment: z.string().optional()
-})
-
-export const load: PageServerLoad = async function(event) {
-  const form = await superValidate(event, addSchema, {id: 'add-form'});  
-  return { form };
-}
 export const actions: Actions = {
-  add: async (event) => {
-    const formData = await event.request.formData();
-    const form = await superValidate(event, addSchema, {id: 'add-form'});
-    console.log(form);
-    if(!form.valid) {      
-      console.log("fail");
-      return fail(400, { form });
-    } else if(form.data.locationName === "Övrig" && !form.data.teamComment) {
-      console.log("fail again")
-      form.errors.teamComment = ["Övriga platser kräver kommentar"];
-      return fail(400, { form } )
+  add: async ({ request, locals }) => {
+    const form = await request.formData(); 
+    if(form.get("locationName") === "Övrig" && !form.get("teamComment")) {
+      return fail(400, { message: "Övrig plats kräver kommentar"} )
     }
-    console.log({ ...form.data, proofs: formData.get("proofs"), team: event.locals.client.authStore.model?.id })
+    form.set("team", locals.client.authStore.model?.id as string);
+    const proofsFile = form.get("proofs") as File;
+    if(proofsFile.size === 0) {
+      form.delete("proofs")
+    }
+    let feat;
     try {
-      await event.locals
+      feat = await locals
         .client
         .collection("feat")
-        .create({ ...form.data, proofs: formData.get("proofs"), team: event.locals.client.authStore.model?.id })
+        .create(form)
     } catch (e: any) {
-      return fail(400, { form, ...e })
+      return fail(400, { ...e })
     }
-    return { form };
+    return { feat };
   },
   edit: async ({ request, locals }) => {
     const formData = await request.formData();
