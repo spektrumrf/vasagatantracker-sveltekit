@@ -3,8 +3,12 @@
 	import { locations, FeatContent } from '$lib/stores';
 	export let modalOpen = false;
 	export let feat: any = {};
-	$: content = feat.content || {};
-	let approved: boolean = !!feat.approved;
+	let content: {};
+	let approved: boolean;
+	$: { 
+		content = feat.content || {};
+		approved = !!feat.approved
+	}
 </script>
 
 <div class={`modal modal-bottom sm:modal-middle ${modalOpen ? 'modal-open' : ''}`}>
@@ -17,6 +21,7 @@
 					value={feat.points}
 					type="number"
 					label="Poäng"
+					step="0.01"
 				/>
 
 				<div class="form-control w-full max-w-xs">
