@@ -14,7 +14,7 @@
 		<div class="mx-auto">
 			<h3 class="font-bold text-xl">Ny prestation</h3>
 			<form method="POST" id="add-form" enctype="multipart/form-data" action="?/add">
-				<Input name="points" type="number" label="Poäng" required={true} min={0} max={15} altLabel="0-15, 0 om osäker" />
+				<Input name="points" type="number" label="Poäng" required={true} min={0} max={15} step="0.01" altLabel="0-15, 0 om osäker" />
 
 				<div class="form-control w-full max-w-xs">
 					<label class="label" for="location">
