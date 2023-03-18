@@ -17,6 +17,7 @@
 					value={feat.points}
 					type="number"
 					label="Poäng"
+					step="0.01"
 				/>
 
 				<div class="form-control w-full max-w-xs">
