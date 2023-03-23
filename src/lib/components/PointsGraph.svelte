@@ -2,7 +2,7 @@
 	import { Line } from 'svelte-chartjs';
 	import 'chart.js/auto';
 	import 'chartjs-adapter-dayjs-4/dist/chartjs-adapter-dayjs-4.esm';
-	import { locale } from 'dayjs';
+	import dayjs from 'dayjs';
 	import { feats, teams } from '$lib/stores';
 	let data: any;
 	let options: any;
@@ -30,10 +30,12 @@
 		};
 		options = {
 			scales: {
-				xAxis: { type: 'time', adapters: { date: { locale: locale('fi') } } }
-			}
+				xAxis: { type: 'time', adapters: { date: { locale: dayjs.locale('fi') } } }
+			},
+			responsive: true,
+			maintainAspectRatio: true
 		};
 	}
 </script>
 
-<Line {data} {options} height={400} />
+<Line {data} {options} width={375} height={400}/>

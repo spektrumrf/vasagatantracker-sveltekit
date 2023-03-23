@@ -13,5 +13,5 @@
 <h4 class="font-bold text-xl mb-5">Poängkällor</h4>
 <DrinkTable drinks={drinkEntries}/>
 
-<h4 class="font-bold text-xl mb-5">Poäng</h4>
+<h4 class="font-bold text-xl my-5">Poäng</h4>
 <PointsGraph/>
