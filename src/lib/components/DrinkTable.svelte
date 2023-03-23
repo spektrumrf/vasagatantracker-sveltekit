@@ -19,5 +19,11 @@
 </script>
 
 <div class="overfull-x-auto">
-	<SvelteTable rows={drinks} {columns} classNameTable="table table-compact" />
+	<SvelteTable
+		rows={drinks}
+		{columns}
+		classNameThead="text-center"
+		classNameCell="text-center text-base"
+		classNameTable="table table-compact"
+	/>
 </div>
