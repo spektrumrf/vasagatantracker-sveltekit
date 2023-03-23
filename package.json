@@ -46,6 +46,6 @@
 		"dotenv": "^16.0.3",
 		"pocketbase": "^0.8.2",
 		"svelte-chartjs": "^3.1.2",
-		"svelte-table": "^0.5.2"
+		"svelte-table": "^0.5.6"
 	}
 }
