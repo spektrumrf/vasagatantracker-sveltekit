@@ -55,7 +55,7 @@
 		<div class="font-bold text-2xl">Vasagatan har börjat!</div>
 		{#if $account?.role === Role.TEAM}
 			<div>
-				<AddFeat />
+				<AddFeat formActionPath={`${$event?.year}/feats?/add`} />
 			</div>
 		{/if}
 	{/if}

@@ -30,9 +30,11 @@ export const actions: Actions = {
     const formData = await request.formData();
     const formObject = Object.fromEntries(formData.entries());
     let content: any = {};
+    console.log(formObject)
     Object.values(FeatContent).forEach((c: string) => content[c] = Number(formData.get(c)));
     // Super hack, sorry
-    content["öl"] = Number(formData.get("Ã¶l"));
+    // Why isn't this needed anymore?
+    // content["öl"] = Number(formData.get("Ã¶l"));
     formObject.approved = formObject.approved ? "true" : "false";
     const feat = await locals
       .client
