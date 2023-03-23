@@ -31,9 +31,11 @@
 		options = {
 			scales: {
 				xAxis: { type: 'time', adapters: { date: { locale: locale('fi') } } }
-			}
+			},
+			responsive: true,
+			maintainAspectRatio: true
 		};
 	}
 </script>
 
-<Line {data} {options} height={400} />
+<Line {data} {options} width={375} height={400}/>
