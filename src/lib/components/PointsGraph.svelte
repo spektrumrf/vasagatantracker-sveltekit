@@ -1,43 +1,39 @@
 <script lang="ts">
-	import Chart from 'chart.js/auto';
-	import 'chartjs-adapter-date-fns';
-	import { fi } from 'date-fns/locale';
+	import { Line } from 'svelte-chartjs';
+	import 'chart.js/auto';
+	import 'chartjs-adapter-dayjs-4/dist/chartjs-adapter-dayjs-4.esm';
+	import { locale } from 'dayjs';
 	import { feats, teams } from '$lib/stores';
-	import { onMount } from 'svelte';
-
-	let points;
-	const featsByTeam: { [key: string]: any[] } = {};
-
-	$feats.forEach((f) => {
-		if (!featsByTeam[f.team]) {
-			featsByTeam[f.team] = [];
-		} else {
-			featsByTeam[f.team].push(f);
-		}
-	});
-	const data = {
-		datasets: Object.keys(featsByTeam).map((team) => ({
-			data: featsByTeam[team].map((f) => ({ x: f.created.slice(0, -5), y: f.points })),
-			label: $teams.find(t => t.id === team).name,
-		}))
-	};
-
-	const config = {
-		type: 'line',
-		data,
-		options: {
+	let data: any;
+	let options: any;
+	$: {
+		const featsByTeam: { [key: string]: any[] } = {};
+		$feats
+			.filter((f) => f.approved)
+			.reverse()
+			.forEach((f) => {
+				if (!featsByTeam[f.team]) {
+					featsByTeam[f.team] = [f];
+				} else {
+					featsByTeam[f.team].push(f);
+				}
+			});
+		data = {
+			datasets: Object.keys(featsByTeam).map((team) => ({
+				data: featsByTeam[team].reduce(
+					(points, f) =>
+						points.concat({ x: f.created.slice(0, -5), y: (points.at(-1)?.y || 0) + f.points }),
+					[]
+				),
+				label: $teams.find((t) => t.id === team)?.name
+			}))
+		};
+		options = {
 			scales: {
-				xAxis: { type: 'time' }
-			},
-			adapters: { date: { locale: fi } }
-		}
-	};
-	onMount(() => {
-		const ctx = points.getContext('2d');
-		let chart = new Chart(ctx, config);
-	});
+				xAxis: { type: 'time', adapters: { date: { locale: locale('fi') } } }
+			}
+		};
+	}
 </script>
 
-{#if Object.keys(data).length !== 0}
-	<canvas bind:this={points} width={400} height={400} />
-{/if}
+<Line {data} {options} height={400} />
