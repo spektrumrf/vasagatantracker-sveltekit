@@ -3,7 +3,7 @@
 </script>
 
 <div class="">
-	<label for="addLocation" class="btn btn-success my-5 max-w-xs ">Ny plats</label>
+	<label for="addLocation" class="btn btn-success my-5 max-w-xs">Ny plats</label>
 </div>
 <input type="checkbox" id="addLocation" class="modal-toggle" />
 <div class="modal modal-bottom sm:modal-middle">

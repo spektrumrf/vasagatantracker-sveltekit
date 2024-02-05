@@ -5,9 +5,9 @@
 	export let feat: any = {};
 	let content: {};
 	let approved: boolean;
-	$: { 
+	$: {
 		content = feat.content || {};
-		approved = !!feat.approved
+		approved = !!feat.approved;
 	}
 </script>
 
@@ -16,13 +16,7 @@
 		<div class="mx-auto">
 			<h3 class="font-bold text-2xl mb-2">Editera prestation</h3>
 			<form method="POST" name="editFeat" enctype="multipart/form-data" action="?/edit">
-				<Input
-					name="points"
-					value={feat.points}
-					type="number"
-					label="Poäng"
-					step="0.01"
-				/>
+				<Input name="points" value={feat.points} type="number" label="Poäng" step="0.01" />
 
 				<div class="form-control w-full max-w-xs">
 					<label class="label" for="content">

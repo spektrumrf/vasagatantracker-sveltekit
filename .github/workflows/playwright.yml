@@ -5,7 +5,7 @@ on:
 jobs:
   test:
     env:
-      PUBLIC_ENV: "DEV"
+      PUBLIC_ENV: 'DEV'
       RUBEN_USERNAME: ${{secrets.RUBEN_USERNAME}}
       RUBEN_PASSWORD: ${{secrets.RUBEN_PASSWORD}}
       ADMIN_EMAIL: ${{secrets.ADMIN_EMAIL}}

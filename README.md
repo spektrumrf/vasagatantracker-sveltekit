@@ -9,4 +9,3 @@ The application connects to a [Pocketbase](https://pocketbase.io)-database manag
 The app is styled with [Tailwind](https://tailwindcss.com) with [DaisyUI](https://daisyui.com) as a component library.
 
 The app with database is hosted on Hetzner on a Coolify instance.
-

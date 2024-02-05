@@ -39,7 +39,12 @@
 			<h3 class="font-bold text-2xl">Editera lag</h3>
 			<form method="POST" enctype="multipart/form-data" action="?/editTeam">
 				<Input name="name" value={selectedTeam?.name || ''} type="text" label="Lagets namn" />
-				<Input name="members" value={selectedTeam?.members || ''} type="text" label="Lagets medlemmar" />
+				<Input
+					name="members"
+					value={selectedTeam?.members || ''}
+					type="text"
+					label="Lagets medlemmar"
+				/>
 				<Input
 					name="coefficient"
 					value={selectedTeam?.coefficient || 1}

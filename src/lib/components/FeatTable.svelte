@@ -27,7 +27,7 @@
 			key: 'created',
 			title: 'Tid',
 			value: (v) => v.created,
-			renderValue: (v) => `${new Date(v.created).toLocaleTimeString('fi-FI').slice(0,5)}`,
+			renderValue: (v) => `${new Date(v.created).toLocaleTimeString('fi-FI').slice(0, 5)}`,
 			sortable: true
 		},
 		{
@@ -53,7 +53,7 @@
 			const row = e.detail.row;
 			selectedFeat = selectedFeat?.id === row.id ? null : row;
 		}}
-		bind:filterSelections= {$featFilterSelections}
+		bind:filterSelections={$featFilterSelections}
 	/>
 </div>
 {#if !$account || $account.role === Role.TEAM}

@@ -6,7 +6,7 @@
 
 {#if selectedLocation}
 	<div>
-		<label for="editLocation" class="btn btn-primary my-5 max-w-xs ">Editera</label>
+		<label for="editLocation" class="btn btn-primary my-5 max-w-xs">Editera</label>
 	</div>
 	<div class="my-5">
 		<form
