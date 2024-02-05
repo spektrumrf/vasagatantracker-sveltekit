@@ -97,11 +97,10 @@
 				<input hidden value={feat?.id} type="text" name="id" />
 				<div class="flex gap-3 py-5">
 					<button class="btn btn-primary">Spara</button>
-					<label
-						for="editFeat"
+					<button
 						class="btn"
 						on:keypress={() => (modalOpen = false)}
-						on:click={() => (modalOpen = false)}>Stäng</label
+						on:click={() => (modalOpen = false)}>Stäng</button
 					>
 				</div>
 			</form>

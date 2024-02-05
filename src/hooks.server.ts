@@ -1,7 +1,6 @@
-import type { Handle } from '@sveltejs/kit';
+import type { Handle, HandleServerError } from '@sveltejs/kit';
 import { getClient } from '$lib/pocketbase';
 import * as Sentry from '@sentry/sveltekit';
-import '@sentry/tracing';
 import { sequence } from '@sveltejs/kit/hooks';
 
 const myHandle: Handle = async function ({ event, resolve }) {
@@ -40,5 +39,5 @@ Sentry.init({
 	// Add the Http integration for tracing
 });
 
-export const handleError = Sentry.handleErrorWithSentry();
+export const handleError: HandleServerError = Sentry.handleErrorWithSentry();
 export const handle = sequence(Sentry.sentryHandle(), myHandle);
