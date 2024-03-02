@@ -6,13 +6,13 @@
 		{
 			key: 'name',
 			title: 'Namn',
-			value: (v) => v.name,
+			value: (v: LocationWithPoints) => v.name,
 			sortable: true
 		},
 		{
 			key: 'points',
 			title: 'Poäng',
-			value: (v) => v.points,
+			value: (v: LocationWithPoints) => v.points,
 			sortable: true
 		}
 	];
@@ -23,6 +23,10 @@
 			.reduce((sum, f) => (f.location === l.id ? sum + f.points : sum), 0),
 		...l
 	}));
+	interface LocationWithPoints {
+		name: string;
+		points: number;
+	}
 </script>
 
 <div class="overfull-x-auto">
