@@ -1,18 +1,18 @@
 <script lang="ts">
-	import { teams, feats } from '$lib/stores';
+	import { teams, feats, type Account } from '$lib/stores';
 	import SvelteTable from 'svelte-table';
 
 	const columns = [
 		{
 			key: 'name',
 			title: 'Namn',
-			value: (v) => v.name,
+			value: (v: TeamWithPoints) => v.name,
 			sortable: true
 		},
 		{
 			key: 'points',
 			title: 'Poäng',
-			value: (v) => v.points,
+			value: (v: TeamWithPoints) => v.points,
 			sortable: true
 		}
 	];
@@ -27,6 +27,11 @@
 			...t
 		};
 	});
+
+	interface TeamWithPoints {
+		name: string;
+		points: number;
+	}
 </script>
 
 <div class="overfull-x-auto">
