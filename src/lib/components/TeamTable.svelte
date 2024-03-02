@@ -17,13 +17,16 @@
 		}
 	];
 
-	$: teamsWithPoints = $teams.map((t) => ({
-		points:
+	$: teamsWithPoints = $teams.map((t) => {
+		let points =
 			$feats
 				.filter((f) => f.approved)
-				.reduce((sum, f) => (f.team === t.id ? sum + f.points : sum), 0) * t.coefficient,
-		...t
-	}));
+				.reduce((sum, f) => (f.team === t.id ? sum + f.points : sum), 0) * t.coefficient;
+		return {
+			points: Math.round(points * 100) / 100,
+			...t
+		};
+	});
 </script>
 
 <div class="overfull-x-auto">
