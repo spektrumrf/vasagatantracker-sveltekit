@@ -6,13 +6,13 @@
 		{
 			key: 'drink',
 			title: 'Poängkälla',
-			value: (v) => v[0],
+			value: (v: any) => v[0],
 			sortable: true
 		},
 		{
 			key: 'amount',
 			title: 'Antal',
-			value: (v) => v[1],
+			value: (v: any) => v[1],
 			sortable: true
 		}
 	];
