@@ -14,7 +14,7 @@
 		{
 			key: 'location',
 			title: 'Plats',
-			value: (v) => v.expand.location.name,
+			value: (v: Feat) => v.expand?.location.name,
 			filterOptions: [...new Set($feats.map((f) => f.expand?.location.name))]
 		},
 		// {
@@ -26,17 +26,17 @@
 		{
 			key: 'created',
 			title: 'Tid',
-			value: (v) => v.created,
-			renderValue: (v) => `${new Date(v.created).toLocaleTimeString('fi-FI').slice(0, 5)}`,
+			value: (v: Feat) => v.created,
+			renderValue: (v: Feat) => `${new Date(v.created).toLocaleTimeString('fi-FI').slice(0, 5)}`,
 			sortable: true
 		},
 		{
 			key: 'approved',
 			title: 'OK',
-			value: (v) => v.approved,
-			renderValue: (v) => (v.approved ? 'Ja' : 'Nej'),
+			value: (v: Feat) => v.approved,
+			renderValue: (v: Feat) => (v.approved ? 'Ja' : 'Nej'),
 			filterOptions: ['Ja', 'Nej'],
-			filterValue: (v) => (v.approved ? 'Ja' : 'Nej')
+			filterValue: (v: Feat) => (v.approved ? 'Ja' : 'Nej')
 		}
 	];
 	let selectedFeat: Feat;
