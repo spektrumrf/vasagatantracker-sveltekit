@@ -1,4 +1,4 @@
-import { fail, redirect } from '@sveltejs/kit';
+import { fail, json, redirect } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async function ({ locals, params }) {
@@ -8,7 +8,7 @@ export const load: PageServerLoad = async function ({ locals, params }) {
 };
 
 export const actions: Actions = {
-	default: async ({ locals, cookies, request, params }) => {
+	login: async ({ locals, cookies, request, params }) => {
 		const form = await request.formData();
 		const username = form.get('username') as string;
 		const password = form.get('password') as string;
@@ -34,5 +34,23 @@ export const actions: Actions = {
 		}
 		cookies.set('pocketbase_auth', locals.client.authStore.exportToCookie(), { path: '/' });
 		throw redirect(303, `/${params.year}`);
+	},
+	passwordReset: async ({ locals, request }) => {
+		const form = await request.formData();
+		const email = form.get('email') as string;
+		try {
+			await locals.client.collection('account').requestPasswordReset(email);
+		} catch (error: any) {
+			const errorData = error.data?.data;
+			const errorMessage = Object.entries(errorData)
+				.map(([key, value]) => `${key}: ${(value as any).message}`)
+				.join(' ');
+			return fail(400, {
+				resetMessage: errorMessage || 'Nollställningsförsöket misslyckades, sorry!'
+			});
+		}
+		return {
+			resetMessage: 'Kolla din epost!'
+		};
 	}
 };
