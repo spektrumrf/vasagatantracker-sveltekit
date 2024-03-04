@@ -8,6 +8,7 @@ const myHandle: Handle = async function ({ event, resolve }) {
 	const client = await getClient(cookie);
 	event.locals.client = client;
 	const authStore = client.authStore;
+
 	if (authStore.isValid) {
 		try {
 			await client.collection('account').authRefresh();
