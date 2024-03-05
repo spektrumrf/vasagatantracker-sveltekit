@@ -12,6 +12,5 @@ export const GET: RequestHandler = async function ({ locals, url }) {
 		.catch((e) => {
 			throw error(e.status, e.data.message);
 		});
-	console.log(locations);
 	return json(locations || []);
 };

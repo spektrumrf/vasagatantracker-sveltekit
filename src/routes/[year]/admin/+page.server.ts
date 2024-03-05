@@ -43,13 +43,31 @@ export const actions: Actions = {
 	},
 	deleteLocation: async ({ request, locals }) => {
 		const formData = await request.formData();
+		const id = formData.get('id') as string;
+		const eventId = formData.get('eventId') as string;
 		const location = await locals.client
 			.collection('location')
-			.delete(formData.get('id') as string)
+			.getOne(id)
 			.catch((e) => {
 				throw error(e.status, e.data.message);
 			});
-		return { location };
+		let returnLocation;
+		if (location.event.length > 1) {
+			returnLocation = await locals.client
+				.collection('location')
+				.update(id, { event: location.event.filter((id: string) => eventId !== id) })
+				.catch((e) => {
+					throw error(e.status, e.data.message);
+				});
+		} else {
+			returnLocation = await locals.client
+				.collection('location')
+				.delete(id)
+				.catch((e) => {
+					throw error(e.status, e.data.message);
+				});
+		}
+		return { returnLocation };
 	},
 	editTeam: async ({ request, locals }) => {
 		const formData = await request.formData();
