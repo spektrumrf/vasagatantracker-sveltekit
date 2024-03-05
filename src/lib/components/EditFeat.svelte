@@ -99,6 +99,7 @@
 					<button class="btn btn-primary">Spara</button>
 					<button
 						class="btn"
+						type="button"
 						on:keypress={() => (modalOpen = false)}
 						on:click={() => (modalOpen = false)}>Stäng</button
 					>

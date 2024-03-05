@@ -7,7 +7,7 @@ export const GET: RequestHandler = async function ({ locals, url }) {
 		.getFullList(undefined, {
 			expand: 'team,location,event',
 			sort: 'name',
-			filter: `event.year?~${url.searchParams.get('year')}`
+			filter: url.searchParams.get('year') ? `event.year?~${url.searchParams.get('year')}` : ''
 		})
 		.catch((e) => {
 			throw error(e.status, e.data.message);

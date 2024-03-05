@@ -4,10 +4,12 @@ import type { Actions, PageServerLoad } from './$types';
 
 export const ssr = false;
 
-export const load: PageServerLoad = async function ({ locals }) {
+export const load: PageServerLoad = async function ({ fetch, locals }) {
 	if (locals.client.authStore.model?.export().role !== Role.ADMIN) {
 		throw redirect(303, '/');
 	}
+	const allLocations = await fetch('/api/locations').then((res) => res.json());
+	return { allLocations };
 };
 export const actions: Actions = {
 	edit: async ({ request, locals }) => {
@@ -40,6 +42,24 @@ export const actions: Actions = {
 				throw error(e.status, e.data.message);
 			});
 		return { location };
+	},
+	addLocationToYear: async ({ request, locals }) => {
+		const formData = await request.formData();
+		const id = formData.get('locationId') as string;
+		const eventId = formData.get('eventId') as string;
+		const location = await locals.client
+			.collection('location')
+			.getOne(id)
+			.catch((e) => {
+				throw error(e.status, e.data.message);
+			});
+		const updatedLocation = await locals.client
+			.collection('location')
+			.update(id, { event: [...location.event, eventId].filter((v, i, a) => a.indexOf(v) === i) })
+			.catch((e) => {
+				throw error(e.status, e.data.message);
+			});
+		return { updatedLocation };
 	},
 	deleteLocation: async ({ request, locals }) => {
 		const formData = await request.formData();
