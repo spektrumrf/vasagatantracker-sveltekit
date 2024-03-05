@@ -3,12 +3,12 @@ import { getClient } from '$lib/pocketbase';
 import type { Feat } from '$lib/stores';
 import type { PageServerLoad } from './$types';
 
-export const load: PageServerLoad = async function () {
+export const load: PageServerLoad = async function ({ params }) {
 	const client = await getClient('');
 	await client.admins.authWithPassword(env.ADMIN_EMAIL as string, env.ADMIN_PASSWORD as string);
 	const feats: Feat[] = await client
 		.collection('feat')
-		.getFullList()
+		.getFullList(undefined, { filter: `event.year = ${params.year}` })
 		.then((feats) => feats.map((f) => f.export() as Feat));
 	const approvedFeats = feats.filter((f) => f.approved);
 	const totalDrinks: { [key: string]: number } = {};

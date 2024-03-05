@@ -2,10 +2,14 @@ import { error, json } from '@sveltejs/kit';
 import type { RequestHandler } from '@sveltejs/kit';
 import type { Feat } from '$lib/stores';
 
-export const GET: RequestHandler = async function ({ locals }) {
+export const GET: RequestHandler = async function ({ locals, url }) {
 	const feats = await locals.client
 		.collection('feat')
-		.getFullList(undefined, { expand: 'team,location', sort: '-created' })
+		.getFullList(undefined, {
+			expand: 'team,location,event',
+			sort: '-created',
+			filter: `event.year=${url.searchParams.get('year')}`
+		})
 		.catch((e) => {
 			throw error(e.status, e.data.message);
 		});

@@ -25,7 +25,10 @@ export const actions: Actions = {
 		const user = await locals.client
 			.collection('account')
 			.getOne(locals.client.authStore.model?.id || '', { expand: 'event' });
-		if (user.export().expand.event.year.toString() !== params.year) {
+		if (
+			user.export().role === 'team' &&
+			user.export().expand.event.year.toString() !== params.year
+		) {
 			locals.client.authStore.clear();
 			cookies.delete('pocketbase_auth', { path: '/' });
 			return fail(400, {

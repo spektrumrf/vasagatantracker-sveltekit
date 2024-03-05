@@ -3,10 +3,10 @@ import type { LayoutServerLoad } from './$types';
 
 export const load: LayoutServerLoad = async function ({ fetch, locals, params }): Promise<Data> {
 	const account = locals.client.authStore.model;
-	const featsPromise = fetch('/api/feats').then((res) => res.json());
-	const locationsPromise = fetch('/api/locations').then((res) => res.json());
+	const featsPromise = fetch(`/api/feats?year=${params.year}`).then((res) => res.json());
+	const locationsPromise = fetch(`/api/locations?year=${params.year}`).then((res) => res.json());
 	const eventPromise = fetch(`/api/event?year=${params.year}`).then((res) => res.json());
-	const teamsPromise = fetch('/api/teams').then((res) => res.json());
+	const teamsPromise = fetch(`/api/teams?year=${params.year}`).then((res) => res.json());
 	const [feats, locations, event, teams] = await Promise.all([
 		featsPromise,
 		locationsPromise,

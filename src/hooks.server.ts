@@ -16,7 +16,11 @@ const myHandle: Handle = async function ({ event, resolve }) {
 				.collection('account')
 				.getOne(authStore.model?.id as string, { expand: 'event' })
 				.then((a: any) => a.export());
-			if (!event.params.year || account.expand.event.year.toString() === event.params.year) {
+			if (
+				account.role === 'admin' ||
+				!event.params.year ||
+				account.expand.event?.year.toString() === event.params.year
+			) {
 				event.cookies.set('pocketbase_auth', authStore.exportToCookie(), { path: '/' });
 			} else {
 				authStore.clear();

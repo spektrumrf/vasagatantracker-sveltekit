@@ -16,16 +16,27 @@
 		const client = await getClient(data.cookie);
 		client
 			.collection('feat')
-			.subscribe('*', async () => ($feats = await fetch('/api/feats').then((res) => res.json())));
+			.subscribe(
+				'*',
+				async () =>
+					($feats = await fetch(`/api/feats?year=${$page.params.year}`).then((res) => res.json()))
+			);
 		client
 			.collection('location')
 			.subscribe(
 				'*',
-				async () => ($locations = await fetch('/api/locations').then((res) => res.json()))
+				async () =>
+					($locations = await fetch(`/api/locations?year=${$page.params.year}`).then((res) =>
+						res.json()
+					))
 			);
 		client
 			.collection('account')
-			.subscribe('*', async () => ($teams = await fetch('/api/teams').then((res) => res.json())));
+			.subscribe(
+				'*',
+				async () =>
+					($teams = await fetch(`/api/teams?year=${$page.params.year}`).then((res) => res.json()))
+			);
 		if ($event) {
 			client
 				.collection('event')
