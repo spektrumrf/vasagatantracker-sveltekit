@@ -1,1 +1,7 @@
-{"image":"mcr.microsoft.com/devcontainers/typescript-node"}
+{
+	"image":"mcr.microsoft.com/devcontainers/typescript-node",
+        "mounts": 
+	[
+  		"source=/home/jonas/.config/nvim,target=/home/node/.config/nvim,type=bind,consistency=cached"
+	]
+}
