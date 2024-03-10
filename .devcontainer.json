@@ -1,7 +1,3 @@
 {
-	"image":"mcr.microsoft.com/devcontainers/typescript-node",
-        "mounts": 
-	[
-  		"source=/home/jonas/.config/nvim,target=/home/node/.config/nvim,type=bind,consistency=cached"
-	]
+  "build": { "dockerfile": "Dockerfile" }
 }
