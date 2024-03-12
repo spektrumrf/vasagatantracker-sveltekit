@@ -5,6 +5,7 @@
 	import type { LayoutData } from './$types';
 	import { onMount } from 'svelte';
 	import { getClient } from '$lib/pocketbase';
+	import { env } from '$env/dynamic/public';
 
 	export let data: LayoutData;
 	$account = data.account;
@@ -88,7 +89,9 @@
 			</div>
 		{/if}
 		<div class="grow">
-			<a href="/" class="btn btn-ghost normal-case text-xl">Vasagatantracker</a>
+			<a href="/" class="btn btn-ghost normal-case text-xl"
+				>Vasagatantracker{env.PUBLIC_ENV === 'DEV' ? ' DEVELOPMENT' : ''}</a
+			>
 		</div>
 		<div class="flex-none">
 			{#if !$account && !$page.url.toString().includes('login')}
