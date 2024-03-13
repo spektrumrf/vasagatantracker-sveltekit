@@ -4,27 +4,29 @@ import { Role } from '$lib/stores';
 import { fail, redirect } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
 import { z } from 'zod';
-import { superValidate } from 'sveltekit-superforms/server';
+import { zod } from 'sveltekit-superforms/adapters';
+import { superValidate } from 'sveltekit-superforms';
 
 const schema = z.object({
-	username: z.string().regex(new RegExp('^[a-z0-9_]*$')).nonempty().max(12).min(3),
+	username: z.string().regex(new RegExp('^[a-z0-9_]*$')).max(12).min(3),
 	password: z.string().min(8),
 	passwordConfirm: z.string().min(8),
 	email: z.string().email(),
 	name: z.string().max(30),
 	members: z.string().optional(),
 	coefficient: z.number().min(1).max(2),
-	event: z.string().nonempty()
+	event: z.string().min(1)
 });
 
-export const load: PageServerLoad = async (event) => {
-	const form = await superValidate(event, schema);
+export const load: PageServerLoad = async () => {
+	const form = await superValidate(zod(schema));
 	return { form };
 };
 
 export const actions: Actions = {
 	default: async (event) => {
-		const form = await superValidate(event, schema);
+		const form = await superValidate(event, zod(schema));
+		console.log(form.errors, form.data, form);
 		if (!form.valid) {
 			return fail(400, { form });
 		}
