@@ -5,7 +5,7 @@ import type { Actions, PageServerLoad } from './$types';
 export const ssr = false;
 
 export const load: PageServerLoad = async function ({ fetch, locals }) {
-	if (locals.client.authStore.model?.export().role !== Role.ADMIN) {
+	if (locals.client.authStore.model?.role !== Role.ADMIN) {
 		throw redirect(303, '/');
 	}
 	const allLocations = await fetch('/api/locations').then((res) => res.json());

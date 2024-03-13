@@ -46,8 +46,9 @@
 	<SvelteTable
 		rows={$feats}
 		{columns}
-		classNameTable="table table-compact w-full"
-		classNameSelect="select select-sm"
+		classNameTable="table table-sm w-full"
+		classNameThead="bg-primary"
+		classNameSelect="select select-bordered select-sm"
 		classNameCell="text-xs lg:text-base"
 		on:clickRow={(e) => {
 			const row = e.detail.row;

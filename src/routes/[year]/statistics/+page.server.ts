@@ -9,7 +9,7 @@ export const load: PageServerLoad = async function ({ params }) {
 	const feats: Feat[] = await client
 		.collection('feat')
 		.getFullList(undefined, { filter: `event.year = ${params.year}` })
-		.then((feats) => feats.map((f) => f.export() as Feat));
+		.then((feats) => feats.map((f) => f as any));
 	const approvedFeats = feats.filter((f) => f.approved);
 	const totalDrinks: { [key: string]: number } = {};
 	approvedFeats.forEach((f) => {

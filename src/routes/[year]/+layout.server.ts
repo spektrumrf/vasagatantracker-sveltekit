@@ -14,7 +14,7 @@ export const load: LayoutServerLoad = async function ({ fetch, locals, params })
 		teamsPromise
 	]);
 	return {
-		account: account?.export(),
+		account,
 		feats,
 		locations,
 		event,
