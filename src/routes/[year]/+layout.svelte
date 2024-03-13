@@ -90,7 +90,7 @@
 		{/if}
 		<div class="grow">
 			<a href={`/${$page.params.year}`} class="btn btn-ghost normal-case text-xl"
-				>Vasagatantracker{env.PUBLIC_ENV === 'DEV' ? ' DEVELOPMENT' : ''}</a
+				>Vasagatantracker{env.PUBLIC_ENV === 'DEV' ? ' DEV' : ''}</a
 			>
 		</div>
 		<div class="flex-none">
