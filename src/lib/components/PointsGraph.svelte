@@ -38,4 +38,4 @@
 	}
 </script>
 
-<Line {data} {options} width={375} height={400}/>
+<Line {data} {options} width={375} height={400} />

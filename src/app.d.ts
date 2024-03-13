@@ -4,15 +4,15 @@ import type { Account } from '$lib/stores';
 
 // and what to do when importing types
 declare global {
-declare namespace App {
-	interface Locals {
-		client: import('pocketbase').default;
-		account: Account;
+	declare namespace App {
+		interface Locals {
+			client: import('pocketbase').default;
+			account: Account;
+		}
+		// interface PageData {}
+		// interface Error {}
+		// interface Platform {}
 	}
-	// interface PageData {}
-	// interface Error {}
-	// interface Platform {}
-}
 
-declare module "svelte-table";
+	declare module 'svelte-table';
 }

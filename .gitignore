@@ -6,5 +6,10 @@ node_modules
 .env
 .env.*
 !.env.example
-/test-results
 /playwright-report
+migrate.ts
+/images
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/

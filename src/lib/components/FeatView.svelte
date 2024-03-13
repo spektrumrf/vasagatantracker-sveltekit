@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { Feat } from '$lib/stores';
-	import { FeatContent, locations } from "$lib/stores"
+	import { FeatContent, locations } from '$lib/stores';
 	import Input from './Input.svelte';
 
 	export let feat: Feat;
@@ -12,13 +12,7 @@
 		<div class="modal-box flex">
 			<div class="mx-auto">
 				<h3 class="font-bold text-2xl mb-2">Prestation</h3>
-				<Input
-					name="points"
-					value={feat.points}
-					type="number"
-					label="Poäng"
-					disabled={true}
-				/>
+				<Input name="points" value={feat.points} type="number" label="Poäng" disabled={true} />
 
 				<div class="form-control w-full max-w-xs">
 					<label class="label" for="content">
@@ -30,11 +24,7 @@
 								<label class="label" for={type}>
 									<span class="label-text">{type}</span>
 								</label>
-								<select
-									disabled
-									name={type}
-									class="select select-bordered"
-								>
+								<select disabled name={type} class="select select-bordered">
 									{#each [...Array(10).keys()] as i}
 										<option value={i}>{i}</option>
 									{/each}
@@ -51,9 +41,7 @@
 					<select name="location" class="select select-bordered" disabled>
 						<option disabled>Välj plats</option>
 						{#each $locations as location}
-							<option value={location.id}
-								>{location.name}</option
-							>
+							<option value={location.id}>{location.name}</option>
 						{/each}
 					</select>
 				</div>

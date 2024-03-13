@@ -1,28 +1,37 @@
 <script lang="ts">
-	import { teams, feats } from '$lib/stores';
+	import { teams, feats, type Account } from '$lib/stores';
 	import SvelteTable from 'svelte-table';
 
 	const columns = [
 		{
 			key: 'name',
 			title: 'Namn',
-			value: (v) => v.name,
+			value: (v: TeamWithPoints) => v.name,
 			sortable: true
 		},
 		{
 			key: 'points',
 			title: 'Poäng',
-			value: (v) => v.points,
+			value: (v: TeamWithPoints) => v.points,
 			sortable: true
 		}
 	];
 
-	$: teamsWithPoints = $teams.map((t) => ({
-		points: $feats
-			.filter((f) => f.approved)
-			.reduce((sum, f) => (f.team === t.id ? sum + f.points : sum), 0)*t.coefficient,
-		...t
-	}));
+	$: teamsWithPoints = $teams.map((t) => {
+		let points =
+			$feats
+				.filter((f) => f.approved)
+				.reduce((sum, f) => (f.team === t.id ? sum + f.points : sum), 0) * t.coefficient;
+		return {
+			points: Math.round(points * 100) / 100,
+			...t
+		};
+	});
+
+	interface TeamWithPoints {
+		name: string;
+		points: number;
+	}
 </script>
 
 <div class="overfull-x-auto">

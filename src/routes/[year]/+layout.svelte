@@ -5,6 +5,7 @@
 	import type { LayoutData } from './$types';
 	import { onMount } from 'svelte';
 	import { getClient } from '$lib/pocketbase';
+	import { env } from '$env/dynamic/public';
 
 	export let data: LayoutData;
 	$account = data.account;
@@ -16,16 +17,27 @@
 		const client = await getClient(data.cookie);
 		client
 			.collection('feat')
-			.subscribe('*', async () => ($feats = await fetch('/api/feats').then((res) => res.json())));
+			.subscribe(
+				'*',
+				async () =>
+					($feats = await fetch(`/api/feats?year=${$page.params.year}`).then((res) => res.json()))
+			);
 		client
 			.collection('location')
 			.subscribe(
 				'*',
-				async () => ($locations = await fetch('/api/locations').then((res) => res.json()))
+				async () =>
+					($locations = await fetch(`/api/locations?year=${$page.params.year}`).then((res) =>
+						res.json()
+					))
 			);
 		client
 			.collection('account')
-			.subscribe('*', async () => ($teams = await fetch('/api/teams').then((res) => res.json())));
+			.subscribe(
+				'*',
+				async () =>
+					($teams = await fetch(`/api/teams?year=${$page.params.year}`).then((res) => res.json()))
+			);
 		if ($event) {
 			client
 				.collection('event')
@@ -77,7 +89,9 @@
 			</div>
 		{/if}
 		<div class="grow">
-			<a href="/" class="btn btn-ghost normal-case text-xl">Vasagatantracker</a>
+			<a href="/" class="btn btn-ghost normal-case text-xl"
+				>Vasagatantracker{env.PUBLIC_ENV === 'DEV' ? ' DEVELOPMENT' : ''}</a
+			>
 		</div>
 		<div class="flex-none">
 			{#if !$account && !$page.url.toString().includes('login')}

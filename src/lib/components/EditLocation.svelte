@@ -1,12 +1,13 @@
 <script lang="ts">
 	import Input from '$lib/components/Input.svelte';
 	import type { Location } from '$lib/stores';
+	import { event } from '$lib/stores';
 	export let selectedLocation: Location | null = null;
 </script>
 
 {#if selectedLocation}
 	<div>
-		<label for="editLocation" class="btn btn-primary my-5 max-w-xs ">Editera</label>
+		<label for="editLocation" class="btn btn-primary my-5 max-w-xs">Editera</label>
 	</div>
 	<div class="my-5">
 		<form
@@ -16,6 +17,7 @@
 		>
 			<div class="flex gap-3">
 				<input type="hidden" name="id" value={selectedLocation?.id} />
+				<input hidden name="eventId" value={$event?.id} />
 				<button class="btn btn-error" data-testid="deleteLocation">Radera</button>
 			</div>
 		</form>

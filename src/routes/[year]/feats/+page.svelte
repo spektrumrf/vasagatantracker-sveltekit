@@ -5,8 +5,8 @@
 	const hasEventStarted = new Date($event.startTime).toISOString() < new Date().toISOString();
 </script>
 
-{#if $account?.role === Role.TEAM && hasEventStarted } 
-	<AddFeat/>
+{#if $account?.role === Role.TEAM && hasEventStarted}
+	<AddFeat />
 {/if}
 
 <h3 class="font-bold text-2xl mb-5">Prestationer</h3>

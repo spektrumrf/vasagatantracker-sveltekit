@@ -9,7 +9,7 @@
 <div class="flex">
 	<div class="mx-auto">
 		<h3 class="text-2xl font-bold my-3">Logga in</h3>
-		<form method="POST">
+		<form method="POST" action="?/login">
 			{#if form?.credentialsError}
 				<div>
 					{form?.credentialsError}
@@ -29,5 +29,20 @@
 			Inget lag?
 			<a class="link" href={`${$page.url.origin}/${$page.params.year}/register`}>Registrera!</a>
 		</div>
+		<div class="collapse mt-10">
+			<input type="checkbox" />
+			<div class="collapse-title pl-0 italic">Glömt lösenord? Tryck här!</div>
+			<div class="collapse-content">
+				<form method="POST" action="?/passwordReset">
+					<Input name="email" type="email" label="Epost" />
+					<button class="btn btn-secondary my-5">Nollställ lösenord</button>
+				</form>
+			</div>
+		</div>
+		{#if form?.resetMessage}
+			<div>
+				{form?.resetMessage}
+			</div>
+		{/if}
 	</div>
 </div>

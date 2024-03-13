@@ -1,9 +1,9 @@
 <script lang="ts">
 	import Input from '$lib/components/Input.svelte';
 	import { event, locations } from '$lib/stores';
-	export let formActionPath = "?/add";
-	let locationId = "";
-	$: locationName = $locations.find(l => l.id === locationId)?.name
+	export let formActionPath = '?/add';
+	let locationId = '';
+	$: locationName = $locations.find((l) => l.id === locationId)?.name;
 </script>
 
 <div class="flex">
@@ -15,14 +15,28 @@
 		<div class="mx-auto">
 			<h3 class="font-bold text-xl">Ny prestation</h3>
 			<form method="POST" id="add-form" enctype="multipart/form-data" action={formActionPath}>
-				<Input name="points" type="number" label="Poäng" required={true} min={0} max={15} step="0.01" altLabel="0-15, 0 om osäker" />
+				<Input
+					name="points"
+					type="number"
+					label="Poäng"
+					required={true}
+					min={0}
+					max={15}
+					step="0.01"
+					altLabel="0-15, 0 om osäker"
+				/>
 
 				<div class="form-control w-full max-w-xs">
 					<label class="label" for="location">
 						<span class="label-text">Plats</span>
 						<span class="label-text-alt">Specialkrogar märkta med *</span>
 					</label>
-					<select name="location" required on:change={(e) => locationId = e.target.value} class="select select-bordered">
+					<select
+						name="location"
+						required
+						on:change={(e) => (locationId = e.target.value)}
+						class="select select-bordered"
+					>
 						<option disabled selected value="">Välj plats</option>
 						{#each $locations as location}
 							<option value={location.id}>{location.name}</option>
@@ -42,7 +56,7 @@
 					/>
 				</div>
 
-				<Input name="teamComment" type="text" label="Kommentar" altLabel=""/>
+				<Input name="teamComment" type="text" label="Kommentar" altLabel="" />
 				<input hidden value={$event?.id} name="event" />
 				<input hidden value={locationName} name="locationName" />
 				<div class="flex gap-3 mt-3">
