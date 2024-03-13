@@ -39,7 +39,7 @@
 			filterValue: (v: Feat) => (v.approved ? 'Ja' : 'Nej')
 		}
 	];
-	let selectedFeat: Feat;
+	let selectedFeat: Feat | null;
 </script>
 
 <div class="overflow-x-auto rounded-lg">

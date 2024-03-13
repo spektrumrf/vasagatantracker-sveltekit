@@ -31,12 +31,7 @@
 						<span class="label-text">Plats</span>
 						<span class="label-text-alt">Specialkrogar märkta med *</span>
 					</label>
-					<select
-						name="location"
-						required
-						on:change={(e) => (locationId = e.target.value)}
-						class="select select-bordered"
-					>
+					<select name="location" required bind:value={locationId} class="select select-bordered">
 						<option disabled selected value="">Välj plats</option>
 						{#each $locations as location}
 							<option value={location.id}>{location.name}</option>
