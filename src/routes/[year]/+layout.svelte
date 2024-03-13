@@ -89,7 +89,7 @@
 			</div>
 		{/if}
 		<div class="grow">
-			<a href="/" class="btn btn-ghost normal-case text-xl"
+			<a href={`/${$page.params.year}`} class="btn btn-ghost normal-case text-xl"
 				>Vasagatantracker{env.PUBLIC_ENV === 'DEV' ? ' DEVELOPMENT' : ''}</a
 			>
 		</div>
