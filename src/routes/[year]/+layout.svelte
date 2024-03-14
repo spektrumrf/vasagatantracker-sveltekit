@@ -71,7 +71,7 @@
 						class="menu dropdown-content z-[1] mt-3 p-2 shadow bg-base-100 rounded-box w-52"
 					>
 						<li class="w-full overflow-hidden"><span>{$account?.name || ''}</span></li>
-						<span class="divider -my-1" />
+						<div class="divider divider-primary -my-1"></div>
 						<li><a href={`${$page.url.origin}/${$page.params.year}/feats`}>Prestationer</a></li>
 						<li><a href={`${$page.url.origin}/${$page.params.year}/teams`}>Lag</a></li>
 						<li><a href={`${$page.url.origin}/${$page.params.year}/locations`}>Platser</a></li>

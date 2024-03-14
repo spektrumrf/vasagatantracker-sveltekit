@@ -8,7 +8,7 @@
 </script>
 
 <h3 class="font-bold text-2xl mb-5">Statistik</h3>
-<div class="divider" />
+<div class="divider divider-primary"></div>
 
 <h4 class="font-bold text-xl mb-5">Poängkällor</h4>
 <DrinkTable drinks={drinkEntries} />

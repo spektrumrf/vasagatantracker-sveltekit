@@ -14,7 +14,7 @@
 
 <h2 class="font-bold text-2xl">Admin</h2>
 
-<span class="divider mb-5" />
+<div class="divider divider-primary mb-5"></div>
 
 <h3 class="font-bold text-xl mb-5">Evenemang {$event?.year}</h3>
 <EditEvent />
