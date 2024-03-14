@@ -7,7 +7,11 @@
 </script>
 
 <div class="flex">
-	<label for="addFeat" class="btn btn-primary mb-8 w-full max-w-sm mx-auto">Ny prestation</label>
+	<label
+		for="addFeat"
+		class="btn btn-primary border border-black text-xl mb-8 w-full max-w-sm mx-auto"
+		>Ny prestation</label
+	>
 </div>
 <input type="checkbox" id="addFeat" class="modal-toggle" />
 <div class="modal modal-bottom sm:modal-middle">
