@@ -68,7 +68,7 @@
 					</div>
 					<ul
 						tabindex="0"
-						class="menu dropdown-content z-[1] mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+						class="menu dropdown-content z-[1] mt-3 p-2 text-lg shadow bg-base-100 rounded-box w-52"
 					>
 						<li class="w-full overflow-hidden"><span>{$account?.name || ''}</span></li>
 						<div class="divider divider-primary -my-1"></div>
@@ -83,7 +83,7 @@
 							<div class="mx-auto my-2">
 								<form method="POST" action="/logout">
 									<input hidden name="year" value={$page.params.year} />
-									<button class="btn"> Logga ut </button>
+									<button class="btn btn-secondary"> Logga ut </button>
 								</form>
 							</div>
 						{/if}

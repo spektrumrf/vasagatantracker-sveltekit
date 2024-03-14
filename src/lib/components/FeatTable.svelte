@@ -42,7 +42,7 @@
 	let selectedFeat: Feat | null;
 </script>
 
-<div class="overflow-x-auto rounded-lg">
+<div class="overflow-x-auto rounded-lg border-2 border-primary">
 	<SvelteTable
 		rows={$feats}
 		{columns}

@@ -61,8 +61,11 @@
 						<span class="label-text"> Bevis</span>
 					</label>
 					{#each feat.proofUrls as url, i}
-						<a target="_blank" class="btn btn-secondary btn-sm ml-2" rel="noreferrer" href={url}
-							>Bild {i + 1}</a
+						<a
+							target="_blank"
+							class="btn btn-secondary btn-sm ml-2 my-2"
+							rel="noreferrer"
+							href={url}>Bild {i + 1}</a
 						>
 					{/each}
 				</div>

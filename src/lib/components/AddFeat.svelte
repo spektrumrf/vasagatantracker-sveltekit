@@ -47,6 +47,7 @@
 						type="file"
 						name="proofs"
 						required
+						multiple
 						class="file-input file-input-secondary file-input-sm file-input-bordered w-full max-w-xs"
 					/>
 				</div>

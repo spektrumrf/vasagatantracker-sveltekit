@@ -18,7 +18,7 @@
 	];
 </script>
 
-<div class="overfull-x-auto">
+<div class="overfull-x-auto rounded-lg border-2 border-primary">
 	<SvelteTable
 		rows={drinks}
 		{columns}

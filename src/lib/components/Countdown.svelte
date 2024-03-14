@@ -22,29 +22,29 @@
 	}
 </script>
 
-<div class="text-center text-lg alert flex flex-col">
+<div class="text-center text-lg alert bg-zinc-200 flex flex-col">
 	{#if distance >= 0}
 		<div class="font-bold text-2xl">Tid till Approbatur i Vasagatan</div>
 		<div class="grid grid-flow-col text-center auto-cols-max justify-center">
-			<div class="flex flex-col p-2 rounded-box text-primary-focus">
+			<div class="flex flex-col p-2 rounded-box text-primary">
 				<span class="countdown font-mono text-3xl">
 					<span style={`--value:${days};`} />
 				</span>
 				d
 			</div>
-			<div class="flex flex-col p-2 rounded-box text-primary-focus">
+			<div class="flex flex-col p-2 rounded-box text-primary">
 				<span class="countdown font-mono text-3xl">
 					<span style={`--value:${hours};`} />
 				</span>
 				h
 			</div>
-			<div class="flex flex-col p-2 rounded-box text-primary-focus">
+			<div class="flex flex-col p-2 rounded-box text-primary">
 				<span class="countdown font-mono text-3xl">
 					<span style={`--value:${minutes};`} />
 				</span>
 				min
 			</div>
-			<div class="flex flex-col p-2 rounded-box text-primary-focus">
+			<div class="flex flex-col p-2 rounded-box text-primary">
 				<span class="countdown font-mono text-3xl">
 					<span style={`--value:${seconds};`} />
 				</span>
@@ -52,9 +52,9 @@
 			</div>
 		</div>
 	{:else if distance < 0}
-		<div class="font-bold text-2xl">Vasagatan har börjat!</div>
+		<div class="font-bold text-2xl">Vasagatan {$event?.year} har börjat!</div>
 		{#if $account?.role === Role.TEAM}
-			<div>
+			<div class="w-full">
 				<AddFeat formActionPath={`${$event?.year}/feats?/add`} />
 			</div>
 		{/if}
