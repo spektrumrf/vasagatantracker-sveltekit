@@ -23,7 +23,7 @@
 </script>
 
 <div class="text-center text-lg alert bg-zinc-200 flex flex-col">
-	{#if distance >= 0}
+	{#if distance >= 0 && !$event?.finished}
 		<div class="font-bold text-2xl">Tid till Approbatur i Vasagatan</div>
 		<div class="grid grid-flow-col text-center auto-cols-max justify-center">
 			<div class="flex flex-col p-2 rounded-box text-primary">
@@ -51,12 +51,14 @@
 				sec
 			</div>
 		</div>
-	{:else if distance < 0}
+	{:else if distance < 0 && !$event?.finished}
 		<div class="font-bold text-2xl">Vasagatan {$event?.year} har börjat!</div>
 		{#if $account?.role === Role.TEAM}
 			<div class="w-full">
 				<AddFeat formActionPath={`${$event?.year}/feats?/add`} />
 			</div>
 		{/if}
+	{:else}
+		<div class="font-bold text-2xl">Vasagatan {$event?.year} är avslutad!</div>
 	{/if}
 </div>
