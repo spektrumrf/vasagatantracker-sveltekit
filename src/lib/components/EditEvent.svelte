@@ -1,7 +1,9 @@
 <script lang="ts">
 	import Input from '$lib/components/Input.svelte';
+	import Loading from '$lib/components/Loading.svelte';
 	import { event } from '$lib/stores';
 	let finished = $event?.finished;
+	let loading = false;
 </script>
 
 <label for="editEvent" class="btn btn-primary max-w-xs mb-5">Editera</label>
@@ -10,7 +12,13 @@
 	<div class="modal-box flex">
 		<div class="mx-auto">
 			<h3 class="font-bold text-2xl mb-2">Editera evenemang</h3>
-			<form method="POST" class="mb-10" enctype="multipart/form-data" action="?/edit">
+			<form
+				method="POST"
+				class="mb-10"
+				enctype="multipart/form-data"
+				action="?/edit"
+				on:submit={() => (loading = true)}
+			>
 				<Input name="what" value={$event?.info.what} type="text" label="Vad?" />
 				<Input name="why" value={$event?.info.why} type="text" label="Varför?" />
 				<Input name="when" value={$event?.info.when} type="text" label="När?" />
@@ -47,7 +55,9 @@
 				</div>
 				<Input name="id" value={$event?.id} type="hidden" />
 				<div class="flex gap-3 pb-10">
-					<button class="btn btn-primary">Spara</button>
+					<button class="btn btn-primary">
+						<Loading {loading}>Spara</Loading>
+					</button>
 					<label for="editEvent" class="btn">Stäng</label>
 				</div>
 			</form>

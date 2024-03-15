@@ -3,15 +3,17 @@
 	import { event } from '$lib/stores';
 	import { superForm } from 'sveltekit-superforms';
 	import type { PageData } from './$types';
+	import Loading from '$lib/components/Loading.svelte';
 	export let data: PageData;
 	const { form, errors, constraints } = superForm(data.form);
+	let loading = false;
 </script>
 
 <div class="flex">
 	<div class="mx-auto">
 		<h3 class="text-2xl font-bold mb-3">Registrera ditt lag</h3>
 		<div>OBS! Endast en registrering per lag.</div>
-		<form method="POST" autocomplete="off">
+		<form method="POST" autocomplete="off" on:submit={() => (loading = true)}>
 			<Input
 				name="username"
 				type="text"
@@ -71,7 +73,9 @@
 				value={$form.coefficient || 1}
 			/>
 			<input hidden name="event" value={$event?.id} />
-			<button class="btn btn-primary mt-5">Registrera</button>
+			<button class="btn btn-primary mt-5">
+				<Loading {loading}>Registrera</Loading>
+			</button>
 		</form>
 	</div>
 </div>

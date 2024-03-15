@@ -1,10 +1,12 @@
 <script lang="ts">
 	import Input from '$lib/components/Input.svelte';
+	import Loading from '$lib/components/Loading.svelte';
 	import { locations, FeatContent } from '$lib/stores';
 	export let modalOpen = false;
 	export let feat: any = {};
 	let content: {};
 	let approved: boolean;
+	let loading = false;
 	$: {
 		content = feat.content || {};
 		approved = !!feat.approved;
@@ -15,7 +17,15 @@
 	<div class="modal-box flex">
 		<div class="mx-auto">
 			<h3 class="font-bold text-2xl mb-2">Editera prestation</h3>
-			<form method="POST" name="editFeat" enctype="multipart/form-data" action="?/edit">
+			<form
+				method="POST"
+				name="editFeat"
+				enctype="multipart/form-data"
+				action="?/edit"
+				on:submit={() => {
+					loading = true;
+				}}
+			>
 				<Input name="points" value={feat.points} type="number" label="Poäng" step="0.01" />
 
 				<div class="form-control w-full max-w-xs">
@@ -99,7 +109,9 @@
 				</div>
 				<input hidden value={feat?.id} type="text" name="id" />
 				<div class="flex gap-3 py-5">
-					<button class="btn btn-primary">Spara</button>
+					<button class="btn btn-primary">
+						<Loading {loading}>Spara</Loading>
+					</button>
 					<button
 						class="btn"
 						type="button"
