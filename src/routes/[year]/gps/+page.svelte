@@ -1,14 +1,36 @@
-<script>
+<script lang="ts">
 	import L from 'leaflet';
-	import { onMount } from 'svelte';
+	import { onDestroy, onMount } from 'svelte';
+	import { Role, account, event } from '$lib/stores';
 	let map;
+	let gpsSub: NodeJS.Timeout;
 	onMount(() => {
-		map = L.map('map').setView([51.505, -0.09], 13);
+		map = L.map('map').setView([60.1885, 24.957], 16);
 		L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 			maxZoom: 19,
 			attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 		}).addTo(map);
+		if ($account && $account.role === Role.TEAM && $account.allowGps) {
+			gpsSub = setInterval(saveLocation, 20000);
+			saveLocation();
+		}
 	});
+	onDestroy(() => clearInterval(gpsSub));
+	async function saveLocation() {
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(async (loc) => {
+				await fetch('/api/gps', {
+					method: 'POST',
+					body: JSON.stringify({
+						event: $event?.id,
+						latitude: loc.coords.latitude,
+						longitude: loc.coords.longitude,
+						team: $account?.id
+					})
+				});
+			});
+		}
+	}
 </script>
 
 <svelte:head>
@@ -24,6 +46,6 @@
 
 <style>
 	#map {
-		height: 500px;
+		height: 300px;
 	}
 </style>

@@ -35,6 +35,7 @@ export type Account = {
 	avatar: string;
 	coefficient: number;
 	event: string;
+	allowGps: boolean;
 	created: string;
 	updated: string;
 };
