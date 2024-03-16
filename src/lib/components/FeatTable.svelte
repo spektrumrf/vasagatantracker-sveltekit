@@ -39,15 +39,16 @@
 			filterValue: (v: Feat) => (v.approved ? 'Ja' : 'Nej')
 		}
 	];
-	let selectedFeat: Feat;
+	let selectedFeat: Feat | null;
 </script>
 
-<div class="overflow-x-auto">
+<div class="overflow-x-auto rounded-lg border-2 border-primary">
 	<SvelteTable
 		rows={$feats}
 		{columns}
-		classNameTable="table table-compact w-full"
-		classNameSelect="select select-sm"
+		classNameTable="table table-sm w-full"
+		classNameThead="bg-primary"
+		classNameSelect="select select-bordered select-sm mt-2"
 		classNameCell="text-xs lg:text-base"
 		on:clickRow={(e) => {
 			const row = e.detail.row;

@@ -18,12 +18,12 @@
 	];
 </script>
 
-<div class="overfull-x-auto">
+<div class="overfull-x-auto rounded-lg border-2 border-primary">
 	<SvelteTable
 		rows={drinks}
 		{columns}
-		classNameThead="text-center"
+		classNameThead="bg-primary text-center"
 		classNameCell="text-center text-base"
-		classNameTable="table table-compact"
+		classNameTable="table table-sm"
 	/>
 </div>

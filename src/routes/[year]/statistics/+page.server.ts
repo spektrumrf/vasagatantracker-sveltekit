@@ -8,8 +8,7 @@ export const load: PageServerLoad = async function ({ params }) {
 	await client.admins.authWithPassword(env.ADMIN_EMAIL as string, env.ADMIN_PASSWORD as string);
 	const feats: Feat[] = await client
 		.collection('feat')
-		.getFullList(undefined, { filter: `event.year = ${params.year}` })
-		.then((feats) => feats.map((f) => f.export() as Feat));
+		.getFullList(undefined, { filter: `event.year = ${params.year}` });
 	const approvedFeats = feats.filter((f) => f.approved);
 	const totalDrinks: { [key: string]: number } = {};
 	approvedFeats.forEach((f) => {

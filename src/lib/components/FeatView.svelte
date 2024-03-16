@@ -3,7 +3,7 @@
 	import { FeatContent, locations } from '$lib/stores';
 	import Input from './Input.svelte';
 
-	export let feat: Feat;
+	export let feat: Feat | null;
 	export let isOpen = false;
 </script>
 
@@ -38,7 +38,12 @@
 						<span class="label-text">Plats</span>
 						<span class="label-text-alt">Specialkrogar märkta med *</span>
 					</label>
-					<select name="location" class="select select-bordered" disabled>
+					<select
+						name="location"
+						class="select select-bordered"
+						bind:value={feat.location}
+						disabled
+					>
 						<option disabled>Välj plats</option>
 						{#each $locations as location}
 							<option value={location.id}>{location.name}</option>
@@ -51,8 +56,11 @@
 						<span class="label-text"> Bevis</span>
 					</label>
 					{#each feat.proofUrls as url, i}
-						<a target="_blank" class="btn btn-secondary btn-sm ml-2" rel="noreferrer" href={url}
-							>Bild {i + 1}</a
+						<a
+							target="_blank"
+							class="btn btn-secondary btn-sm ml-2 my-2"
+							rel="noreferrer"
+							href={url}>Bild {i + 1}</a
 						>
 					{/each}
 				</div>

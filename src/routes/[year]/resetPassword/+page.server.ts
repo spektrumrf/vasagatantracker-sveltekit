@@ -1,7 +1,7 @@
 import { type Actions, fail, redirect } from '@sveltejs/kit';
 
 export const actions: Actions = {
-	confirm: async ({ locals, request, params, url }) => {
+	confirm: async ({ locals, request, url }) => {
 		const token = url.searchParams.get('token') || '';
 		const form = await request.formData();
 		const password = form.get('password') as string;

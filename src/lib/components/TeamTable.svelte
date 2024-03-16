@@ -34,6 +34,11 @@
 	}
 </script>
 
-<div class="overfull-x-auto">
-	<SvelteTable rows={teamsWithPoints} {columns} classNameTable="table table-compact" />
+<div class="overfull-x-auto rounded-lg border-2 border-primary">
+	<SvelteTable
+		rows={teamsWithPoints}
+		{columns}
+		classNameTable="table table-sm"
+		classNameThead="bg-primary"
+	/>
 </div>

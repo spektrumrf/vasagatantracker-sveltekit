@@ -18,7 +18,7 @@
 		<span class="label-text-alt">{altLabel}</span>
 	</label>
 	<input
-		id="text-input"
+		id={name}
 		{type}
 		{name}
 		{value}

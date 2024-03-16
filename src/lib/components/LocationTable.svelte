@@ -29,6 +29,11 @@
 	}
 </script>
 
-<div class="overfull-x-auto">
-	<SvelteTable rows={locationsWithPoints} {columns} classNameTable="table table-compact" />
+<div class="overfull-x-auto rounded-lg border-2 border-primary">
+	<SvelteTable
+		rows={locationsWithPoints}
+		{columns}
+		classNameTable="table table-sm"
+		classNameThead="bg-primary"
+	/>
 </div>

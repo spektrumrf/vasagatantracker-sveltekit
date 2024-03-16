@@ -9,7 +9,7 @@ module.exports = {
 		themes: [
 			{
 				cupcake: {
-					...require('daisyui/src/colors/themes')['[data-theme=cupcake]'],
+					...require('daisyui/src/theming/themes')['[cupcake]'],
 					primary: '#ef9fbc',
 					secondary: '#65c3c8'
 				}

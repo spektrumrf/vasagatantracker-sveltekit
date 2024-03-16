@@ -3,6 +3,7 @@
 	import 'chart.js/auto';
 	import 'chartjs-adapter-dayjs-4/dist/chartjs-adapter-dayjs-4.esm';
 	import dayjs from 'dayjs';
+	import 'dayjs/locale/fi';
 	import { feats, teams } from '$lib/stores';
 	let data: any;
 	let options: any;
@@ -22,7 +23,10 @@
 			datasets: Object.keys(featsByTeam).map((team) => ({
 				data: featsByTeam[team].reduce(
 					(points, f) =>
-						points.concat({ x: f.created.slice(0, -5), y: (points.at(-1)?.y || 0) + f.points }),
+						points.concat({
+							x: dayjs(f.created).toDate(),
+							y: (points.at(-1)?.y || 0) + f.points
+						}),
 					[]
 				),
 				label: $teams.find((t) => t.id === team)?.name
@@ -30,7 +34,9 @@
 		};
 		options = {
 			scales: {
-				xAxis: { type: 'time', adapters: { date: { locale: dayjs.locale('fi') } } }
+				x: {
+					type: 'time'
+				}
 			},
 			responsive: true,
 			maintainAspectRatio: true

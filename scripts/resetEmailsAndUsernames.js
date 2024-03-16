@@ -10,7 +10,7 @@ async function resetEmails() {
 	await client.admins.authWithPassword(process.env.ADMIN_EMAIL, process.env.ADMIN_PASSWORD);
 	const accounts = await client.collection('account').getFullList();
 	const promises = accounts
-		.filter((a) => a.export().role === 'team')
+		.filter((a) => a.role === 'team')
 		.map((a) =>
 			client
 				.collection('account')
