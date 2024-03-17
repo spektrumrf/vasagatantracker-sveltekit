@@ -19,3 +19,18 @@ export const POST: RequestHandler = async function ({ request, locals }) {
 	}
 	return json({ position });
 };
+export const PATCH: RequestHandler = async function ({ request, locals }) {
+	const { allowGps } = await request.json();
+	if (typeof allowGps !== 'boolean') {
+		error(400, { message: 'Fält saknas' });
+	}
+	let account;
+	try {
+		account = await locals.client
+			.collection('account')
+			.update(locals.client.authStore.model?.id, { allowGps });
+	} catch (e: any) {
+		error(400, { ...e });
+	}
+	return json({ account });
+};

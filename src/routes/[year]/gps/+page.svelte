@@ -4,6 +4,7 @@
 	import { Role, account, event } from '$lib/stores';
 	let map;
 	let gpsSub: NodeJS.Timeout;
+	let allowGps = $account?.allowGps;
 	onMount(() => {
 		map = L.map('map').setView([60.1885, 24.957], 16);
 		L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -31,8 +32,18 @@
 			});
 		}
 	}
+	function toggleAllowGps() {
+		fetch('/api/gps', { method: 'PATCH', body: JSON.stringify({ allowGps }) });
+	}
 </script>
 
+<div class="form-control">
+	<label class="label cursor-pointer">
+		<span class="label-text">Dela din position</span>
+		<input type="checkbox" class="toggle" bind:checked={allowGps} on:change={toggleAllowGps} />
+	</label>
+</div>
+<div id="map" bind:this={map}></div>
 <svelte:head>
 	<link
 		rel="stylesheet"
@@ -41,8 +52,6 @@
 		crossorigin=""
 	/>
 </svelte:head>
-
-<div id="map" bind:this={map}></div>
 
 <style>
 	#map {
