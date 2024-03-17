@@ -114,12 +114,15 @@
 						tabindex="0"
 						class="menu dropdown-content z-[1] mt-3 p-2 text-lg shadow bg-base-100 rounded-box w-52"
 					>
-						<li class="w-full overflow-hidden"><span>{$account?.name || ''}</span></li>
+						<li class="w-full overflow-hidden">
+							<span>{$account?.name || $account?.username || ''}</span>
+						</li>
 						<div class="divider divider-primary -my-1"></div>
 						<li><a href={`${$page.url.origin}/${$page.params.year}/feats`}>Prestationer</a></li>
 						<li><a href={`${$page.url.origin}/${$page.params.year}/teams`}>Lag</a></li>
 						<li><a href={`${$page.url.origin}/${$page.params.year}/locations`}>Platser</a></li>
 						<li><a href={`${$page.url.origin}/${$page.params.year}/statistics`}>Statistik</a></li>
+						<li><a href={`${$page.url.origin}/${$page.params.year}/gps`}>GPS</a></li>
 						{#if $account?.role === Role.ADMIN}
 							<li><a href={`${$page.url.origin}/${$page.params.year}/admin`}>Admin</a></li>
 						{/if}
