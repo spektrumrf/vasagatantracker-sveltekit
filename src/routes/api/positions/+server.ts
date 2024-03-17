@@ -1,6 +1,19 @@
 import { error, json } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
 
+export const GET: RequestHandler = async function ({ locals, url }) {
+	const positions = await locals.client
+		.collection('position')
+		.getFullList(undefined, {
+			expand: 'team',
+			sort: '-created',
+			filter: `event.year=${url.searchParams.get('year')}`
+		})
+		.catch((e) => {
+			throw error(e.status, e.data.message);
+		});
+	return json(positions);
+};
 export const POST: RequestHandler = async function ({ request, locals }) {
 	const { event, team, longitude, latitude } = await request.json();
 	if (!event || !team || !longitude || !latitude) {
@@ -14,10 +27,11 @@ export const POST: RequestHandler = async function ({ request, locals }) {
 			longitude,
 			latitude
 		});
+		await locals.client.collection('account').update(team, { position: position.id });
 	} catch (e: any) {
 		error(400, { ...e });
 	}
-	return json({ position });
+	return json(position);
 };
 export const PATCH: RequestHandler = async function ({ request, locals }) {
 	const { allowGps } = await request.json();
@@ -32,5 +46,5 @@ export const PATCH: RequestHandler = async function ({ request, locals }) {
 	} catch (e: any) {
 		error(400, { ...e });
 	}
-	return json({ account });
+	return json(account);
 };

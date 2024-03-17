@@ -1,9 +1,8 @@
 <script lang="ts">
 	import L from 'leaflet';
-	import { onDestroy, onMount } from 'svelte';
-	import { Role, account, event } from '$lib/stores';
-	let map;
-	let gpsSub: NodeJS.Timeout;
+	import { onMount } from 'svelte';
+	import { account, positions } from '$lib/stores';
+	let map: any;
 	let allowGps = $account?.allowGps;
 	onMount(() => {
 		map = L.map('map').setView([60.1885, 24.957], 16);
@@ -11,39 +10,38 @@
 			maxZoom: 19,
 			attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 		}).addTo(map);
-		if ($account && $account.role === Role.TEAM && $account.allowGps) {
-			gpsSub = setInterval(saveLocation, 20000);
-			saveLocation();
-		}
 	});
-	onDestroy(() => clearInterval(gpsSub));
-	async function saveLocation() {
-		if (navigator.geolocation) {
-			navigator.geolocation.getCurrentPosition(async (loc) => {
-				await fetch('/api/gps', {
-					method: 'POST',
-					body: JSON.stringify({
-						event: $event?.id,
-						latitude: loc.coords.latitude,
-						longitude: loc.coords.longitude,
-						team: $account?.id
-					})
-				});
-			});
-		}
-	}
 	function toggleAllowGps() {
-		fetch('/api/gps', { method: 'PATCH', body: JSON.stringify({ allowGps }) });
+		fetch('/api/positions', { method: 'PATCH', body: JSON.stringify({ allowGps }) });
+	}
+	$: {
+		for (let position of Object.values($positions)) {
+			L.circle([position.latitude, position.longitude], {
+				color: 'blue',
+				fillColor: '#f03',
+				fillOpacity: 0.5,
+				radius: 5
+			})
+				.bindPopup(position.expand.team.name)
+				.addTo(map);
+		}
 	}
 </script>
 
-<div class="form-control">
+<h3 class="font-bold text-2xl mb-5">GPS</h3>
+<div class="max-w-xs">
 	<label class="label cursor-pointer">
 		<span class="label-text">Dela din position</span>
 		<input type="checkbox" class="toggle" bind:checked={allowGps} on:change={toggleAllowGps} />
 	</label>
 </div>
 <div id="map" bind:this={map}></div>
+<h4 class="font-bold text-xl my-5">Info</h4>
+<p>
+	Tillåt platsdata i din webläsare och tryck på "Dela din position" ovan för att se de andra lagens
+	positioner på kartan. Fullständigt frivilligt och bara för skoj.
+</p>
+
 <svelte:head>
 	<link
 		rel="stylesheet"
@@ -56,5 +54,6 @@
 <style>
 	#map {
 		height: 300px;
+		z-index: 0;
 	}
 </style>
