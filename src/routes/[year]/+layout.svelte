@@ -43,27 +43,12 @@
 				.collection('event')
 				.subscribe($event.id, async (data) => ($event = data.record as any));
 		}
-		if ($account && $account.role === Role.TEAM && $account.allowGps) {
+		if ($account && $account.role === Role.ADMIN) {
+			await loadPositionsAndRegisterRealtime(client);
+		} else if ($account && $account.allowGps) {
 			navigator?.geolocation?.getCurrentPosition(async (pos) => {
 				if (pos) {
-					const loadedPositions = await fetch(`/api/positions?year=${$page.params.year}`).then(
-						(res) => res.json()
-					);
-					for (let position of loadedPositions) {
-						if (!$positions[position.team]) {
-							$positions[position.team] = position;
-						}
-					}
-					client.collection('position').subscribe(
-						'*',
-						async (event) => {
-							const position = event.record;
-							if (event.action === 'create') {
-								$positions[position.team] = position;
-							}
-						},
-						{ expand: 'team' }
-					);
+					await loadPositionsAndRegisterRealtime(client);
 				}
 			});
 		}
@@ -89,6 +74,26 @@
 				});
 			});
 		}
+	}
+	async function loadPositionsAndRegisterRealtime(client: any) {
+		const loadedPositions = await fetch(`/api/positions?year=${$page.params.year}`).then((res) =>
+			res.json()
+		);
+		for (let position of loadedPositions) {
+			if (!$positions[position.team]) {
+				$positions[position.team] = position;
+			}
+		}
+		client.collection('position').subscribe(
+			'*',
+			async (event: any) => {
+				const position = event.record;
+				if (event.action === 'create') {
+					$positions[position.team] = position;
+				}
+			},
+			{ expand: 'team' }
+		);
 	}
 </script>
 
