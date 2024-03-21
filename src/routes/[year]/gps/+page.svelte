@@ -1,8 +1,8 @@
 <script lang="ts">
 	import L from 'leaflet';
 	import { onMount } from 'svelte';
-	import { account, positions } from '$lib/stores';
-	import { goto } from '$app/navigation';
+	import { account, positions, type Position } from '$lib/stores';
+	import Loading from '$lib/components/Loading.svelte';
 	let map: any;
 	let allowGps = $account?.allowGps;
 	let loading = false;
@@ -18,7 +18,7 @@
 		loading = true;
 		await fetch('/api/positions', { method: 'PATCH', body: JSON.stringify({ allowGps }) });
 		loading = false;
-		goto(window.location.pathname, { invalidateAll: true });
+		window.location.reload();
 	}
 	$: {
 		if (map) {
@@ -27,27 +27,43 @@
 			}
 			for (let position of Object.values($positions)) {
 				const marker = L.circle([position.latitude, position.longitude], {
-					color: 'blue',
-					fillColor: '#f03',
-					fillOpacity: 0.5,
-					radius: 5
+					color: '#FF007F',
+					fillOpacity: 1,
+					radius: 0.7
 				})
-					.bindPopup(position.expand.team.name)
+					.bindPopup(positionToString(position))
 					.addTo(map);
 				markers = [...markers, marker];
 			}
 		}
 	}
+	const positionToString = (position: any) =>
+		`${position.expand?.team?.name} kl.${new Date(position?.created).toLocaleTimeString('fi-FI').slice(0, 5)}`;
+	const updateMapPosition = (position: any) =>
+		(map = map.setView([position.latitude, position.longitude], 16));
 </script>
 
 <h3 class="font-bold text-2xl mb-5">GPS</h3>
 <div class="max-w-xs">
 	<label class="label cursor-pointer">
 		<span class="label-text">Dela din position</span>
-		<input type="checkbox" class="toggle" bind:checked={allowGps} on:change={toggleAllowGps} />
+		<Loading {loading}>
+			<input type="checkbox" class="toggle" bind:checked={allowGps} on:change={toggleAllowGps} />
+		</Loading>
 	</label>
 </div>
 <div id="map" bind:this={map}></div>
+{#if allowGps}
+	<h4 class="font-bold text-xl mt-5 mb-2">Positioner</h4>
+	<p class="italic">Tryck på lag för att centrera karta</p>
+	<ul class="ml-5 mt-2 list-disc">
+		{#each Object.values($positions) as position}
+			<li class="cursor-pointer" on:click={() => updateMapPosition(position)}>
+				{positionToString(position)}
+			</li>
+		{/each}
+	</ul>
+{/if}
 <h4 class="font-bold text-xl my-5">Info</h4>
 <p>
 	Tillåt platsdata i din webläsare och tryck på "Dela din position" ovan för att se de andra lagens
