@@ -1,7 +1,7 @@
 <script lang="ts">
 	import L from 'leaflet';
 	import { onMount } from 'svelte';
-	import { account, positions, event } from '$lib/stores';
+	import { account, positions, event, Role } from '$lib/stores';
 	import Loading from '$lib/components/Loading.svelte';
 	import dayjs from 'dayjs';
 	let map: any;
@@ -46,7 +46,7 @@
 </script>
 
 <h3 class="font-bold text-2xl mb-5">GPS</h3>
-{#if hasStarted}
+{#if hasStarted && $account?.role === Role.TEAM}
 	<div class="max-w-xs">
 		<label class="label cursor-pointer">
 			<span class="label-text">Dela din position</span>
@@ -60,11 +60,11 @@
 			</Loading>
 		</label>
 	</div>
-{:else}
+{:else if $account?.role === Role.TEAM}
 	<p>Ladda om sidan då Vasagatan har börjat</p>
 {/if}
 <div id="map" bind:this={map}></div>
-{#if allowGps}
+{#if allowGps || $account?.role === Role.ADMIN}
 	<h4 class="font-bold text-xl mt-5 mb-2">Positioner</h4>
 	<p class="italic">Tryck på lag för att centrera karta</p>
 	<ul class="ml-5 mt-2 list-disc">
