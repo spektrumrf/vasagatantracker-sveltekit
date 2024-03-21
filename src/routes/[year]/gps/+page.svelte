@@ -65,9 +65,13 @@
 	</ul>
 {/if}
 <h4 class="font-bold text-xl my-5">Info</h4>
-<p>
+<p class="mb-5">
 	Tillåt platsdata i din webläsare och tryck på "Dela din position" ovan för att se de andra lagens
 	positioner på kartan. Fullständigt frivilligt och bara för skoj.
+</p>
+<p>
+	OBS! Firefox Android har en potentiell bugg där platstillåtelsen nollställs till block då sidan
+	laddas om trots beviljad åtkomst. Rekommenderar en annan webläsare på Android.
 </p>
 
 <svelte:head>

@@ -151,7 +151,7 @@
 			{/if}
 		</div>
 	</div>
-	<div class="max-w-2xl mx-auto">
+	<div class="max-w-2xl mx-auto mb-20">
 		<div class="m-5">
 			<slot />
 		</div>
