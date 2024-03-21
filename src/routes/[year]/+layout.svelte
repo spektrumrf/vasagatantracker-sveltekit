@@ -68,7 +68,7 @@
 			});
 		}
 
-		if ($account && $account.role === Role.TEAM && $account.allowGps) {
+		if ($account && $account.role === Role.TEAM && $account.allowGps && !$event?.finished) {
 			gpsSub = setInterval(saveLocation, 20000);
 			saveLocation();
 		}
