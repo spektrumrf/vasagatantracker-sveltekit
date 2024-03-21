@@ -5,6 +5,7 @@ export const feats = writable<Feat[]>([]);
 export const locations = writable<Location[]>([]);
 export const event = writable<Event | null>(null);
 export const teams = writable<Account[]>([]);
+export const positions = writable<{ [key: string]: any }>({});
 
 function createFeatFilterSelections() {
 	const selections =
@@ -35,6 +36,7 @@ export type Account = {
 	avatar: string;
 	coefficient: number;
 	event: string;
+	allowGps: boolean;
 	created: string;
 	updated: string;
 };
@@ -73,6 +75,15 @@ export type Feat = {
 	expand?: { [key: string]: any };
 	created: string;
 	updated: string;
+};
+
+export type Position = {
+	id: string;
+	event: string;
+	team: string;
+	latitude: number;
+	longitude: number;
+	expand?: { [key: string]: any };
 };
 
 export enum Role {

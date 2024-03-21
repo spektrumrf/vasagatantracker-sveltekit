@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { teams, feats, type Account } from '$lib/stores';
+	import { teams, feats } from '$lib/stores';
 	import SvelteTable from 'svelte-table';
 
 	const columns = [
