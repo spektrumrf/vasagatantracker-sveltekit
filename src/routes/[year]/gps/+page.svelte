@@ -2,8 +2,11 @@
 	import L from 'leaflet';
 	import { onMount } from 'svelte';
 	import { account, positions } from '$lib/stores';
+	import { goto } from '$app/navigation';
 	let map: any;
 	let allowGps = $account?.allowGps;
+	let loading = false;
+	let markers: L.Circle<any>[] = [];
 	onMount(() => {
 		map = L.map('map').setView([60.1885, 24.957], 16);
 		L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -11,19 +14,28 @@
 			attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 		}).addTo(map);
 	});
-	function toggleAllowGps() {
-		fetch('/api/positions', { method: 'PATCH', body: JSON.stringify({ allowGps }) });
+	async function toggleAllowGps() {
+		loading = true;
+		await fetch('/api/positions', { method: 'PATCH', body: JSON.stringify({ allowGps }) });
+		loading = false;
+		goto(window.location.pathname, { invalidateAll: true });
 	}
 	$: {
-		for (let position of Object.values($positions)) {
-			L.circle([position.latitude, position.longitude], {
-				color: 'blue',
-				fillColor: '#f03',
-				fillOpacity: 0.5,
-				radius: 5
-			})
-				.bindPopup(position.expand.team.name)
-				.addTo(map);
+		if (map) {
+			for (let marker of markers) {
+				map.removeLayer(marker);
+			}
+			for (let position of Object.values($positions)) {
+				const marker = L.circle([position.latitude, position.longitude], {
+					color: 'blue',
+					fillColor: '#f03',
+					fillOpacity: 0.5,
+					radius: 5
+				})
+					.bindPopup(position.expand.team.name)
+					.addTo(map);
+				markers = [...markers, marker];
+			}
 		}
 	}
 </script>

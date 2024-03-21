@@ -32,19 +32,18 @@
 						res.json()
 					))
 			);
-		client
-			.collection('account')
-			.subscribe(
-				'*',
-				async () =>
-					($teams = await fetch(`/api/teams?year=${$page.params.year}`).then((res) => res.json()))
-			);
+		client.collection('account').subscribe('*', async (data) => {
+			if (!data.record.allowGps) {
+				clearInterval(gpsSub);
+			}
+			$teams = await fetch(`/api/teams?year=${$page.params.year}`).then((res) => res.json());
+		});
 		if ($event) {
 			client
 				.collection('event')
 				.subscribe($event.id, async (data) => ($event = data.record as any));
 		}
-		if ($account && $account.role === Role.TEAM) {
+		if ($account && $account.role === Role.TEAM && $account.allowGps) {
 			navigator?.geolocation?.getCurrentPosition(async (pos) => {
 				if (pos) {
 					const loadedPositions = await fetch(`/api/positions?year=${$page.params.year}`).then(
@@ -55,12 +54,16 @@
 							$positions[position.team] = position;
 						}
 					}
-					client.collection('position').subscribe('*', async (event) => {
-						const position = event.record;
-						if (event.action === 'create') {
-							$positions[position.team] = position;
-						}
-					});
+					client.collection('position').subscribe(
+						'*',
+						async (event) => {
+							const position = event.record;
+							if (event.action === 'create') {
+								$positions[position.team] = position;
+							}
+						},
+						{ expand: 'team' }
+					);
 				}
 			});
 		}
@@ -72,7 +75,6 @@
 	});
 
 	onDestroy(() => clearInterval(gpsSub));
-
 	async function saveLocation() {
 		if (navigator.geolocation) {
 			navigator.geolocation.getCurrentPosition(async (loc) => {

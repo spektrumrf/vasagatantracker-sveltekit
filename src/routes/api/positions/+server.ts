@@ -6,7 +6,7 @@ export const GET: RequestHandler = async function ({ locals, url }) {
 		.collection('position')
 		.getFullList(undefined, {
 			expand: 'team',
-			sort: '-created',
+			sort: '+created',
 			filter: `event.year=${url.searchParams.get('year')}`
 		})
 		.catch((e) => {
