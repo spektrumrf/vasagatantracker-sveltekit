@@ -1,8 +1,9 @@
 <script lang="ts">
 	import L from 'leaflet';
 	import { onMount } from 'svelte';
-	import { account, positions, type Position } from '$lib/stores';
+	import { account, positions, event } from '$lib/stores';
 	import Loading from '$lib/components/Loading.svelte';
+	import dayjs from 'dayjs';
 	let map: any;
 	let allowGps = $account?.allowGps;
 	let loading = false;
@@ -41,17 +42,27 @@
 		`${position.expand?.team?.name} kl.${new Date(position?.created).toLocaleTimeString('fi-FI').slice(0, 5)}`;
 	const updateMapPosition = (position: any) =>
 		(map = map.setView([position.latitude, position.longitude], 16));
+	$: hasStarted = dayjs().toISOString() > dayjs($event?.startTime).toISOString();
 </script>
 
 <h3 class="font-bold text-2xl mb-5">GPS</h3>
-<div class="max-w-xs">
-	<label class="label cursor-pointer">
-		<span class="label-text">Dela din position</span>
-		<Loading {loading}>
-			<input type="checkbox" class="toggle" bind:checked={allowGps} on:change={toggleAllowGps} />
-		</Loading>
-	</label>
-</div>
+{#if hasStarted}
+	<div class="max-w-xs">
+		<label class="label cursor-pointer">
+			<span class="label-text">Dela din position</span>
+			<Loading {loading}>
+				<input
+					type="checkbox"
+					class="toggle disabled"
+					bind:checked={allowGps}
+					on:change={toggleAllowGps}
+				/>
+			</Loading>
+		</label>
+	</div>
+{:else}
+	<p>Ladda om sidan då Vasagatan har börjat</p>
+{/if}
 <div id="map" bind:this={map}></div>
 {#if allowGps}
 	<h4 class="font-bold text-xl mt-5 mb-2">Positioner</h4>
