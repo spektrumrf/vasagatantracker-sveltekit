@@ -39,7 +39,7 @@ export const actions: Actions = {
 			return fail(400, { form });
 		}
 		const client = await getClient('');
-		await client.admins.authWithPassword(env.ADMIN_EMAIL as string, env.ADMIN_PASSWORD as string);
+		await client.collection('_superusers').authWithPassword(env.ADMIN_EMAIL as string, env.ADMIN_PASSWORD as string);
 		try {
 			await client.collection('account').create({ ...form.data, role: Role.TEAM });
 		} catch (e: any) {
