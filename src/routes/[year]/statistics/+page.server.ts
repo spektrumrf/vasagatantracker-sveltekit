@@ -1,11 +1,11 @@
-import { env } from '$env/dynamic/private';
+import { ADMIN_EMAIL, ADMIN_PASSWORD } from '$env/static/private';
 import { getClient } from '$lib/pocketbase';
 import type { Feat } from '$lib/stores';
 import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async function ({ params }) {
 	const client = await getClient('');
-	await client.collection("_superusers").authWithPassword(env.ADMIN_EMAIL as string, env.ADMIN_PASSWORD as string);
+	await client.collection("_superusers").authWithPassword(ADMIN_EMAIL as string, ADMIN_PASSWORD as string);
 	const feats: Feat[] = await client
 		.collection('feat')
 		.getFullList(undefined, { filter: `event.year = ${params.year}` });

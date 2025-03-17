@@ -1,4 +1,4 @@
-import { env } from '$env/dynamic/private';
+import { ADMIN_EMAIL, ADMIN_PASSWORD } from '$env/static/private';
 import { getClient } from '$lib/pocketbase';
 import { Role } from '$lib/stores';
 import { fail, redirect } from '@sveltejs/kit';
@@ -39,7 +39,7 @@ export const actions: Actions = {
 			return fail(400, { form });
 		}
 		const client = await getClient('');
-		await client.collection('_superusers').authWithPassword(env.ADMIN_EMAIL as string, env.ADMIN_PASSWORD as string);
+		await client.collection('_superusers').authWithPassword(ADMIN_EMAIL as string, ADMIN_PASSWORD as string);
 		try {
 			await client.collection('account').create({ ...form.data, role: Role.TEAM });
 		} catch (e: any) {
