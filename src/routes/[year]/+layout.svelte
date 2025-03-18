@@ -5,7 +5,7 @@
 	import type { LayoutData } from './$types';
 	import { onDestroy, onMount } from 'svelte';
 	import { getClient } from '$lib/pocketbase';
-	import { env } from '$env/dynamic/public';
+	import { PUBLIC_ENV } from '$env/static/public';
 
 	export let data: LayoutData;
 	$account = data.account;
@@ -147,7 +147,7 @@
 		{/if}
 		<div class="grow">
 			<a href={`/${$page.params.year}`} class="btn btn-ghost normal-case text-xl"
-				>Vasagatantracker{env.PUBLIC_ENV === 'DEV' ? ' DEV' : ''}</a
+				>Vasagatantracker{PUBLIC_ENV === 'DEV' ? ' DEV' : ''}</a
 			>
 		</div>
 		<div class="flex-none">
