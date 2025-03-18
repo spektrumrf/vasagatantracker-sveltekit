@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { account, feats, locations, event, teams, Role, positions } from '$lib/stores';
+	import { account, feats, locations, event, teams, Role } from '$lib/stores';
 	import { page } from '$app/stores';
 	import '../../app.css';
 	import type { LayoutData } from './$types';
-	import { onDestroy, onMount } from 'svelte';
+	import { onMount } from 'svelte';
 	import { getClient } from '$lib/pocketbase';
 	import { PUBLIC_ENV } from '$env/static/public';
 
@@ -13,7 +13,7 @@
 	$locations = data.locations;
 	$event = data.event;
 	$teams = data.teams;
-	let gpsSub: NodeJS.Timeout;
+
 	onMount(async () => {
 		const client = await getClient(data.cookie);
 		client
@@ -32,10 +32,7 @@
 						res.json()
 					))
 			);
-		client.collection('account').subscribe('*', async (data) => {
-			if (!data.record.allowGps) {
-				clearInterval(gpsSub);
-			}
+		client.collection('account').subscribe('*', async () => {
 			$teams = await fetch(`/api/teams?year=${$page.params.year}`).then((res) => res.json());
 		});
 		if ($event) {
@@ -43,58 +40,7 @@
 				.collection('event')
 				.subscribe($event.id, async (data) => ($event = data.record as any));
 		}
-		if ($account && $account.role === Role.ADMIN) {
-			await loadPositionsAndRegisterRealtime(client);
-		} else if ($account && $account.allowGps) {
-			navigator?.geolocation?.getCurrentPosition(async (pos) => {
-				if (pos) {
-					await loadPositionsAndRegisterRealtime(client);
-				}
-			});
-		}
-
-		if ($account && $account.role === Role.TEAM && $account.allowGps && !$event?.finished) {
-			gpsSub = setInterval(saveLocation, 20000);
-			saveLocation();
-		}
 	});
-
-	onDestroy(() => clearInterval(gpsSub));
-	async function saveLocation() {
-		if (navigator.geolocation) {
-			navigator.geolocation.getCurrentPosition(async (loc) => {
-				await fetch('/api/positions', {
-					method: 'POST',
-					body: JSON.stringify({
-						event: $event?.id,
-						latitude: loc.coords.latitude,
-						longitude: loc.coords.longitude,
-						team: $account?.id
-					})
-				});
-			});
-		}
-	}
-	async function loadPositionsAndRegisterRealtime(client: any) {
-		const loadedPositions = await fetch(`/api/positions?year=${$page.params.year}`).then((res) =>
-			res.json()
-		);
-		for (let position of loadedPositions) {
-			if (!$positions[position.team]) {
-				$positions[position.team] = position;
-			}
-		}
-		client.collection('position').subscribe(
-			'*',
-			async (event: any) => {
-				const position = event.record;
-				if (event.action === 'create') {
-					$positions[position.team] = position;
-				}
-			},
-			{ expand: 'team' }
-		);
-	}
 </script>
 
 <div>
@@ -129,7 +75,6 @@
 						<li><a href={`${$page.url.origin}/${$page.params.year}/teams`}>Lag</a></li>
 						<li><a href={`${$page.url.origin}/${$page.params.year}/locations`}>Platser</a></li>
 						<li><a href={`${$page.url.origin}/${$page.params.year}/statistics`}>Statistik</a></li>
-						<li><a href={`${$page.url.origin}/${$page.params.year}/gps`}>GPS</a></li>
 						{#if $account?.role === Role.ADMIN}
 							<li><a href={`${$page.url.origin}/${$page.params.year}/admin`}>Admin</a></li>
 						{/if}
