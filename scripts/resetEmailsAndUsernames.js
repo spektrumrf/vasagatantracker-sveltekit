@@ -7,7 +7,9 @@ async function resetEmails() {
 	const pocketbaseUrl = 'https://db-dev.tracker.vasagatan.fi';
 	const client = new PocketBase(pocketbaseUrl);
 
-	await client.admins.authWithPassword(process.env.ADMIN_EMAIL, process.env.ADMIN_PASSWORD);
+	await client
+		.collection('_superusers')
+		.authWithPassword(process.env.ADMIN_EMAIL, process.env.ADMIN_PASSWORD);
 	const accounts = await client.collection('account').getFullList();
 	const promises = accounts
 		.filter((a) => a.role === 'team')

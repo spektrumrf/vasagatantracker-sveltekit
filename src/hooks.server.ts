@@ -38,7 +38,7 @@ const myHandle: Handle = async function ({ event, resolve }) {
 };
 
 Sentry.init({
-	dsn: 'https://e8042ea7a3c64f2ba27befa6631c532e@o4504774078693376.ingest.sentry.io/4504774081839104',
+	dsn: 'https://cc7c02b5a9339bf0698f8ab541b3d825@o4504774078693376.ingest.us.sentry.io/4508992848068608',
 	tracesSampleRate: 1.0
 	// Add the Http integration for tracing
 });
