@@ -6,10 +6,12 @@
 	export let feat: any = {};
 	let content: {};
 	let approved: boolean;
+	let checked: boolean;
 	let loading = false;
 	$: {
 		content = feat.content || {};
 		approved = !!feat.approved;
+		checked = !!feat.checked;
 	}
 </script>
 
@@ -102,7 +104,7 @@
 						<input
 							type="checkbox"
 							name="approved"
-							class="toggle"
+							class="toggle text-error checked:text-success"
 							value={approved}
 							checked={approved}
 							on:change={() => (approved = !approved)}
@@ -115,10 +117,10 @@
 						<input
 							type="checkbox"
 							name="checked"
-							class="toggle"
-							value={feat.checked}
-							checked={feat.checked}
-							on:change={() => (feat.checked = !feat.checked)}
+							class="toggle text-error checked:text-success"
+							value={checked}
+							{checked}
+							on:change={() => (checked = !checked)}
 						/>
 					</div>
 				</div>
