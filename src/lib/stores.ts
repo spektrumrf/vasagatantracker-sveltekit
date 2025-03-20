@@ -70,6 +70,7 @@ export type Feat = {
 	approved: boolean;
 	teamComment: string;
 	adminComment: string;
+	checked: boolean;
 	proofs: string[];
 	proofUrls: string[];
 	expand?: { [key: string]: any };

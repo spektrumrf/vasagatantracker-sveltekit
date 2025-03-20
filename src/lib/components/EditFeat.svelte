@@ -94,18 +94,33 @@
 					label="Domarkommentar"
 					altLabel=""
 				/>
-				<div class="form-control">
-					<label for="approved" class="label cursor-pointer">
-						<span class="label-text">Godkänd</span>
-					</label>
-					<input
-						type="checkbox"
-						name="approved"
-						class="toggle"
-						value={approved}
-						checked={approved}
-						on:change={() => (approved = !approved)}
-					/>
+				<div class="flex gap-4">
+					<div class="form-control">
+						<label for="approved" class="label cursor-pointer">
+							<span class="label-text">Godkänd</span>
+						</label>
+						<input
+							type="checkbox"
+							name="approved"
+							class="toggle"
+							value={approved}
+							checked={approved}
+							on:change={() => (approved = !approved)}
+						/>
+					</div>
+					<div class="form-control">
+						<label for="checked" class="label cursor-pointer">
+							<span class="label-text">Granskad</span>
+						</label>
+						<input
+							type="checkbox"
+							name="checked"
+							class="toggle"
+							value={feat.checked}
+							checked={feat.checked}
+							on:change={() => (feat.checked = !feat.checked)}
+						/>
+					</div>
 				</div>
 				<input hidden value={feat?.id} type="text" name="id" />
 				<div class="flex gap-3 py-5">
