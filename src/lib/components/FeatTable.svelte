@@ -37,6 +37,14 @@
 			renderValue: (v: Feat) => (v.approved ? 'Ja' : 'Nej'),
 			filterOptions: ['Ja', 'Nej'],
 			filterValue: (v: Feat) => (v.approved ? 'Ja' : 'Nej')
+		},
+		{
+			key: 'checked',
+			title: 'Granskad',
+			value: (v: Feat) => v.checked,
+			renderValue: (v: Feat) => (v.checked ? '✓' : ''),
+			filterOptions: ['Ja', 'Nej'],
+			filterValue: (v: Feat) => (v.checked ? 'Ja' : 'Nej')
 		}
 	];
 	let selectedFeat: Feat | null;

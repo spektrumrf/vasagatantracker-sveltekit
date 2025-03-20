@@ -32,6 +32,7 @@ export const actions: Actions = {
 		// Why isn't this needed anymore?
 		// content["öl"] = Number(formData.get("Ã¶l"));
 		formObject.approved = formObject.approved ? 'true' : 'false';
+		formObject.checked = formObject.checked ? 'true' : 'false';
 		const feat = await locals.client
 			.collection('feat')
 			.update(formData.get('id') as string, { ...formObject, content })

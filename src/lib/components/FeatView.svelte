@@ -81,19 +81,6 @@
 					altLabel=""
 					disabled={true}
 				/>
-				<div class="form-control">
-					<label for="approved" class="label cursor-pointer">
-						<span class="label-text">Godkänd</span>
-					</label>
-					<input
-						type="checkbox"
-						name="approved"
-						class="toggle"
-						value={feat.approved}
-						checked={feat?.approved}
-						disabled
-					/>
-				</div>
 				<div>
 					<button on:click={() => (isOpen = false)} class="btn my-2">Stäng</button>
 				</div>
