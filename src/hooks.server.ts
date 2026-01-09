@@ -1,6 +1,6 @@
 import type { Handle, HandleServerError } from '@sveltejs/kit';
 import { getClient } from '$lib/pocketbase';
-import * as Sentry from '@sentry/sveltekit';
+//import * as Sentry from '@sentry/sveltekit';
 import { sequence } from '@sveltejs/kit/hooks';
 
 const myHandle: Handle = async function ({ event, resolve }) {
@@ -37,11 +37,12 @@ const myHandle: Handle = async function ({ event, resolve }) {
 	return resolve(event);
 };
 
-Sentry.init({
-	dsn: 'https://cc7c02b5a9339bf0698f8ab541b3d825@o4504774078693376.ingest.us.sentry.io/4508992848068608',
-	tracesSampleRate: 1.0
+// Sentry.init({
+	// dsn: 'https://cc7c02b5a9339bf0698f8ab541b3d825@o4504774078693376.ingest.us.sentry.io/4508992848068608',
+	// tracesSampleRate: 1.0
 	// Add the Http integration for tracing
-});
+// });
 
-export const handleError: HandleServerError = Sentry.handleErrorWithSentry();
-export const handle = sequence(Sentry.sentryHandle(), myHandle);
+//export const handleError: HandleServerError = Sentry.handleErrorWithSentry();
+//export const handle = sequence(Sentry.sentryHandle(), myHandle);
+export const handle = myHandle;
