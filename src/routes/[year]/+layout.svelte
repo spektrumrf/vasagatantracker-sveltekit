@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { account, feats, locations, event, teams, Role } from '$lib/stores';
 	import { page } from '$app/stores';
-	import '../../app.css';
 	import type { LayoutData } from './$types';
 	import { onMount } from 'svelte';
 	import { getClient } from '$lib/pocketbase';
@@ -44,7 +43,7 @@
 </script>
 
 <div>
-	<div class="navbar max-w-2xl mx-auto">
+	<div class="navbar mx-auto max-w-2xl">
 		{#if $account}
 			<div class="flex-none">
 				<div class="dropdown">
@@ -64,8 +63,8 @@
 						>
 					</div>
 					<ul
-						tabindex="0"
-						class="menu dropdown-content z-[1] mt-3 p-2 text-lg shadow bg-base-100 rounded-box w-52"
+						tabindex="-1"
+						class="menu dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 text-lg shadow"
 					>
 						<li class="w-full overflow-hidden">
 							<span>{$account?.name || $account?.username || ''}</span>
@@ -91,7 +90,7 @@
 			</div>
 		{/if}
 		<div class="grow">
-			<a href={`/${$page.params.year}`} class="btn btn-ghost normal-case text-xl"
+			<a href={`/${$page.params.year}`} class="btn btn-ghost text-xl normal-case"
 				>Vasagatantracker{PUBLIC_ENV === 'DEV' ? ' DEV' : ''}</a
 			>
 		</div>
@@ -101,7 +100,7 @@
 			{/if}
 		</div>
 	</div>
-	<div class="max-w-2xl mx-auto mb-20">
+	<div class="mx-auto mb-20 max-w-2xl">
 		<div class="m-5">
 			<slot />
 		</div>

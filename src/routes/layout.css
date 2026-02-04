@@ -1,0 +1,7 @@
+@import 'tailwindcss';
+html {
+	font-family:
+		Superclarendon, 'Bookman Old Style', 'URW Bookman', 'URW Bookman L', 'Georgia Pro', Georgia,
+		serif;
+	font-weight: normal;
+}
