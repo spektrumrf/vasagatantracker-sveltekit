@@ -45,7 +45,6 @@
 		"dotenv": "^17.2.3",
 		"leaflet": "^1.9.4",
 		"pocketbase": "^0.26.8",
-		"svelte-chartjs": "^3.1.5",
 		"svelte-table": "^0.6.5"
 	}
 }
