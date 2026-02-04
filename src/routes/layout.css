@@ -1,4 +1,11 @@
+/*! 🌼 daisyUI 5.5.17 */
 @import 'tailwindcss';
+@plugin 'daisyui' {
+	themes:
+		light --default,
+		dark --prefersdark,
+		cupcake;
+}
 html {
 	font-family:
 		Superclarendon, 'Bookman Old Style', 'URW Bookman', 'URW Bookman L', 'Georgia Pro', Georgia,
