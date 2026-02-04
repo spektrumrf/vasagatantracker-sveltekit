@@ -28,25 +28,25 @@
 		<div class="grid grid-flow-col text-center auto-cols-max justify-center">
 			<div class="flex flex-col p-2 rounded-box text-primary">
 				<span class="countdown font-mono text-3xl">
-					<span style={`--value:${days};`} />
+					<span style={`--value:${days};`}></span>
 				</span>
 				d
 			</div>
 			<div class="flex flex-col p-2 rounded-box text-primary">
 				<span class="countdown font-mono text-3xl">
-					<span style={`--value:${hours};`} />
+					<span style={`--value:${hours};`}></span>
 				</span>
 				h
 			</div>
 			<div class="flex flex-col p-2 rounded-box text-primary">
 				<span class="countdown font-mono text-3xl">
-					<span style={`--value:${minutes};`} />
+					<span style={`--value:${minutes};`}></span>
 				</span>
 				min
 			</div>
 			<div class="flex flex-col p-2 rounded-box text-primary">
 				<span class="countdown font-mono text-3xl">
-					<span style={`--value:${seconds};`} />
+					<span style={`--value:${seconds};`}></span>
 				</span>
 				sec
 			</div>
