@@ -1,3 +1,4 @@
+/*! 🌼 daisyUI 5.5.17 */
 import { error, json } from '@sveltejs/kit';
 import type { RequestHandler } from '@sveltejs/kit';
 import type { Feat } from '$lib/stores';
@@ -15,7 +16,7 @@ export const GET: RequestHandler = async function ({ locals, url }) {
 		});
 	const featsWithProofUrls = feats.map((f: any) => ({
 		...f,
-		proofUrls: f.proofs.map((p: string) => locals.client.getFileUrl(f, p))
+		proofUrls: f.proofs.map((p: string) => locals.client.files.getUrl(f, p))
 	})) as Feat[];
 	return json(featsWithProofUrls);
 };
