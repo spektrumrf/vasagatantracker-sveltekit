@@ -4,5 +4,7 @@
 	import { event } from '$lib/stores';
 </script>
 
-<Countdown />
+<div class="mb-8">
+	<Countdown />
+</div>
 <Info info={$event?.info} />
