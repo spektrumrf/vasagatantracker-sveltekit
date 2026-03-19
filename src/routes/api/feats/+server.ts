@@ -16,7 +16,7 @@ export const GET: RequestHandler = async function ({ locals, url }) {
 		});
 	const featsWithProofUrls = feats.map((f: any) => ({
 		...f,
-		proofUrls: f.proofs.map((p: string) => locals.client.files.getUrl(f, p))
+		proofUrls: f.proofs.map((p: string) => locals.client.files.getURL(f, p))
 	})) as Feat[];
 	return json(featsWithProofUrls);
 };

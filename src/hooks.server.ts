@@ -11,19 +11,20 @@ const myHandle: Handle = async function ({ event, resolve }) {
 
 	if (authStore.isValid) {
 		try {
-			await client.collection('account').authRefresh();
-			const account = await client
-				.collection('account')
-				.getOne(authStore.model?.id as string, { expand: 'event' });
-			if (
-				account.role === 'admin' ||
-				!event.params.year ||
-				account?.expand?.event?.year.toString() === event.params.year
-			) {
-				event.cookies.set('pocketbase_auth', authStore.exportToCookie(), { path: '/' });
-			} else {
-				authStore.clear();
-				event.cookies.delete('pocketbase_auth', { path: '/' });
+			if (!event.url.pathname.startsWith('/api/')) {
+				const { record: account } = await client
+					.collection('account')
+					.authRefresh({ expand: 'event' });
+				if (
+					account.role === 'admin' ||
+					!event.params.year ||
+					account?.expand?.event?.year.toString() === event.params.year
+				) {
+					event.cookies.set('pocketbase_auth', authStore.exportToCookie(), { path: '/' });
+				} else {
+					authStore.clear();
+					event.cookies.delete('pocketbase_auth', { path: '/' });
+				}
 			}
 		} catch (e) {
 			authStore.clear();
@@ -38,9 +39,9 @@ const myHandle: Handle = async function ({ event, resolve }) {
 };
 
 // Sentry.init({
-	// dsn: 'https://cc7c02b5a9339bf0698f8ab541b3d825@o4504774078693376.ingest.us.sentry.io/4508992848068608',
-	// tracesSampleRate: 1.0
-	// Add the Http integration for tracing
+// dsn: 'https://cc7c02b5a9339bf0698f8ab541b3d825@o4504774078693376.ingest.us.sentry.io/4508992848068608',
+// tracesSampleRate: 1.0
+// Add the Http integration for tracing
 // });
 
 //export const handleError: HandleServerError = Sentry.handleErrorWithSentry();

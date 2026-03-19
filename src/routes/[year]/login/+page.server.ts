@@ -14,7 +14,7 @@ export const actions: Actions = {
 		const password = form.get('password') as string;
 		const result = await locals.client
 			.collection('account')
-			.authWithPassword(username, password)
+			.authWithPassword(username, password, { expand: 'event' })
 			.catch((e) => e);
 		if (result.status === 400) {
 			return fail(400, {
@@ -22,9 +22,7 @@ export const actions: Actions = {
 				credentialsError: 'Inloggningen misslyckades, fel lösenord eller användarnamn'
 			});
 		}
-		const user = await locals.client
-			.collection('account')
-			.getOne(locals.client.authStore.model?.id || '', { expand: 'event' });
+		const user = result.record;
 		if (user.role === 'team' && user?.expand?.event.year.toString() !== params.year) {
 			locals.client.authStore.clear();
 			cookies.delete('pocketbase_auth', { path: '/' });
