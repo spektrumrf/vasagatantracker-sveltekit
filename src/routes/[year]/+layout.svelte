@@ -27,30 +27,41 @@
 
 	onMount(async () => {
 		const client = await getClient(data.cookie);
-		client
-			.collection('feat')
-			.subscribe(
-				'*',
-				async () =>
-					($feats = await fetch(`/api/feats?year=${$page.params.year}`).then((res) => res.json()))
-			);
-		client
-			.collection('location')
-			.subscribe(
-				'*',
-				async () =>
-					($locations = await fetch(`/api/locations?year=${$page.params.year}`).then((res) =>
-						res.json()
-					))
-			);
-		client.collection('account').subscribe('*', async () => {
-			$teams = await fetch(`/api/teams?year=${$page.params.year}`).then((res) => res.json());
-		});
-		if ($event) {
+
+		// Delay subscriptions to avoid blocking the browser's load event or being affected by adblocker synchronous drops
+		setTimeout(() => {
 			client
-				.collection('event')
-				.subscribe($event.id, async (data) => ($event = data.record as any));
-		}
+				.collection('feat')
+				.subscribe('*', async () => {
+					$feats = await fetch(`/api/feats?year=${$page.params.year}`).then((res) => res.json());
+				})
+				.catch((err) => console.warn('Feat realtime subscription failed/blocked:', err));
+
+			client
+				.collection('location')
+				.subscribe('*', async () => {
+					$locations = await fetch(`/api/locations?year=${$page.params.year}`).then((res) =>
+						res.json()
+					);
+				})
+				.catch((err) => console.warn('Location realtime subscription failed/blocked:', err));
+
+			client
+				.collection('account')
+				.subscribe('*', async () => {
+					$teams = await fetch(`/api/teams?year=${$page.params.year}`).then((res) => res.json());
+				})
+				.catch((err) => console.warn('Account realtime subscription failed/blocked:', err));
+
+			if ($event) {
+				client
+					.collection('event')
+					.subscribe($event.id, async (data) => {
+						$event = data.record as any;
+					})
+					.catch((err) => console.warn('Event realtime subscription failed/blocked:', err));
+			}
+		}, 1000);
 	});
 </script>
 
