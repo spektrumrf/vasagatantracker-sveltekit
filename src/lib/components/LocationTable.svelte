@@ -29,11 +29,15 @@
 	}
 </script>
 
-<div class="overfull-x-auto rounded-lg border-2 border-primary">
-	<SvelteTable
-		rows={locationsWithPoints}
-		{columns}
-		classNameTable="table table-sm"
-		classNameThead="bg-primary"
-	/>
+<div class="overflow-hidden rounded-xl border border-stone-200 bg-white shadow-sm">
+	<div class="overflow-x-auto">
+		<SvelteTable
+			rows={locationsWithPoints}
+			{columns}
+			classNameTable="w-full text-left text-sm text-stone-700 border-collapse"
+			classNameThead="text-xs text-stone-500 uppercase tracking-wider bg-stone-50 border-b border-stone-200 [&_th]:px-4 [&_th]:py-3"
+			classNameRow="bg-white border-b border-stone-100 hover:bg-stone-50 transition-colors"
+			classNameCell="px-4 py-3 sm:py-4 font-medium"
+		/>
+	</div>
 </div>

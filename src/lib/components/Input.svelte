@@ -12,11 +12,17 @@
 	export let required: boolean = false;
 </script>
 
-<div class="form-control w-full max-w-xs">
-	<label class="label" for={name}>
-		<span class="label-text">{label}</span>
-		<span class="label-text-alt">{altLabel}</span>
-	</label>
+<div class="w-full">
+	{#if label || altLabel}
+		<div class="mb-1 flex items-end justify-between">
+			<label class="block text-sm font-medium text-stone-700" for={name}>
+				{label}
+			</label>
+			{#if altLabel}
+				<span class="text-xs text-stone-500">{altLabel}</span>
+			{/if}
+		</div>
+	{/if}
 	<input
 		id={name}
 		{type}
@@ -28,6 +34,6 @@
 		{min}
 		{max}
 		{required}
-		class="input input-bordered w-full max-w-xs"
+		class="input-field"
 	/>
 </div>

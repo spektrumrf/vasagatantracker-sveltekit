@@ -39,7 +39,6 @@
 		"@tailwindcss/typography": "^0.5.19",
 		"chart.js": "^4.5.1",
 		"chartjs-adapter-dayjs-4": "^1.0.4",
-		"daisyui": "^5.5.17",
 		"date-fns": "^4.1.0",
 		"dayjs": "^1.11.19",
 		"dotenv": "^17.2.3",
