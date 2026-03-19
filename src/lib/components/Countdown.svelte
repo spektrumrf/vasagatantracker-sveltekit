@@ -20,45 +20,77 @@
 		minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
 		seconds = Math.floor((distance % (1000 * 60)) / 1000);
 	}
+
+	function padZero(num: number) {
+		return num.toString().padStart(2, '0');
+	}
 </script>
 
-<div class="text-center text-lg alert bg-zinc-200 flex flex-col">
+<div
+	class="flex flex-col items-center card border-brand-200 bg-brand-50 p-6 text-center shadow-md sm:p-8"
+>
 	{#if distance >= 0 && !$event?.finished}
-		<div class="font-bold text-2xl">Tid till Approbatur i Vasagatan</div>
-		<div class="grid grid-flow-col text-center auto-cols-max justify-center">
-			<div class="flex flex-col p-2 rounded-box text-primary">
-				<span class="countdown font-mono text-3xl">
-					<span style={`--value:${days};`}></span>
-				</span>
-				d
+		<h2 class="mb-6 font-serif text-2xl font-bold text-brand-900 sm:text-3xl">
+			Tid till Approbatur i Vasagatan
+		</h2>
+
+		<div class="flex justify-center gap-4 sm:gap-6">
+			<div class="flex flex-col items-center">
+				<div
+					class="min-w-[3rem] rounded-lg border border-brand-100 bg-white px-4 py-3 font-mono text-3xl font-bold text-brand-700 shadow-sm sm:min-w-[4rem] sm:text-4xl"
+				>
+					{padZero(days)}
+				</div>
+				<span class="mt-2 text-xs font-medium tracking-wider text-brand-600 uppercase sm:text-sm"
+					>Dagar</span
+				>
 			</div>
-			<div class="flex flex-col p-2 rounded-box text-primary">
-				<span class="countdown font-mono text-3xl">
-					<span style={`--value:${hours};`}></span>
-				</span>
-				h
+
+			<div class="flex flex-col items-center">
+				<div
+					class="min-w-[3rem] rounded-lg border border-brand-100 bg-white px-4 py-3 font-mono text-3xl font-bold text-brand-700 shadow-sm sm:min-w-[4rem] sm:text-4xl"
+				>
+					{padZero(hours)}
+				</div>
+				<span class="mt-2 text-xs font-medium tracking-wider text-brand-600 uppercase sm:text-sm"
+					>Timmar</span
+				>
 			</div>
-			<div class="flex flex-col p-2 rounded-box text-primary">
-				<span class="countdown font-mono text-3xl">
-					<span style={`--value:${minutes};`}></span>
-				</span>
-				min
+
+			<div class="flex flex-col items-center">
+				<div
+					class="min-w-[3rem] rounded-lg border border-brand-100 bg-white px-4 py-3 font-mono text-3xl font-bold text-brand-700 shadow-sm sm:min-w-[4rem] sm:text-4xl"
+				>
+					{padZero(minutes)}
+				</div>
+				<span class="mt-2 text-xs font-medium tracking-wider text-brand-600 uppercase sm:text-sm"
+					>Min</span
+				>
 			</div>
-			<div class="flex flex-col p-2 rounded-box text-primary">
-				<span class="countdown font-mono text-3xl">
-					<span style={`--value:${seconds};`}></span>
-				</span>
-				sec
+
+			<div class="flex flex-col items-center">
+				<div
+					class="min-w-[3rem] rounded-lg border border-brand-100 bg-white px-4 py-3 font-mono text-3xl font-bold text-brand-700 shadow-sm sm:min-w-[4rem] sm:text-4xl"
+				>
+					{padZero(seconds)}
+				</div>
+				<span class="mt-2 text-xs font-medium tracking-wider text-brand-600 uppercase sm:text-sm"
+					>Sek</span
+				>
 			</div>
 		</div>
 	{:else if distance < 0 && !$event?.finished}
-		<div class="font-bold text-2xl">Vasagatan {$event?.year} har börjat!</div>
+		<h2 class="mb-6 font-serif text-2xl font-bold text-brand-900 sm:text-3xl">
+			Vasagatan {$event?.year} har börjat!
+		</h2>
 		{#if $account?.role === Role.TEAM}
-			<div class="w-full">
+			<div class="mx-auto w-full max-w-md">
 				<AddFeat formActionPath={`${$event?.year}/feats?/add`} />
 			</div>
 		{/if}
 	{:else}
-		<div class="font-bold text-2xl">Vasagatan {$event?.year} är avslutad!</div>
+		<h2 class="font-serif text-2xl font-bold text-brand-900 sm:text-3xl">
+			Vasagatan {$event?.year} är avslutad!
+		</h2>
 	{/if}
 </div>
