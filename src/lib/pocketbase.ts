@@ -3,7 +3,7 @@ import { browser } from '$app/environment';
 import PocketBase from 'pocketbase';
 
 export async function getClient(cookie: string) {
-	let pocketbaseUrl = PUBLIC_ENV === 'DEV' ? 'http://pocketbase:7003' : 'http://pocketbase:7001';
+	let pocketbaseUrl = 'http://pocketbase:8080';
 
 	if (browser) {
 		pocketbaseUrl =
