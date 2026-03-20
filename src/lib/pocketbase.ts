@@ -1,11 +1,19 @@
-import { PUBLIC_ENV } from "$env/static/public";
-import PocketBase from "pocketbase";
+import { PUBLIC_ENV } from '$env/static/public';
+import { browser } from '$app/environment';
+import PocketBase from 'pocketbase';
+import { dev } from '$app/environment';
 
 export async function getClient(cookie: string) {
-  const pocketbaseUrl = PUBLIC_ENV === "DEV"
-    ? "https://db-dev.tracker.vasagatan.fi"
-    : "https://db.tracker.vasagatan.fi";
-  const client = new PocketBase(pocketbaseUrl);
-  client.authStore.loadFromCookie(cookie);
-  return client;
+	let pocketbaseUrl = 'http://pocketbase:8080';
+
+	if (browser || dev) {
+		pocketbaseUrl =
+			PUBLIC_ENV === 'DEV'
+				? 'https://db-dev.tracker.vasagatan.fi'
+				: 'https://db.tracker.vasagatan.fi';
+	}
+
+	const client = new PocketBase(pocketbaseUrl);
+	client.authStore.loadFromCookie(cookie);
+	return client;
 }

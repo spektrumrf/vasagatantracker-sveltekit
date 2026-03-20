@@ -16,7 +16,7 @@ export const actions: Actions = {
 			.collection('account')
 			.authWithPassword(username, password, { expand: 'event' })
 			.catch((e) => e);
-		if (result.status === 400) {
+		if (result instanceof Error || result.status >= 400) {
 			return fail(400, {
 				username,
 				credentialsError: 'Inloggningen misslyckades, fel lösenord eller användarnamn'
