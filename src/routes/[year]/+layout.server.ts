@@ -1,24 +1,62 @@
 import type { Account, Event, Feat, Location } from '$lib/stores';
 import type { LayoutServerLoad } from './$types';
 
-export const load: LayoutServerLoad = async function ({ fetch, locals, params }): Promise<Data> {
+export const load: LayoutServerLoad = async function ({ locals, params }): Promise<Data> {
 	const account = locals.client.authStore.model;
-	const featsPromise = fetch(`/api/feats?year=${params.year}`).then((res) => res.json());
-	const locationsPromise = fetch(`/api/locations?year=${params.year}`).then((res) => res.json());
-	const eventPromise = fetch(`/api/event?year=${params.year}`).then((res) => res.json());
-	const teamsPromise = fetch(`/api/teams?year=${params.year}`).then((res) => res.json());
+
+	const yearFilter = params.year;
+
+	const featsPromise = locals.client
+		.collection('feat')
+		.getFullList(undefined, {
+			expand: 'team,location,event',
+			sort: '-created',
+			filter: `event.year=${yearFilter}`
+		})
+		.then((feats) =>
+			feats.map((f: any) => ({
+				...f,
+				proofUrls: f.proofs.map((p: string) => locals.client.files.getUrl(f, p))
+			}))
+		)
+		.catch(() => []);
+
+	const locationsPromise = locals.client
+		.collection('location')
+		.getFullList(undefined, {
+			expand: 'team,location,event',
+			sort: 'name',
+			filter: yearFilter ? `event.year?~${yearFilter}` : ''
+		})
+		.catch(() => []);
+
+	const eventPromise = locals.client
+		.collection('event')
+		.getFirstListItem(`year = ${yearFilter}`)
+		.catch(() => null);
+
+	const teamsPromise = locals.client
+		.collection('account')
+		.getFullList(undefined, {
+			sort: 'name',
+			filter: `event.year=${yearFilter}`
+		})
+		.then((accounts) => accounts.filter((a) => a.role === 'team'))
+		.catch(() => []);
+
 	const [feats, locations, event, teams] = await Promise.all([
 		featsPromise,
 		locationsPromise,
 		eventPromise,
 		teamsPromise
 	]);
+
 	return {
 		account: account as unknown as Account,
-		feats,
-		locations,
-		event,
-		teams,
+		feats: feats as unknown as Feat[],
+		locations: locations as unknown as Location[],
+		event: event as unknown as Event,
+		teams: teams as unknown as Account[],
 		cookie: locals.client.authStore.exportToCookie()
 	} as Data;
 };
