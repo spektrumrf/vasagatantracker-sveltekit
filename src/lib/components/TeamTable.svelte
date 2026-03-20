@@ -34,15 +34,13 @@
 	}
 </script>
 
-<div class="overflow-hidden rounded-xl border border-stone-200 bg-white shadow-sm">
-	<div class="overflow-x-auto">
-		<SvelteTable
-			rows={teamsWithPoints}
-			{columns}
-			classNameTable="w-full text-left text-sm text-stone-700 border-collapse"
-			classNameThead="text-xs text-stone-500 uppercase tracking-wider bg-stone-50 border-b border-stone-200 [&_th]:px-4 [&_th]:py-3"
-			classNameRow="bg-white border-b border-stone-100 hover:bg-stone-50 transition-colors"
-			classNameCell="px-4 py-3 sm:py-4 font-medium"
-		/>
-	</div>
+<div class="card overflow-x-auto bg-white p-1">
+	<SvelteTable
+		rows={teamsWithPoints}
+		{columns}
+		classNameTable="w-full text-left font-mono text-base text-stone-900 border-collapse"
+		classNameThead="text-xs text-stone-600 uppercase tracking-widest bg-brand-100 border-b-4 border-stone-900 [&_th]:px-4 [&_th]:py-3 [&_th]:font-black"
+		classNameRow="bg-white border-b-2 border-stone-200 hover:bg-brand-50 transition-colors font-bold"
+		classNameCell="px-4 py-3 sm:py-4"
+	/>
 </div>

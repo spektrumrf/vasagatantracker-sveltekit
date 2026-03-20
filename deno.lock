@@ -2120,6 +2120,7 @@
         "npm:dotenv@^17.3.1",
         "npm:effect@^3.20.0",
         "npm:leaflet@^1.9.4",
+        "npm:lucide-svelte@0.577",
         "npm:pocketbase@~0.26.8",
         "npm:prettier-plugin-svelte@^3.5.1",
         "npm:prettier-plugin-tailwindcss@~0.7.2",

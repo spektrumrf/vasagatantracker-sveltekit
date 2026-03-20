@@ -17,44 +17,52 @@
 {#if feat && isOpen}
 	<div
 		on:click={close}
-		class="fixed inset-0 z-50 flex items-center justify-center bg-stone-900/50 p-4 backdrop-blur-sm transition-opacity duration-200"
+		class="fixed inset-0 z-50 flex items-center justify-center bg-stone-900/60 p-4 backdrop-blur-sm transition-opacity duration-200"
 	>
 		<div
 			on:click|stopPropagation
-			class="relative max-h-[90vh] w-full max-w-lg transform overflow-y-auto rounded-xl bg-white p-6 shadow-xl transition-transform duration-200 sm:p-8"
+			class="relative max-h-[90vh] w-full max-w-lg transform overflow-y-auto border-4 border-stone-900 bg-white p-6 shadow-[8px_8px_0px_0px_rgba(28,25,23,1)] transition-transform duration-200 sm:p-8"
 		>
-			<div class="mb-6 flex items-center justify-between border-b border-stone-100 pb-4">
-				<h3 class="font-serif text-2xl font-bold text-brand-900">Prestation</h3>
+			<div class="mb-8 flex items-center justify-between border-b-4 border-stone-100 pb-4">
+				<h3 class="font-mono text-2xl font-black tracking-tight text-brand-900 uppercase">
+					Prestation
+				</h3>
 				<button
 					aria-label="Stäng"
 					on:click={close}
-					class="text-stone-400 hover:text-stone-600 focus:outline-none"
+					class="text-stone-900 transition-transform hover:scale-110 active:scale-95"
 				>
-					<svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+					<svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 						<path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-width="2"
+							stroke-linecap="square"
+							stroke-linejoin="miter"
+							stroke-width="3"
 							d="M6 18L18 6M6 6l12 12"
 						/>
 					</svg>
 				</button>
 			</div>
 
-			<div class="space-y-4">
+			<div class="space-y-6">
 				<Input name="points" value={feat.points} type="number" label="Poäng" disabled={true} />
 
 				<div class="w-full">
-					<label class="mb-2 block text-sm font-medium text-stone-700" for="content">
+					<label
+						class="mb-2 block font-mono text-sm font-bold tracking-wider text-stone-900 uppercase"
+						for="content"
+					>
 						Innehåll
 					</label>
 					<div class="grid grid-cols-3 gap-3">
 						{#each Object.values(FeatContent) as type}
 							<div>
-								<label class="mb-1 block text-xs text-stone-500" for={type}>
+								<label
+									class="mb-1 block font-mono text-xs font-bold tracking-widest text-brand-600 uppercase"
+									for={type}
+								>
 									{type}
 								</label>
-								<select disabled name={type} class="input-field px-2 py-1">
+								<select disabled name={type} class="input-field px-2 py-1 text-sm">
 									{#each [...Array(10).keys()] as i}
 										<option value={i}>{i}</option>
 									{/each}
@@ -65,9 +73,16 @@
 				</div>
 
 				<div class="w-full">
-					<div class="mb-1 flex items-end justify-between">
-						<label class="block text-sm font-medium text-stone-700" for="location"> Plats </label>
-						<span class="text-xs text-stone-500">Specialkrogar märkta med *</span>
+					<div class="mb-2 flex items-end justify-between">
+						<label
+							class="block font-mono text-sm font-bold tracking-wider text-stone-900 uppercase"
+							for="location"
+						>
+							Plats
+						</label>
+						<span class="font-mono text-xs font-bold tracking-widest text-brand-600 uppercase"
+							>Specialkrogar märkta med *</span
+						>
 					</div>
 					<select name="location" class="input-field" bind:value={feat.location} disabled>
 						<option disabled>Välj plats</option>
@@ -78,19 +93,25 @@
 				</div>
 
 				<div class="w-full pt-2">
-					<div class="mb-2 block text-sm font-medium text-stone-700">Bevis</div>
+					<div
+						class="mb-2 block font-mono text-sm font-bold tracking-wider text-stone-900 uppercase"
+					>
+						Bevis
+					</div>
 					<div class="flex flex-wrap gap-2">
 						{#if feat.proofUrls && feat.proofUrls.length > 0}
 							{#each feat.proofUrls as url, i}
 								<a
 									target="_blank"
-									class="inline-flex items-center rounded border border-stone-300 bg-white px-3 py-1.5 text-sm font-medium text-stone-700 shadow-sm hover:bg-stone-50 focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 focus:outline-none"
+									class="btn-secondary px-3 py-1.5 text-xs"
 									rel="noreferrer"
 									href={url}>Bild {i + 1}</a
 								>
 							{/each}
 						{:else}
-							<span class="text-sm text-stone-500 italic">Inga bevis uppladdade</span>
+							<span class="font-mono text-sm font-bold text-stone-500 uppercase"
+								>Inga bevis uppladdade</span
+							>
 						{/if}
 					</div>
 				</div>
@@ -117,7 +138,7 @@
 					/>
 				</div>
 
-				<div class="mt-6 border-t border-stone-100 pt-6">
+				<div class="mt-8 border-t-4 border-stone-100 pt-8">
 					<button on:click={close} class="btn-secondary w-full">Stäng</button>
 				</div>
 			</div>

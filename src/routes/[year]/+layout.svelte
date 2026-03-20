@@ -5,6 +5,17 @@
 	import { onMount } from 'svelte';
 	import { getClient } from '$lib/pocketbase';
 	import { PUBLIC_ENV } from '$env/static/public';
+	import {
+		Trophy,
+		Users,
+		MapPin,
+		BarChart3,
+		Settings,
+		LogOut,
+		Menu,
+		X,
+		LogIn
+	} from 'lucide-svelte';
 
 	export let data: LayoutData;
 	$: {
@@ -65,114 +76,181 @@
 	});
 </script>
 
-<div class="flex min-h-screen flex-col">
-	<header class="sticky top-0 z-50 border-b border-stone-200 bg-white">
-		<div class="mx-auto flex h-16 max-w-4xl items-center justify-between px-4 sm:px-6 lg:px-8">
-			{#if $account}
-				<div class="flex items-center">
+<div class="flex min-h-screen flex-col bg-stone-100">
+	<header class="sticky top-0 z-50 border-b-4 border-stone-900 bg-white">
+		<div class="mx-auto flex h-16 max-w-4xl items-center justify-between px-4 sm:px-6">
+			<!-- Left Slot: Branding -->
+			<div class="flex items-center">
+				<a
+					href={`/${$page.params.year}`}
+					class="group flex items-center font-mono text-lg font-black tracking-tighter uppercase sm:text-2xl"
+				>
+					<span class="text-stone-900 transition-colors group-hover:text-brand-600">Vasagatan</span>
+					<span
+						class="ml-1 bg-stone-900 px-2 py-0.5 text-white transition-colors group-hover:bg-brand-600"
+						>tracker</span
+					>
+					{#if PUBLIC_ENV === 'DEV'}
+						<span class="ml-2 hidden text-[10px] text-stone-400 sm:inline"
+							>{PUBLIC_ENV === 'DEV' ? 'DEV' : ''}</span
+						>
+					{/if}
+				</a>
+			</div>
+
+			<!-- Right Slot: Actions -->
+			<div class="flex items-center gap-3">
+				{#if !$account && !$page.url.toString().includes('login')}
+					<a
+						class="flex h-11 w-11 items-center justify-center border-4 border-stone-900 bg-brand-500 text-white shadow-[2px_2px_0px_0px_rgba(28,25,23,1)] transition-all hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-none active:translate-x-[2px] active:translate-y-[2px]"
+						href={`/${$page.params.year}/login`}
+						title="Logga in"
+					>
+						<span class="sr-only">Logga in</span>
+						<LogIn size={22} strokeWidth={3} />
+					</a>
+				{/if}
+
+				{#if $account}
 					<div class="relative">
 						<button
 							on:click={toggleMenu}
-							class="-ml-2 rounded-md p-2 text-stone-600 hover:bg-stone-100 hover:text-brand-600 focus:ring-2 focus:ring-brand-500 focus:outline-none focus:ring-inset"
+							class="flex h-11 w-11 items-center justify-center border-4 border-stone-900 bg-brand-500 text-white shadow-[2px_2px_0px_0px_rgba(28,25,23,1)] transition-all hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-none focus:outline-none active:translate-x-[2px] active:translate-y-[2px]"
 							aria-expanded={menuOpen}
 						>
 							<span class="sr-only">Open menu</span>
-							<svg
-								class="h-6 w-6"
-								xmlns="http://www.w3.org/2000/svg"
-								fill="none"
-								viewBox="0 0 24 24"
-								stroke="currentColor"
-							>
-								<path
-									stroke-linecap="round"
-									stroke-linejoin="round"
-									stroke-width="2"
-									d="M4 6h16M4 12h16M4 18h7"
-								/>
-							</svg>
+							<Menu size={22} strokeWidth={3} />
 						</button>
 
 						{#if menuOpen}
 							<!-- Overlay -->
 							<button
-								class="fixed inset-0 z-40 h-full w-full cursor-default bg-stone-900/20 backdrop-blur-sm"
+								class="fixed inset-0 z-40 h-full w-full cursor-default bg-stone-900/60 backdrop-blur-sm transition-opacity"
 								on:click={closeMenu}
 								aria-label="Close menu"
 							></button>
 
-							<!-- Dropdown menu -->
+							<!-- Centered Modal Menu -->
 							<div
-								class="ring-opacity-5 absolute left-0 z-50 mt-2 w-56 divide-y divide-stone-100 overflow-hidden rounded-md bg-white shadow-lg ring-1 ring-black"
+								class="pointer-events-none fixed inset-0 z-50 flex items-center justify-center p-4"
 							>
-								<div class="bg-stone-50 px-4 py-3">
-									<p class="text-sm text-stone-500">Inloggad som</p>
-									<p class="truncate text-sm font-medium text-stone-900">
-										{$account?.name || $account?.username || ''}
-									</p>
-								</div>
-								<!-- svelte-ignore a11y_click_events_have_key_events -->
-								<!-- svelte-ignore a11y_no_static_element_interactions -->
-								<div class="py-1" on:click={closeMenu}>
-									<a
-										href={`${$page.url.origin}/${$page.params.year}/feats`}
-										class="block px-4 py-2 text-sm text-stone-700 hover:bg-brand-50 hover:text-brand-700"
-										>Prestationer</a
+								<div
+									class="pointer-events-auto w-full max-w-sm border-4 border-stone-900 bg-white shadow-[8px_8px_0px_0px_rgba(28,25,23,1)]"
+								>
+									<div
+										class="flex items-center justify-between border-b-4 border-stone-900 bg-brand-500 px-6 py-4"
 									>
-									<a
-										href={`${$page.url.origin}/${$page.params.year}/teams`}
-										class="block px-4 py-2 text-sm text-stone-700 hover:bg-brand-50 hover:text-brand-700"
-										>Lag</a
-									>
-									<a
-										href={`${$page.url.origin}/${$page.params.year}/locations`}
-										class="block px-4 py-2 text-sm text-stone-700 hover:bg-brand-50 hover:text-brand-700"
-										>Platser</a
-									>
-									<a
-										href={`${$page.url.origin}/${$page.params.year}/statistics`}
-										class="block px-4 py-2 text-sm text-stone-700 hover:bg-brand-50 hover:text-brand-700"
-										>Statistik</a
-									>
-									{#if $account?.role === Role.ADMIN}
-										<a
-											href={`${$page.url.origin}/${$page.params.year}/admin`}
-											class="block px-4 py-2 text-sm font-medium text-stone-700 hover:bg-brand-50 hover:text-brand-700"
-											>Admin</a
-										>
-									{/if}
-								</div>
-								<div class="py-1">
-									<form method="POST" action="/logout" class="w-full">
-										<input hidden name="year" value={$page.params.year} />
+										<div>
+											<p
+												class="font-mono text-xs font-bold tracking-widest text-stone-900 uppercase"
+											>
+												Inloggad som
+											</p>
+											<p class="truncate font-mono text-lg font-black text-white uppercase">
+												{$account?.name || $account?.username || ''}
+											</p>
+										</div>
 										<button
-											type="submit"
-											class="block w-full px-4 py-2 text-left text-sm text-red-600 hover:bg-red-50 hover:text-red-700"
+											aria-label="Stäng"
+											on:click={closeMenu}
+											class="text-stone-900 transition-transform hover:scale-110 active:scale-95"
 										>
-											Logga ut
+											<X size={32} strokeWidth={3} />
 										</button>
-									</form>
+									</div>
+
+									<div class="grid grid-cols-2 gap-4 bg-stone-100 p-6">
+										<a
+											on:click={closeMenu}
+											href={`${$page.url.origin}/${$page.params.year}/feats`}
+											class="group flex aspect-square flex-col items-center justify-center card border-4 border-stone-900 bg-white p-4 text-center transition-all hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[8px_8px_0px_0px_rgba(219,39,119,1)] active:translate-x-0 active:translate-y-0 active:shadow-[4px_4px_0px_0px_rgba(219,39,119,1)]"
+										>
+											<div
+												class="mb-3 text-stone-900 transition-transform group-hover:scale-110 group-hover:text-brand-600"
+											>
+												<Trophy size={40} strokeWidth={2.5} />
+											</div>
+											<span
+												class="font-mono text-sm font-black text-stone-900 group-hover:text-brand-600"
+												>PRESTATIONER</span
+											>
+										</a>
+										<a
+											on:click={closeMenu}
+											href={`${$page.url.origin}/${$page.params.year}/teams`}
+											class="group flex aspect-square flex-col items-center justify-center card border-4 border-stone-900 bg-white p-4 text-center transition-all hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[8px_8px_0px_0px_rgba(219,39,119,1)] active:translate-x-0 active:translate-y-0 active:shadow-[4px_4px_0px_0px_rgba(219,39,119,1)]"
+										>
+											<div
+												class="mb-3 text-stone-900 transition-transform group-hover:scale-110 group-hover:text-brand-600"
+											>
+												<Users size={40} strokeWidth={2.5} />
+											</div>
+											<span
+												class="font-mono text-sm font-black text-stone-900 group-hover:text-brand-600"
+												>LAG</span
+											>
+										</a>
+										<a
+											on:click={closeMenu}
+											href={`${$page.url.origin}/${$page.params.year}/locations`}
+											class="group flex aspect-square flex-col items-center justify-center card border-4 border-stone-900 bg-white p-4 text-center transition-all hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[8px_8px_0px_0px_rgba(219,39,119,1)] active:translate-x-0 active:translate-y-0 active:shadow-[4px_4px_0px_0px_rgba(219,39,119,1)]"
+										>
+											<div
+												class="mb-3 text-stone-900 transition-transform group-hover:scale-110 group-hover:text-brand-600"
+											>
+												<MapPin size={40} strokeWidth={2.5} />
+											</div>
+											<span
+												class="font-mono text-sm font-black text-stone-900 group-hover:text-brand-600"
+												>PLATSER</span
+											>
+										</a>
+										<a
+											on:click={closeMenu}
+											href={`${$page.url.origin}/${$page.params.year}/statistics`}
+											class="group flex aspect-square flex-col items-center justify-center card border-4 border-stone-900 bg-white p-4 text-center transition-all hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[8px_8px_0px_0px_rgba(219,39,119,1)] active:translate-x-0 active:translate-y-0 active:shadow-[4px_4px_0px_0px_rgba(219,39,119,1)]"
+										>
+											<div
+												class="mb-3 text-stone-900 transition-transform group-hover:scale-110 group-hover:text-brand-600"
+											>
+												<BarChart3 size={40} strokeWidth={2.5} />
+											</div>
+											<span
+												class="font-mono text-sm font-black text-stone-900 group-hover:text-brand-600"
+												>STATISTIK</span
+											>
+										</a>
+										{#if $account?.role === Role.ADMIN}
+											<a
+												on:click={closeMenu}
+												href={`${$page.url.origin}/${$page.params.year}/admin`}
+												class="group col-span-2 flex items-center justify-center card border-4 border-brand-600 bg-brand-50 p-4 text-center transition-all hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[8px_8px_0px_0px_rgba(219,39,119,1)] active:translate-x-0 active:translate-y-0 active:shadow-[4px_4px_0px_0px_rgba(219,39,119,1)]"
+											>
+												<div class="mr-3 text-brand-600 transition-transform group-hover:rotate-90">
+													<Settings size={28} strokeWidth={3} />
+												</div>
+												<span class="font-mono text-lg font-black text-brand-600">ADMIN</span>
+											</a>
+										{/if}
+										<form method="POST" action="/logout" class="col-span-2 w-full">
+											<input hidden name="year" value={$page.params.year} />
+											<button
+												type="submit"
+												class="group flex w-full items-center justify-center card border-4 border-stone-900 bg-stone-900 p-4 text-center transition-all hover:-translate-x-1 hover:-translate-y-1 hover:bg-stone-800 hover:shadow-[8px_8px_0px_0px_rgba(239,68,68,1)] active:translate-x-0 active:translate-y-0 active:shadow-[4px_4px_0px_0px_rgba(239,68,68,1)]"
+											>
+												<div
+													class="mr-3 text-white transition-transform group-hover:-translate-x-1"
+												>
+													<LogOut size={28} strokeWidth={3} />
+												</div>
+												<span class="font-mono text-lg font-black text-white">LOGGA UT</span>
+											</button>
+										</form>
+									</div>
 								</div>
 							</div>
 						{/if}
 					</div>
-				</div>
-			{/if}
-
-			<div class="flex flex-1 justify-center lg:justify-start lg:pl-4">
-				<a
-					href={`/${$page.params.year}`}
-					class="flex items-center font-serif text-xl font-bold text-brand-900 transition-colors hover:text-brand-700"
-				>
-					Vasagatantracker{PUBLIC_ENV === 'DEV' ? ' DEV' : ''}
-				</a>
-			</div>
-
-			<div class="flex items-center justify-end">
-				{#if !$account && !$page.url.toString().includes('login')}
-					<a class="btn-primary px-4 py-1.5 text-sm" href={`/${$page.params.year}/login`}
-						>Logga in</a
-					>
 				{/if}
 			</div>
 		</div>

@@ -10,5 +10,4 @@
 	<AddFeat />
 {/if}
 
-<h3 class="mb-6 font-serif text-3xl font-bold text-brand-900">Prestationer</h3>
-<FeatTable />
+<FeatTable title="Prestationer" />

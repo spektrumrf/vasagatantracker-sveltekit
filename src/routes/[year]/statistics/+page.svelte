@@ -7,20 +7,26 @@
 	const drinkEntries = Object.entries(data.totalDrinks);
 </script>
 
-<div class="space-y-10">
+<div class="space-y-12">
 	<div>
-		<h3 class="mb-6 font-serif text-3xl font-bold text-brand-900">Statistik</h3>
-		<hr class="border-stone-200" />
+		<h3 class="mb-2 font-mono text-3xl font-black tracking-tighter text-brand-900 uppercase">
+			Statistik
+		</h3>
+		<hr class="border-t-4 border-stone-900" />
 	</div>
 
 	<section>
-		<h4 class="mb-4 font-serif text-xl font-bold text-brand-900">Poängkällor</h4>
+		<h4 class="mb-6 font-mono text-xl font-black tracking-tight text-brand-900 uppercase">
+			Poängkällor
+		</h4>
 		<DrinkTable drinks={drinkEntries} />
 	</section>
 
 	<section>
-		<h4 class="mb-4 font-serif text-xl font-bold text-brand-900">Poäng</h4>
-		<div class="rounded-xl border border-stone-200 bg-white p-4 shadow-sm sm:p-6">
+		<h4 class="mb-6 font-mono text-xl font-black tracking-tight text-brand-900 uppercase">
+			Poängutveckling
+		</h4>
+		<div class="card bg-white p-4 sm:p-6">
 			<PointsGraph />
 		</div>
 	</section>

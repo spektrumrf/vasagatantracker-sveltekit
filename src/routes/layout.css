@@ -1,25 +1,21 @@
 @import 'tailwindcss';
 
 @theme {
-	--color-brand-50: #fdf8f6;
-	--color-brand-100: #f2e8e5;
-	--color-brand-200: #eaddd7;
-	--color-brand-300: #e0cec7;
-	--color-brand-400: #d2bab0;
-	--color-brand-500: #a0522d; /* Sienna, gives a classic, earthy feel */
-	--color-brand-600: #8b4513; /* SaddleBrown */
-	--color-brand-700: #654321;
-	--color-brand-800: #4a3627;
-	--color-brand-900: #30251c;
-
-	--font-serif:
-		Superclarendon, 'Bookman Old Style', 'URW Bookman', 'URW Bookman L', 'Georgia Pro', Georgia,
-		serif;
+	--color-brand-50: #fdf2f8;
+	--color-brand-100: #fce7f3;
+	--color-brand-200: #fbcfe8;
+	--color-brand-300: #f9a8d4;
+	--color-brand-400: #f472b6;
+	--color-brand-500: #ec4899;
+	--color-brand-600: #db2777; /* Punk Pink */
+	--color-brand-700: #be185d;
+	--color-brand-800: #9d174d;
+	--color-brand-900: #831843;
 }
 
 @layer base {
 	body {
-		@apply bg-stone-50 text-stone-900;
+		@apply bg-stone-100 text-stone-900;
 	}
 
 	h1,
@@ -28,31 +24,31 @@
 	h4,
 	h5,
 	h6 {
-		@apply font-serif tracking-tight text-brand-900;
+		@apply font-mono font-bold tracking-tight text-brand-900 uppercase;
 	}
 }
 
 /* Custom utilities for reusable components */
 @utility btn {
-	@apply inline-flex items-center justify-center rounded-md px-4 py-2 font-medium shadow-sm transition-colors focus:ring-2 focus:ring-offset-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50;
+	@apply inline-flex items-center justify-center border-4 border-stone-900 px-6 py-3 font-mono font-bold tracking-wider uppercase shadow-[4px_4px_0px_0px_rgba(28,25,23,1)] transition-all hover:translate-x-1 hover:translate-y-1 hover:shadow-[0px_0px_0px_0px_rgba(28,25,23,1)] focus:ring-4 focus:ring-brand-500 focus:outline-none active:translate-x-1 active:translate-y-1 active:shadow-none disabled:cursor-not-allowed disabled:opacity-50;
 }
 
 @utility btn-primary {
-	@apply btn border border-transparent bg-brand-600 text-white hover:bg-brand-700 focus:ring-brand-500;
+	@apply btn bg-brand-500 text-white;
 }
 
 @utility btn-secondary {
-	@apply btn border border-stone-300 bg-white text-stone-700 hover:bg-stone-50 focus:ring-brand-500;
+	@apply btn bg-white text-stone-900;
 }
 
 @utility btn-danger {
-	@apply btn border border-transparent bg-red-600 text-white hover:bg-red-700 focus:ring-red-500;
+	@apply btn bg-red-500 text-white;
 }
 
 @utility input-field {
-	@apply block w-full rounded-md border border-stone-300 bg-white px-3 py-2 text-stone-900 shadow-sm focus:border-brand-500 focus:ring-brand-500 disabled:bg-stone-100 disabled:text-stone-500 sm:text-sm;
+	@apply block w-full border-4 border-stone-900 bg-white px-4 py-3 font-mono text-base font-bold text-stone-900 shadow-[4px_4px_0px_0px_rgba(28,25,23,1)] transition-all focus:translate-x-1 focus:translate-y-1 focus:border-brand-600 focus:shadow-[0px_0px_0px_0px_rgba(28,25,23,1)] focus:outline-none disabled:bg-stone-200 disabled:text-stone-500 sm:text-lg;
 }
 
 @utility card {
-	@apply overflow-hidden rounded-lg border border-stone-200 bg-white shadow-sm;
+	@apply overflow-hidden border-4 border-stone-900 bg-white shadow-[6px_6px_0px_0px_rgba(28,25,23,1)];
 }
