@@ -11,7 +11,6 @@
 	enctype="multipart/form-data"
 	action="?/addLocationToYear"
 	on:submit={() => (loading = true)}
-	class="my-5"
 >
 	<input hidden name="locationId" value={selectedLocationToAddToYear?.id} />
 	<input hidden name="eventId" value={$event?.id} />
