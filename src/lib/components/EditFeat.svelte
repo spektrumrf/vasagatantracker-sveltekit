@@ -61,7 +61,14 @@
 				}}
 				class="space-y-6"
 			>
-				<Input name="points" value={feat.points} type="number" label="Poäng" step="0.01" />
+				<Input
+					name="points"
+					value={feat.points}
+					type="number"
+					label="Poäng"
+					step="0.01"
+					inputmode="decimal"
+				/>
 
 				<div class="w-full">
 					<label

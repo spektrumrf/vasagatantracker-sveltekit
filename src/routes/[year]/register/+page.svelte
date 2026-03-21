@@ -87,6 +87,7 @@
 					label="Epost"
 					description="Används för att återställa lösenord."
 					value={form?.data?.email ?? ''}
+					inputmode="email"
 				/>
 				{#if form?.errors?.email}
 					<p class="font-mono text-xs font-bold tracking-wider text-red-600 uppercase">
@@ -132,6 +133,7 @@
 					label="Koefficient"
 					description="Poängmultiplikator (standard är 1)."
 					step="0.01"
+					inputmode="decimal"
 					value={form?.data?.coefficient ?? 1}
 				/>
 				{#if form?.errors?.coefficient}

@@ -85,7 +85,13 @@
 						on:submit={() => (resetLoading = true)}
 						class="space-y-6"
 					>
-						<Input name="email" type="email" label="Epost" required={true} />
+						<Input
+							name="email"
+							type="email"
+							label="Epost"
+							required={true}
+							inputmode="email"
+						/>
 						<button class="btn-secondary w-full">
 							<Loading loading={resetLoading}>Nollställ lösenord</Loading>
 						</button>
