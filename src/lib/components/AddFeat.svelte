@@ -23,7 +23,7 @@
 >
 	<label for="addFeat" class="absolute inset-0 cursor-default"></label>
 	<div
-		class="relative mx-auto max-h-[90vh] w-full max-w-lg border-4 border-stone-900 bg-white p-6 shadow-[8px_8px_0px_0px_rgba(28,25,23,1)] transition-transform duration-200 peer-checked:scale-100 sm:p-8"
+		class="relative mx-auto max-h-[90vh] w-full max-w-lg overflow-y-auto border-4 border-stone-900 bg-white p-6 shadow-[8px_8px_0px_0px_rgba(28,25,23,1)] transition-transform duration-200 peer-checked:scale-100 sm:p-8"
 	>
 		<h3 class="mb-8 font-mono text-2xl font-black tracking-tight text-brand-900 uppercase">
 			Ny prestation
@@ -44,6 +44,7 @@
 				min={0}
 				max={15}
 				step="0.01"
+				inputmode="decimal"
 				description="Ange 0-15 poäng. Lämna som 0 om du är osäker."
 			/>
 
@@ -55,7 +56,7 @@
 					>
 						Plats
 					</label>
-					<span class="font-mono text-[10px] font-black tracking-widest text-brand-600 uppercase"
+					<span class="font-mono text-xs font-black tracking-widest text-brand-600 uppercase"
 						>Specialkrogar *</span
 					>
 				</div>

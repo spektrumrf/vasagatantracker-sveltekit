@@ -11,6 +11,16 @@
 	export let max: number | null = null;
 	export let required: boolean = false;
 	export let description: string = '';
+	export let inputmode:
+		| 'none'
+		| 'text'
+		| 'decimal'
+		| 'numeric'
+		| 'tel'
+		| 'search'
+		| 'email'
+		| 'url'
+		| null = null;
 </script>
 
 <div class="w-full">
@@ -24,9 +34,11 @@
 			</label>
 			{#if altLabel}
 				<span
-					class="text-right font-mono text-[10px] leading-none font-black tracking-widest text-brand-600 uppercase"
+					class="text-right font-mono text-xs leading-none font-black tracking-widest text-brand-600 uppercase"
 					>{altLabel}</span
 				>
+			{:else}
+				<div class="h-1"></div>
 			{/if}
 		</div>
 	{/if}
@@ -41,11 +53,12 @@
 		{min}
 		{max}
 		{required}
+		{inputmode}
 		class="input-field"
 	/>
 	{#if description}
 		<p
-			class="mt-2 font-mono text-[10px] leading-tight font-bold tracking-widest text-stone-500 uppercase"
+			class="mt-2 font-mono text-xs leading-tight font-bold tracking-widest text-stone-500 uppercase"
 		>
 			{description}
 		</p>

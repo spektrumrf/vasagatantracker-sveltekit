@@ -1,5 +1,6 @@
 import type { Account, Event, Feat, Location } from '$lib/stores';
 import type { LayoutServerLoad } from './$types';
+import { POCKETBASE_URL_INTERNAL, POCKETBASE_URL_PUBLIC } from '$lib/pocketbase';
 
 export const load: LayoutServerLoad = async function ({ locals, params }): Promise<Data> {
 	const account = locals.client.authStore.model;
@@ -16,7 +17,9 @@ export const load: LayoutServerLoad = async function ({ locals, params }): Promi
 		.then((feats) =>
 			feats.map((f: any) => ({
 				...f,
-				proofUrls: f.proofs.map((p: string) => locals.client.files.getUrl(f, p))
+				proofUrls: f.proofs.map((p: string) =>
+					locals.client.files.getURL(f, p).replace(POCKETBASE_URL_INTERNAL, POCKETBASE_URL_PUBLIC)
+				)
 			}))
 		)
 		.catch(() => []);

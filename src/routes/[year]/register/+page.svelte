@@ -55,7 +55,7 @@
 					name="password"
 					type="password"
 					label="Lösenord"
-					description="Minst 8 tecken långt och svårgissat."
+					description="Minst 8 tecken."
 					value={form?.data?.password ?? ''}
 				/>
 				{#if form?.errors?.password}
@@ -87,6 +87,7 @@
 					label="Epost"
 					description="Används för att återställa lösenord."
 					value={form?.data?.email ?? ''}
+					inputmode="email"
 				/>
 				{#if form?.errors?.email}
 					<p class="font-mono text-xs font-bold tracking-wider text-red-600 uppercase">
@@ -100,7 +101,7 @@
 					name="name"
 					type="text"
 					label="Lagnamn"
-					description="Det publika namnet på ert lag."
+					description="Namnet som visas åt andra."
 					value={form?.data?.name ?? ''}
 				/>
 				{#if form?.errors?.name}
@@ -115,7 +116,7 @@
 					name="members"
 					type="text"
 					label="Medlemmar"
-					description="Lista på lagmedlemmar (t.ex. förnamn)."
+					description="Lista på lagmedlemmar (t.ex. förnamn räcker)."
 					value={form?.data?.members ?? ''}
 				/>
 				{#if form?.errors?.members}
@@ -130,8 +131,9 @@
 					name="coefficient"
 					type="number"
 					label="Koefficient"
-					description="Poängmultiplikator (standard är 1)."
+					description="Multiplikationsfaktor (lämna som 1 om osäker)."
 					step="0.01"
+					inputmode="decimal"
 					value={form?.data?.coefficient ?? 1}
 				/>
 				{#if form?.errors?.coefficient}

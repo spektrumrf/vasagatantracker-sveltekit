@@ -82,6 +82,7 @@
 				value={selectedTeam?.coefficient || 1}
 				type="number"
 				step="0.01"
+				inputmode="decimal"
 				label="Lagets koefficient"
 			/>
 			<Input name="id" value={selectedTeam?.id} type="hidden" />

@@ -77,7 +77,7 @@
 </script>
 
 <div class="flex min-h-screen flex-col bg-stone-100">
-	<header class="sticky top-0 z-50 border-b-4 border-stone-900 bg-white">
+	<header class="sticky top-0 z-50 border-b-4 border-stone-900 bg-white pt-safe">
 		<div class="mx-auto flex h-16 max-w-4xl items-center justify-between px-4 sm:px-6">
 			<!-- Left Slot: Branding -->
 			<div class="flex items-center">
@@ -91,7 +91,7 @@
 						>tracker</span
 					>
 					{#if PUBLIC_ENV === 'DEV'}
-						<span class="ml-2 hidden text-[10px] text-stone-400 sm:inline"
+						<span class="ml-2 hidden text-xs text-stone-400 sm:inline"
 							>{PUBLIC_ENV === 'DEV' ? 'DEV' : ''}</span
 						>
 					{/if}
