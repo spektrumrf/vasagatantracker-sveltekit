@@ -26,51 +26,51 @@
 	}
 </script>
 
-<div class="flex flex-col items-center card bg-brand-50 p-6 text-center sm:p-8">
+<div class="flex flex-col items-center card bg-brand-50 p-4 text-center sm:p-8">
 	{#if distance >= 0 && !$event?.finished}
-		<h2 class="mb-8 text-2xl sm:text-3xl">Tid till Approbatur i Vasagatan</h2>
+		<h2 class="mb-8 text-xl sm:text-3xl">Tid till Approbatur i Vasagatan</h2>
 
-		<div class="flex justify-center gap-4 sm:gap-6">
+		<div class="flex justify-center gap-2 sm:gap-6">
 			<div class="flex flex-col items-center">
 				<div
-					class="min-w-[3rem] border-4 border-stone-900 bg-white px-4 py-3 font-mono text-3xl font-black text-brand-600 shadow-[4px_4px_0px_0px_rgba(28,25,23,1)] sm:min-w-[4rem] sm:text-4xl"
+					class="min-w-[2.5rem] border-4 border-stone-900 bg-white px-2 py-2 font-mono text-2xl font-black text-brand-600 shadow-[4px_4px_0px_0px_rgba(28,25,23,1)] sm:min-w-[4rem] sm:px-4 sm:py-3 sm:text-4xl"
 				>
 					{padZero(days)}
 				</div>
-				<span class="mt-4 font-mono text-sm font-bold tracking-wider text-stone-700 uppercase"
+				<span class="mt-4 font-mono text-[10px] font-bold tracking-wider text-stone-700 uppercase sm:text-sm"
 					>Dagar</span
 				>
 			</div>
 
 			<div class="flex flex-col items-center">
 				<div
-					class="min-w-[3rem] border-4 border-stone-900 bg-white px-4 py-3 font-mono text-3xl font-black text-brand-600 shadow-[4px_4px_0px_0px_rgba(28,25,23,1)] sm:min-w-[4rem] sm:text-4xl"
+					class="min-w-[2.5rem] border-4 border-stone-900 bg-white px-2 py-2 font-mono text-2xl font-black text-brand-600 shadow-[4px_4px_0px_0px_rgba(28,25,23,1)] sm:min-w-[4rem] sm:px-4 sm:py-3 sm:text-4xl"
 				>
 					{padZero(hours)}
 				</div>
-				<span class="mt-4 font-mono text-sm font-bold tracking-wider text-stone-700 uppercase"
+				<span class="mt-4 font-mono text-[10px] font-bold tracking-wider text-stone-700 uppercase sm:text-sm"
 					>Timmar</span
 				>
 			</div>
 
 			<div class="flex flex-col items-center">
 				<div
-					class="min-w-[3rem] border-4 border-stone-900 bg-white px-4 py-3 font-mono text-3xl font-black text-brand-600 shadow-[4px_4px_0px_0px_rgba(28,25,23,1)] sm:min-w-[4rem] sm:text-4xl"
+					class="min-w-[2.5rem] border-4 border-stone-900 bg-white px-2 py-2 font-mono text-2xl font-black text-brand-600 shadow-[4px_4px_0px_0px_rgba(28,25,23,1)] sm:min-w-[4rem] sm:px-4 sm:py-3 sm:text-4xl"
 				>
 					{padZero(minutes)}
 				</div>
-				<span class="mt-4 font-mono text-sm font-bold tracking-wider text-stone-700 uppercase"
+				<span class="mt-4 font-mono text-[10px] font-bold tracking-wider text-stone-700 uppercase sm:text-sm"
 					>Min</span
 				>
 			</div>
 
 			<div class="flex flex-col items-center">
 				<div
-					class="min-w-[3rem] border-4 border-stone-900 bg-white px-4 py-3 font-mono text-3xl font-black text-brand-600 shadow-[4px_4px_0px_0px_rgba(28,25,23,1)] sm:min-w-[4rem] sm:text-4xl"
+					class="min-w-[2.5rem] border-4 border-stone-900 bg-white px-2 py-2 font-mono text-2xl font-black text-brand-600 shadow-[4px_4px_0px_0px_rgba(28,25,23,1)] sm:min-w-[4rem] sm:px-4 sm:py-3 sm:text-4xl"
 				>
 					{padZero(seconds)}
 				</div>
-				<span class="mt-4 font-mono text-sm font-bold tracking-wider text-stone-700 uppercase"
+				<span class="mt-4 font-mono text-[10px] font-bold tracking-wider text-stone-700 uppercase sm:text-sm"
 					>Sek</span
 				>
 			</div>
